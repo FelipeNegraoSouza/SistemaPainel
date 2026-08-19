@@ -151,21 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${yyyy}-${mm}-${dd}`;
     }
 
-    function getPreviousWorkday(dateStr) {
+    function getPreviousNightDate(dateStr) {
         if (!dateStr) return '';
         const [y, m, d] = dateStr.split('-').map(Number);
         const dt = new Date(y, m - 1, d);
-        const dayOfWeek = dt.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-        let sub = 1;
-        if (dayOfWeek === 1) sub = 3;      // Segunda -> Sexta
-        else if (dayOfWeek === 0) sub = 2; // Domingo -> Sexta
-        else if (dayOfWeek === 6) sub = 1; // Sábado -> Sexta
+        dt.setDate(dt.getDate() - 1);
         
-        const prev = new Date(dt);
-        prev.setDate(dt.getDate() - sub);
-        const py = prev.getFullYear();
-        const pm = String(prev.getMonth() + 1).padStart(2, '0');
-        const pd = String(prev.getDate()).padStart(2, '0');
+        const py = dt.getFullYear();
+        const pm = String(dt.getMonth() + 1).padStart(2, '0');
+        const pd = String(dt.getDate()).padStart(2, '0');
         return `${py}-${pm}-${pd}`;
     }
 
@@ -174,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const shift = sessionShiftInput.value;
         const dateVal = sessionDateInput.value;
         if (shift === 'Noturno' && dateVal) {
-            const prevDate = getPreviousWorkday(dateVal);
+            const prevDate = getPreviousNightDate(dateVal);
             const [py, pm, pd] = prevDate.split('-');
             const [sy, sm, sd] = dateVal.split('-');
             shiftNightText.innerHTML = `Produção física referente à <strong>noite de ${pd}/${pm}/${py}</strong> (consolidada na planilha de <strong>${sd}/${sm}/${sy}</strong>)`;
