@@ -153,6 +153,67 @@ def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) 
     db.refresh(db_entry)
     return db_entry
 
+def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) -> Optional[models.ProductionEntry]:
+    db_entry = db.query(models.ProductionEntry).filter(models.ProductionEntry.id == entry_id).first()
+    if not db_entry:
+        return None
+
+    # Se o produto tem código, vincula ao catálogo
+    product_code = entry_data.product_code
+    if product_code:
+        prod = get_product_by_code(db, product_code)
+        if not prod:
+            product_code = None
+
+    gross_minutes = entry_data.gross_minutes
+    if not gross_minutes or gross_minutes == 0:
+        gross_minutes = _calculate_time_difference_minutes(entry_data.start_time, entry_data.end_time)
+
+    # Limpa paradas antigas do intervalo
+    db.query(models.ProductionStop).filter(models.ProductionStop.entry_id == entry_id).delete()
+
+    stop_objs = []
+    total_stop_minutes = 0
+    for stop in entry_data.stops:
+        duration = stop.duration_minutes
+        if not duration or duration == 0:
+            duration = _calculate_time_difference_minutes(stop.start_time, stop.end_time)
+        total_stop_minutes += duration
+        stop_objs.append((stop, duration))
+
+    net_minutes = max(0, gross_minutes - total_stop_minutes)
+    qty = entry_data.qty_produced or 0
+    real_rate_per_hour = entry_data.real_rate_per_hour
+    if not real_rate_per_hour or real_rate_per_hour == 0.0:
+        if net_minutes > 0 and qty > 0:
+            real_rate_per_hour = round(qty / (net_minutes / 60.0), 2)
+        else:
+            real_rate_per_hour = 0.0
+
+    db_entry.product_code = product_code
+    db_entry.product_spec_custom = entry_data.product_spec_custom
+    db_entry.start_time = entry_data.start_time
+    db_entry.end_time = entry_data.end_time
+    db_entry.gross_minutes = gross_minutes
+    db_entry.qty_produced = qty
+    db_entry.total_stop_minutes = total_stop_minutes
+    db_entry.net_minutes = net_minutes
+    db_entry.real_rate_per_hour = real_rate_per_hour
+
+    for stop, duration in stop_objs:
+        db_stop = models.ProductionStop(
+            entry_id=db_entry.id,
+            start_time=stop.start_time,
+            end_time=stop.end_time,
+            reason=stop.reason,
+            duration_minutes=duration
+        )
+        db.add(db_stop)
+
+    db.commit()
+    db.refresh(db_entry)
+    return db_entry
+
 def delete_entry(db: Session, entry_id: int) -> bool:
     db_entry = db.query(models.ProductionEntry).filter(models.ProductionEntry.id == entry_id).first()
     if not db_entry:
@@ -160,3 +221,4 @@ def delete_entry(db: Session, entry_id: int) -> bool:
     db.delete(db_entry)
     db.commit()
     return True
+

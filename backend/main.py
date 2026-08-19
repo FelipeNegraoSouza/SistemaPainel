@@ -126,6 +126,22 @@ def add_entry_to_session(session_id: int, entry_data: schemas.EntryCreate, db: S
     return new_entry
 
 
+@app.put("/api/entries/{entry_id}", response_model=schemas.EntryResponse)
+def update_entry(entry_id: int, entry_data: schemas.EntryCreate, db: Session = Depends(get_db)):
+    """Atualiza um intervalo produtivo já gravado e ressincroniza o Excel."""
+    updated = crud.update_entry(db, entry_id, entry_data)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Registro não encontrado")
+    
+    if updated.session and updated.session.reference_date:
+        try:
+            excel_service.sync_date_to_excel(updated.session.reference_date, db)
+        except Exception as e:
+            print(f"[Aviso Excel] Falha no auto-sync após edição: {e}")
+
+    return updated
+
+
 @app.delete("/api/entries/{entry_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_entry(entry_id: int, db: Session = Depends(get_db)):
     """Exclui um intervalo produtivo do banco e atualiza a planilha Excel."""

@@ -742,14 +742,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }))
         };
 
-        if (state.isOnline && state.session.id) {
+        if (state.isOnline) {
             try {
-                const res = await fetch(`${API_BASE_URL}/api/sessions/${state.session.id}/entries`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(entryPayload)
-                });
-                if (res.ok) {
+                let res;
+                if (state.currentEditingId && typeof state.currentEditingId !== 'string') {
+                    // Atualiza intervalo existente (PUT)
+                    res = await fetch(`${API_BASE_URL}/api/entries/${state.currentEditingId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(entryPayload)
+                    });
+                } else if (state.session.id) {
+                    // Cria novo intervalo (POST)
+                    res = await fetch(`${API_BASE_URL}/api/sessions/${state.session.id}/entries`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(entryPayload)
+                    });
+                }
+
+                if (res && res.ok) {
                     await syncSessionWithBackend();
                     resetEntryForm();
                     startTimeInput.value = endTime;
@@ -765,20 +777,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Fallback local
-        const newEntry = {
-            id: 'entry_' + Date.now(),
-            productSpec,
-            productCode,
-            startTime,
-            endTime,
-            qty,
-            grossMinutes,
-            stops,
-            totalStopMinutes,
-            netMinutes,
-            ratePerHour
-        };
-        state.entries.push(newEntry);
+        if (state.currentEditingId) {
+            const idx = state.entries.findIndex(e => String(e.id) === String(state.currentEditingId));
+            if (idx !== -1) {
+                state.entries[idx] = {
+                    ...state.entries[idx],
+                    productSpec,
+                    productCode,
+                    startTime,
+                    endTime,
+                    qty,
+                    grossMinutes,
+                    stops,
+                    totalStopMinutes,
+                    netMinutes,
+                    ratePerHour
+                };
+            }
+        } else {
+            const newEntry = {
+                id: 'entry_' + Date.now(),
+                productSpec,
+                productCode,
+                startTime,
+                endTime,
+                qty,
+                grossMinutes,
+                stops,
+                totalStopMinutes,
+                netMinutes,
+                ratePerHour
+            };
+            state.entries.push(newEntry);
+        }
+
         renderEntriesTable();
         resetEntryForm();
         startTimeInput.value = endTime;
