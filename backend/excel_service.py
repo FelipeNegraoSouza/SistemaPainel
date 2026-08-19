@@ -3,6 +3,7 @@ import shutil
 from datetime import datetime, time, timedelta
 from typing import Dict, Any, Optional, List
 import openpyxl
+from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 
 from backend import models
@@ -194,9 +195,25 @@ def sync_date_to_excel(reference_date: str, db: Session) -> Dict[str, Any]:
     date_obj = paths["date_obj"]
     mes_nome = MONTH_NAMES_LOWER.get(date_obj.month, "")
 
-    # Consulta sessões e lançamentos da data no SQLite
+    # Calcula data útil anterior para o turno noturno (Segunda -> Sexta)
+    weekday = date_obj.weekday()
+    if weekday == 0:
+        prev_date_obj = date_obj - timedelta(days=3)
+    elif weekday == 6:
+        prev_date_obj = date_obj - timedelta(days=2)
+    else:
+        prev_date_obj = date_obj - timedelta(days=1)
+    prev_date_iso = prev_date_obj.strftime("%Y-%m-%d")
+
+    # Consulta sessões e lançamentos da planilha diária no SQLite:
+    # 1. Turno Diurno trabalhado na data
+    # 2. Turno Noturno trabalhado na noite do dia útil anterior
     sessions = db.query(models.ProductionSession).filter(
-        models.ProductionSession.reference_date == ref_date_iso
+        or_(
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Diurno"),
+            and_(models.ProductionSession.reference_date == prev_date_iso, models.ProductionSession.shift == "Noturno"),
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Noturno")
+        )
     ).all()
 
     # Carrega a planilha Excel diária

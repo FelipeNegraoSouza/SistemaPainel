@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sessionDateInput = document.getElementById('session-date');
     const sessionOperatorInput = document.getElementById('session-operator');
     const sessionShiftInput = document.getElementById('session-shift');
+    const shiftNightHint = document.getElementById('shift-night-hint');
+    const shiftNightText = document.getElementById('shift-night-text');
 
     const formApontamento = document.getElementById('form-apontamento');
     const formCardTitle = document.getElementById('form-card-title');
@@ -147,6 +149,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const mm = String(targetDate.getMonth() + 1).padStart(2, '0');
         const dd = String(targetDate.getDate()).padStart(2, '0');
         return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function getPreviousWorkday(dateStr) {
+        if (!dateStr) return '';
+        const [y, m, d] = dateStr.split('-').map(Number);
+        const dt = new Date(y, m - 1, d);
+        const dayOfWeek = dt.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        let sub = 1;
+        if (dayOfWeek === 1) sub = 3;      // Segunda -> Sexta
+        else if (dayOfWeek === 0) sub = 2; // Domingo -> Sexta
+        else if (dayOfWeek === 6) sub = 1; // Sábado -> Sexta
+        
+        const prev = new Date(dt);
+        prev.setDate(dt.getDate() - sub);
+        const py = prev.getFullYear();
+        const pm = String(prev.getMonth() + 1).padStart(2, '0');
+        const pd = String(prev.getDate()).padStart(2, '0');
+        return `${py}-${pm}-${pd}`;
+    }
+
+    function updateShiftNightHint() {
+        if (!shiftNightHint || !shiftNightText) return;
+        const shift = sessionShiftInput.value;
+        const dateVal = sessionDateInput.value;
+        if (shift === 'Noturno' && dateVal) {
+            const prevDate = getPreviousWorkday(dateVal);
+            const [py, pm, pd] = prevDate.split('-');
+            const [sy, sm, sd] = dateVal.split('-');
+            shiftNightText.innerHTML = `Produção física referente à <strong>noite de ${pd}/${pm}/${py}</strong> (consolidada na planilha de <strong>${sd}/${sm}/${sy}</strong>)`;
+            shiftNightHint.classList.remove('hidden');
+        } else {
+            shiftNightHint.classList.add('hidden');
+        }
     }
 
     function timeToMinutes(timeStr) {
@@ -1383,11 +1418,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mudanças na Ficha / Sessão
     sessionMachineSelect.addEventListener('change', syncSessionWithBackend);
     sessionDateInput.addEventListener('change', async () => {
+        updateShiftNightHint();
         await syncSessionWithBackend();
         await updateExcelStatus();
     });
     sessionOperatorInput.addEventListener('change', syncSessionWithBackend);
-    sessionShiftInput.addEventListener('change', syncSessionWithBackend);
+    sessionShiftInput.addEventListener('change', async () => {
+        updateShiftNightHint();
+        await syncSessionWithBackend();
+    });
 
     // Ações de Excel
     if (btnSyncExcel) btnSyncExcel.addEventListener('click', syncExcelNow);
@@ -1421,6 +1460,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INICIALIZAÇÃO ---
     async function init() {
         sessionDateInput.value = getDefaultWorkDate();
+        updateShiftNightHint();
         await checkApiConnection();
         await loadMachines();
         await loadProductsCatalog();

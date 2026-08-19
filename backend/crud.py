@@ -1,4 +1,6 @@
 from typing import List, Optional
+from datetime import datetime, timedelta
+from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from backend import models, schemas
 
@@ -52,10 +54,34 @@ def delete_product(db: Session, code: int) -> bool:
 
 
 # --- FICHAS / SESSÕES DE PRODUÇÃO ---
+def get_previous_workday(date_str: str) -> str:
+    """Calcula a data do dia útil anterior (Segunda-feira -> Sexta-feira)."""
+    try:
+        dt = datetime.strptime(date_str.strip(), "%Y-%m-%d")
+        weekday = dt.weekday() # 0=Monday, ..., 6=Sunday
+        if weekday == 0:
+            prev = dt - timedelta(days=3)
+        elif weekday == 6:
+            prev = dt - timedelta(days=2)
+        else:
+            prev = dt - timedelta(days=1)
+        return prev.strftime("%Y-%m-%d")
+    except Exception:
+        return date_str
+
+def get_effective_session_date(reference_date: str, shift: str) -> str:
+    """Para o turno Noturno de uma planilha, a produção física refere-se à noite do dia útil anterior."""
+    if shift == "Noturno":
+        return get_previous_workday(reference_date)
+    return reference_date
+
 def get_or_create_session(db: Session, session_data: schemas.SessionCreate) -> models.ProductionSession:
-    # Procura se já existe ficha aberta para essa data, máquina e turno
+    # Ajusta data efetiva se for turno noturno
+    effective_date = get_effective_session_date(session_data.reference_date, session_data.shift)
+
+    # Procura se já existe ficha aberta para essa data efetiva, máquina e turno
     existing = db.query(models.ProductionSession).filter(
-        models.ProductionSession.reference_date == session_data.reference_date,
+        models.ProductionSession.reference_date == effective_date,
         models.ProductionSession.machine_id == session_data.machine_id,
         models.ProductionSession.shift == session_data.shift
     ).first()
@@ -68,7 +94,9 @@ def get_or_create_session(db: Session, session_data: schemas.SessionCreate) -> m
             db.refresh(existing)
         return existing
 
-    db_session = models.ProductionSession(**session_data.model_dump())
+    session_dict = session_data.model_dump()
+    session_dict["reference_date"] = effective_date
+    db_session = models.ProductionSession(**session_dict)
     db.add(db_session)
     db.commit()
     db.refresh(db_session)
@@ -78,10 +106,28 @@ def get_session_by_id(db: Session, session_id: int) -> Optional[models.Productio
     return db.query(models.ProductionSession).filter(models.ProductionSession.id == session_id).first()
 
 def get_sessions_by_date(db: Session, date: str, shift: Optional[str] = None) -> List[models.ProductionSession]:
-    query = db.query(models.ProductionSession).filter(models.ProductionSession.reference_date == date)
-    if shift:
-        query = query.filter(models.ProductionSession.shift == shift)
-    return query.order_by(models.ProductionSession.machine_id).all()
+    prev_date = get_previous_workday(date)
+    if shift == "Diurno":
+        return db.query(models.ProductionSession).filter(
+            models.ProductionSession.reference_date == date,
+            models.ProductionSession.shift == "Diurno"
+        ).order_by(models.ProductionSession.machine_id).all()
+    elif shift == "Noturno":
+        return db.query(models.ProductionSession).filter(
+            or_(
+                and_(models.ProductionSession.reference_date == prev_date, models.ProductionSession.shift == "Noturno"),
+                and_(models.ProductionSession.reference_date == date, models.ProductionSession.shift == "Noturno")
+            )
+        ).order_by(models.ProductionSession.machine_id).all()
+    else:
+        # Retorna todas as sessões que compõem a planilha da data (Diurno da data + Noturno do dia útil anterior)
+        return db.query(models.ProductionSession).filter(
+            or_(
+                and_(models.ProductionSession.reference_date == date, models.ProductionSession.shift == "Diurno"),
+                and_(models.ProductionSession.reference_date == prev_date, models.ProductionSession.shift == "Noturno"),
+                and_(models.ProductionSession.reference_date == date, models.ProductionSession.shift == "Noturno")
+            )
+        ).order_by(models.ProductionSession.machine_id).all()
 
 
 
