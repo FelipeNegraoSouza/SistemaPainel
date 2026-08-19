@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apontamento de Produção - Setor Painéis</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Cabeçalho Principal -->
+        <header class="app-header">
+            <div class="header-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-industry"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Apontamento de Produção</h1>
+                    <div class="header-tags">
+                        <span class="badge-sector">Setor: <strong>Painéis</strong></span>
+                        <span class="badge-status" id="db-status-badge" title="Status da conexão SQLite / FastAPI">
+                            <i class="fa-solid fa-database"></i> SQLite Conectado
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="btn-sync-excel" class="btn btn-primary btn-sm" title="Gera a planilha do dia a partir do modelo e sincroniza os apontamentos">
+                    <i class="fa-solid fa-file-excel"></i> <span id="btn-sync-excel-text">Sincronizar Excel Diário</span>
+                </button>
+                <button id="btn-open-analytics" class="btn btn-secondary btn-sm" title="Ver Médias Históricas por Máquina e Medida (Pandas)">
+                    <i class="fa-solid fa-chart-line"></i> Médias e Produtividade
+                </button>
+                <button id="btn-open-products-modal" class="btn btn-secondary btn-sm" title="Catálogo de Especificações Gerais dos Painéis">
+                    <i class="fa-solid fa-boxes-stacked"></i> Catálogo de Painéis
+                </button>
+                <button id="btn-export-json" class="btn btn-secondary btn-sm" title="Exportar dados da sessão em JSON">
+                    <i class="fa-solid fa-file-code"></i> Exportar JSON
+                </button>
+            </div>
+        </header>
+
+        <!-- Sessão / Metadados do Turno e Máquina -->
+        <section class="session-card">
+            <div class="section-title">
+                <i class="fa-solid fa-clipboard-user"></i>
+                <h2>Dados da Ficha de Produção</h2>
+            </div>
+            <div class="form-grid-session">
+                <div class="form-group">
+                    <label for="session-machine">
+                        <i class="fa-solid fa-gears"></i> Máquina / Posto:
+                    </label>
+                    <select id="session-machine" class="form-control font-semibold">
+                        <!-- Carregado dinamicamente via API -->
+                        <option value="1">Dobra 1</option>
+                        <option value="2">Dobra 2</option>
+                        <option value="3">Solda Lateral 1</option>
+                        <option value="4">Solda Lateral 2</option>
+                        <option value="5">Solda Ponto 1</option>
+                        <option value="6">Solda Ponto 2</option>
+                        <option value="7">Revisão (Sem controle)</option>
+                        <option value="8">Solda Manual (Sem controle)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="session-date">
+                        <i class="fa-regular fa-calendar"></i> Data Referente:
+                    </label>
+                    <input type="date" id="session-date" class="form-control">
+                    <small class="helper-text">Padrão calculado para o último dia útil (ajustável).</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="session-operator">
+                        <i class="fa-solid fa-user-gear"></i> Operador Responsável:
+                    </label>
+                    <input type="text" id="session-operator" class="form-control" placeholder="Ex: João da Silva">
+                </div>
+
+                <div class="form-group">
+                    <label for="session-shift">
+                        <i class="fa-regular fa-clock"></i> Turno / Equipe:
+                    </label>
+                    <select id="session-shift" class="form-control">
+                        <option value="Diurno">Diurno</option>
+                        <option value="Noturno">Noturno</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="excel-path-banner" id="excel-path-banner" style="margin-top: 1rem; padding: 0.6rem 0.85rem; background: var(--bg-main); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
+                    <i class="fa-solid fa-file-excel" style="color: #107c41; font-size: 1.1rem;"></i>
+                    <span><strong>Planilha do Dia (Y:):</strong> <span id="excel-target-path" style="color: var(--primary-700); font-family: monospace;">Y:\03 - PAINEL CORRUGADO\Fichas\...</span></span>
+                </div>
+                <span id="excel-status-tag" class="badge-status" style="background: rgba(16, 124, 65, 0.1); color: #107c41; border: 1px solid rgba(16, 124, 65, 0.3);">
+                    <i class="fa-solid fa-circle-check"></i> Modelo Vinculado
+                </span>
+            </div>
+        </section>
+
+        <!-- Layout Principal: Formulário de Lançamento e Lista de Apontamentos -->
+        <main class="main-content">
+            <!-- Formulário de Apontamento por Intervalo -->
+            <section class="entry-card">
+                <div class="section-title-with-actions">
+                    <div class="section-title">
+                        <i class="fa-solid fa-square-plus"></i>
+                        <h2 id="form-card-title">Novo Intervalo Produtivo</h2>
+                    </div>
+                    <button type="button" id="btn-cancel-edit" class="btn btn-outline btn-sm hidden">
+                        <i class="fa-solid fa-xmark"></i> Cancelar Edição
+                    </button>
+                </div>
+
+                <form id="form-apontamento">
+                    <input type="hidden" id="entry-id" value="">
+                    <input type="hidden" id="selected-product-code" value="">
+
+                    <!-- Dados Principais do Intervalo -->
+                    <div class="form-grid-entry">
+                        <div class="form-group span-full product-search-container">
+                            <label for="product-spec">
+                                <i class="fa-solid fa-layer-group"></i> Medida Base do Painel (Pesquisa Inteligente):
+                            </label>
+                            <div class="search-input-wrapper">
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                <input type="text" id="product-spec" class="form-control font-semibold" placeholder="Digite a medida base (ex: 1000 X 11 X 260) ou código (#6215244)..." autocomplete="off" required>
+                                <button type="button" id="btn-clear-product" class="btn-clear-input hidden" title="Limpar seleção">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Dropdown Flutuante de Sugestões de Painéis -->
+                            <div id="product-suggestions" class="product-dropdown-menu hidden">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </div>
+
+                            <!-- Cartão Informativo de Detalhes do Painel Selecionado -->
+                            <div id="product-catalog-hint" class="product-hint-card hidden">
+                                <div class="hint-header">
+                                    <span class="hint-base-badge"><i class="fa-solid fa-ruler-combined"></i> Medida Base: <strong id="hint-base-val">--</strong></span>
+                                    <span class="hint-code-badge"><i class="fa-solid fa-barcode"></i> Cód: <strong id="hint-code-val">--</strong></span>
+                                    <span class="hint-weight-badge" id="hint-weight"><i class="fa-solid fa-weight-hanging"></i> Peso: <strong>-- kg</strong></span>
+                                </div>
+                                <div class="hint-desc" id="hint-full-desc">
+                                    <i class="fa-solid fa-circle-info"></i> <span id="hint-desc-text">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="start-time">
+                                <i class="fa-solid fa-play"></i> Hora Inicial:
+                            </label>
+                            <input type="time" id="start-time" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end-time">
+                                <i class="fa-solid fa-stop"></i> Hora Final:
+                            </label>
+                            <input type="time" id="end-time" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-qty">
+                                <i class="fa-solid fa-boxes-stacked"></i> Quantidade Realizada:
+                            </label>
+                            <input type="number" id="product-qty" class="form-control" min="0" step="1" placeholder="Qtd de peças" required>
+                        </div>
+                    </div>
+
+                    <!-- Seção de Paradas no Intervalo -->
+                    <div class="stops-section">
+                        <div class="stops-header">
+                            <div class="stops-title">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <h3>Paradas no Intervalo Produtivo</h3>
+                                <span class="badge-count" id="stops-count">0</span>
+                            </div>
+                            <button type="button" id="btn-add-stop" class="btn btn-secondary-outline btn-sm">
+                                <i class="fa-solid fa-plus"></i> Adicionar Parada
+                            </button>
+                        </div>
+
+                        <div id="stops-container" class="stops-list">
+                            <!-- Paradas adicionadas dinamicamente aqui -->
+                            <p class="empty-stops-msg" id="empty-stops-msg">
+                                <i class="fa-regular fa-circle-check"></i> Nenhuma parada registrada neste intervalo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Resumo Dinâmico em Tempo Real do Lançamento Atual -->
+                    <div class="live-summary-card">
+                        <div class="summary-item">
+                            <span class="summary-label">Tempo Bruto:</span>
+                            <span class="summary-val" id="summary-gross-time">0h 00m</span>
+                        </div>
+                        <div class="summary-item stop-color">
+                            <span class="summary-label">Total Paradas:</span>
+                            <span class="summary-val" id="summary-stop-time">0h 00m</span>
+                        </div>
+                        <div class="summary-item highlight">
+                            <span class="summary-label">Tempo Líquido:</span>
+                            <span class="summary-val" id="summary-net-time">0h 00m</span>
+                        </div>
+                        <div class="summary-item rate">
+                            <span class="summary-label">Ritmo Estimado:</span>
+                            <span class="summary-val" id="summary-rate">-- pçs/h</span>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Ação -->
+                    <div class="form-actions">
+                        <button type="submit" id="btn-submit-entry" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-floppy-disk"></i> Salvar Intervalo na Ficha
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista / Grade de Registros da Ficha Atual -->
+            <section class="records-card">
+                <div class="records-header">
+                    <div class="section-title">
+                        <i class="fa-solid fa-list-check"></i>
+                        <div>
+                            <h2>Ficha: <span id="current-sheet-title">Dobra 1</span></h2>
+                            <small class="text-muted" id="current-sheet-subtitle">Apontamentos do turno</small>
+                        </div>
+                        <span class="badge-count" id="entries-count">0</span>
+                    </div>
+                    <div class="records-summary-badge" id="day-totals-badge">
+                        <span>Total Líquido: <strong id="day-total-net">0h 00m</strong></span>
+                        <span class="separator">|</span>
+                        <span>Total Peças: <strong id="day-total-qty">0</strong></span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="apontamentos-table" id="entries-table">
+                        <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Especificação do Painel</th>
+                                <th class="text-center">Qtd</th>
+                                <th class="text-center">T. Bruto</th>
+                                <th class="text-center">Paradas</th>
+                                <th class="text-center">T. Líquido</th>
+                                <th class="text-center">Ritmo</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entries-tbody">
+                            <!-- Linhas inseridas via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="empty-entries-view" class="empty-state">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <p>Nenhum intervalo apontado nesta ficha ainda.</p>
+                    <small>Preencha o formulário para registrar a produção desta máquina.</small>
+                </div>
+            </section>
+        </main>
+
+        <!-- Rodapé informativo -->
+        <footer class="app-footer">
+            <p><i class="fa-solid fa-shield-halved"></i> Sistema de Apontamento Industrial &bull; <strong>Setor Painéis</strong> &bull; Backend FastAPI &amp; SQLite</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Paradas Detalhadas -->
+    <div id="modal-stops-detail" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Detalhamento de Paradas</h3>
+                <button type="button" class="btn-close-modal" id="btn-close-modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-stops-content">
+                <!-- Conteúdo dinâmico -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btn-close-modal-footer">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Médias e Produtividade (Pandas Analytics) -->
+    <div id="modal-analytics" class="modal-backdrop hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-chart-line"></i> Tempo Médio e Produtividade por Máquina e Medida (Pandas)</h3>
+                <button type="button" class="btn-close-modal" id="btn-close-analytics">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="analytics-filter-bar">
+                    <label for="filter-analytics-machine"><i class="fa-solid fa-filter"></i> Filtrar Máquina:</label>
+                    <select id="filter-analytics-machine" class="form-control form-control-sm">
+                        <option value="">Todas as Máquinas</option>
+                    </select>
+                </div>
+                <div class="table-responsive" style="margin-top: 1rem;">
+                    <table class="apontamentos-table" id="analytics-table">
+                        <thead>
+                            <tr>
+                                <th>Máquina</th>
+                                <th>Medida / Painel</th>
+                                <th class="text-center">Total Produzido</th>
+                                <th class="text-center">Horas Líquidas</th>
+                                <th class="text-center">Ritmo Médio (pçs/h)</th>
+                                <th class="text-center">Tempo Médio / Unidade</th>
+                                <th class="text-center">Cap. Teórica</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analytics-tbody">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btn-close-analytics-footer">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Catálogo Geral de Painéis -->
+    <div id="modal-products" class="modal-backdrop hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-boxes-stacked"></i> Catálogo Geral de Especificações dos Painéis</h3>
+                <button type="button" class="btn-close-modal" id="btn-close-products">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulário de Cadastro / Edição Rápida de Painel -->
+                <form id="form-new-product" class="new-product-form">
+                    <h4 id="product-form-title" style="margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--primary-900);">Cadastrar / Editar Painel na Base</h4>
+                    <div class="grid-new-product">
+                        <div class="form-group">
+                            <label>Código (PK Int):</label>
+                            <input type="number" id="new-prod-code" class="form-control" placeholder="Ex: 6215244" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Medida Base (Destaque):</label>
+                            <input type="text" id="new-prod-dim" class="form-control" placeholder="Ex: 1000 X 11 X 260" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição Completa / Especificação:</label>
+                            <input type="text" id="new-prod-name" class="form-control" placeholder="Ex: P. CORRUGADO 1000 X 11 X 260MM..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Peso Unitário (kg):</label>
+                            <input type="number" id="new-prod-weight" step="0.01" class="form-control" placeholder="Ex: 59.68" required>
+                        </div>
+                        <div class="form-group" style="align-self: flex-end; display: flex; gap: 0.5rem;">
+                            <button type="submit" id="btn-submit-product" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-plus"></i> <span id="btn-submit-product-text">Salvar no Banco</span>
+                            </button>
+                            <button type="button" id="btn-cancel-edit-prod" class="btn btn-outline hidden" title="Cancelar Edição">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Barra de Ferramentas / Pesquisa e Sincronização do Catálogo -->
+                <div class="catalog-toolbar">
+                    <div class="catalog-search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="catalog-search-input" class="form-control" placeholder="🔍 Filtrar no catálogo por código, medida base ou descrição...">
+                    </div>
+                    <div class="catalog-actions-bar">
+                        <button type="button" id="btn-sync-catalog-excel" class="btn btn-primary-outline btn-sm" title="Reimporta / Sincroniza todos os pesos e medidas da aba BD da planilha modelo (Y:)">
+                            <i class="fa-solid fa-arrows-rotate"></i> <span id="btn-sync-catalog-text">Sincronizar da Planilha Modelo (Y:)</span>
+                        </button>
+                        <span id="catalog-count-badge" class="badge-status" style="background: var(--primary-50); color: var(--primary-800); border: 1px solid var(--primary-200);">
+                            0 itens
+                        </span>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="max-height: 380px; overflow-y: auto;">
+                    <table class="apontamentos-table" id="products-catalog-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Medida Base</th>
+                                <th>Descrição Completa</th>
+                                <th class="text-center">Peso Unit (kg)</th>
+                                <th class="text-center" style="width: 100px;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-catalog-tbody">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btn-close-products-footer">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

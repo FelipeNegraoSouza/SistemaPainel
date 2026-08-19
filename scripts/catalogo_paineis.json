@@ -1,0 +1,4530 @@
+[
+  {
+    "code": 2787,
+    "name": "P. CORRUGADO 100 KVA",
+    "specification": "P. CORRUGADO 100 KVA",
+    "dimensions": "100 KVA",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2907,
+    "name": "P. CORRUGADO 100 KVA  - PC0118",
+    "specification": "P. CORRUGADO 100 KVA  - PC0118",
+    "dimensions": "100 KVA  - PC0118",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215244,
+    "name": "P. CORRUGADO 1000 X 11 X 260MM A=60 P=45 - 215.244",
+    "specification": "P. CORRUGADO 1000 X 11 X 260MM A=60 P=45 - 215.244",
+    "dimensions": "1000 X 11 X 260",
+    "unit_weight_kg": 59.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600008,
+    "name": "P. CORRUGADO 1000 X 11 X 280MM",
+    "specification": "P. CORRUGADO 1000 X 11 X 280MM",
+    "dimensions": "1000 X 11 X 280",
+    "unit_weight_kg": 63.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215288,
+    "name": "P. CORRUGADO 1000 X 11 X 300MM A=65 P=45 - 215.288",
+    "specification": "P. CORRUGADO 1000 X 11 X 300MM A=65 P=45 - 215.288",
+    "dimensions": "1000 X 11 X 300",
+    "unit_weight_kg": 68.06,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215177,
+    "name": "P. CORRUGADO 1000 X 11 X 330MM A=65 P=45 - 215.177",
+    "specification": "P. CORRUGADO 1000 X 11 X 330MM A=65 P=45 - 215.177",
+    "dimensions": "1000 X 11 X 330",
+    "unit_weight_kg": 74.28,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6369551,
+    "name": "P. CORRUGADO 1000 X 12 X 100MM A=55 P=40 - 369.551",
+    "specification": "P. CORRUGADO 1000 X 12 X 100MM A=55 P=40 - 369.551",
+    "dimensions": "1000 X 12 X 100",
+    "unit_weight_kg": 28.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2610,
+    "name": "P. CORRUGADO 1000 X 12 X 230MM",
+    "specification": "P. CORRUGADO 1000 X 12 X 230MM",
+    "dimensions": "1000 X 12 X 230",
+    "unit_weight_kg": 57.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215299,
+    "name": "P. CORRUGADO 1000 X 12 X 250MM A=65 P=45 - 215.299",
+    "specification": "P. CORRUGADO 1000 X 12 X 250MM A=65 P=45 - 215.299",
+    "dimensions": "1000 X 12 X 250",
+    "unit_weight_kg": 62.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5293,
+    "name": "P. CORRUGADO 1000 X 12 X 270MM",
+    "specification": "P. CORRUGADO 1000 X 12 X 270MM",
+    "dimensions": "1000 X 12 X 270",
+    "unit_weight_kg": 67.35,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215233,
+    "name": "P. CORRUGADO 1000 X 12 X 310MM A=70 P=45 - 215.233",
+    "specification": "P. CORRUGADO 1000 X 12 X 310MM A=70 P=45 - 215.233",
+    "dimensions": "1000 X 12 X 310",
+    "unit_weight_kg": 76.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4924,
+    "name": "P. CORRUGADO 1000 X 12 X 330MM",
+    "specification": "P. CORRUGADO 1000 X 12 X 330MM",
+    "dimensions": "1000 X 12 X 330",
+    "unit_weight_kg": 80.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2492,
+    "name": "P. CORRUGADO 1000 X 12 X 50MM",
+    "specification": "P. CORRUGADO 1000 X 12 X 50MM",
+    "dimensions": "1000 X 12 X 50",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3991,
+    "name": "P. CORRUGADO 1000 X 13 X 100MM",
+    "specification": "P. CORRUGADO 1000 X 13 X 100MM",
+    "dimensions": "1000 X 13 X 100",
+    "unit_weight_kg": 30.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363655,
+    "name": "P. CORRUGADO 1000 X 13 X 100MM A=50 P=40 - 363.655",
+    "specification": "P. CORRUGADO 1000 X 13 X 100MM A=50 P=40 - 363.655",
+    "dimensions": "1000 X 13 X 100",
+    "unit_weight_kg": 30.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6373346,
+    "name": "P. CORRUGADO 1000 X 13 X 100MM A=55 P=40 - 373.346",
+    "specification": "P. CORRUGADO 1000 X 13 X 100MM A=55 P=40 - 373.346",
+    "dimensions": "1000 X 13 X 100",
+    "unit_weight_kg": 30.43,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5208,
+    "name": "P. CORRUGADO 1000 X 13 X 250MM",
+    "specification": "P. CORRUGADO 1000 X 13 X 250MM",
+    "dimensions": "1000 X 13 X 250",
+    "unit_weight_kg": 67.59,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5210,
+    "name": "P. CORRUGADO 1000 X 13 X 280MM",
+    "specification": "P. CORRUGADO 1000 X 13 X 280MM",
+    "dimensions": "1000 X 13 X 280",
+    "unit_weight_kg": 74.94,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6395033,
+    "name": "P. CORRUGADO 1000 X 14 X 110MM A=55 P=40 - 395.033",
+    "specification": "P. CORRUGADO 1000 X 14 X 110MM A=55 P=40 - 395.033",
+    "dimensions": "1000 X 14 X 110",
+    "unit_weight_kg": 35.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3129,
+    "name": "P. CORRUGADO 1000 X 14 X 320MM",
+    "specification": "P. CORRUGADO 1000 X 14 X 320MM",
+    "dimensions": "1000 X 14 X 320",
+    "unit_weight_kg": 90.62,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5556,
+    "name": "P. CORRUGADO 1000 X 21 X 230MM",
+    "specification": "P. CORRUGADO 1000 X 21 X 230MM",
+    "dimensions": "1000 X 21 X 230",
+    "unit_weight_kg": 100.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215318,
+    "name": "P. CORRUGADO 1000 X 23 X 250MM A=45 P=45 - 215.318",
+    "specification": "P. CORRUGADO 1000 X 23 X 250MM A=45 P=45 - 215.318",
+    "dimensions": "1000 X 23 X 250",
+    "unit_weight_kg": 118.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2987,
+    "name": "P. CORRUGADO 1000 X 27 X 290MM",
+    "specification": "P. CORRUGADO 1000 X 27 X 290MM",
+    "dimensions": "1000 X 27 X 290",
+    "unit_weight_kg": 159.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215245,
+    "name": "P. CORRUGADO 1000 X 28 X 260MM A=45 P=45 - 215.245",
+    "specification": "P. CORRUGADO 1000 X 28 X 260MM A=45 P=45 - 215.245",
+    "dimensions": "1000 X 28 X 260",
+    "unit_weight_kg": 149.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2609,
+    "name": "P. CORRUGADO 1000 X 29 X 230MM",
+    "specification": "P. CORRUGADO 1000 X 29 X 230MM",
+    "dimensions": "1000 X 29 X 230",
+    "unit_weight_kg": 137.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6185451,
+    "name": "P. CORRUGADO 1000 X 29 X 230MM A=40 P=40 - 185.451",
+    "specification": "P. CORRUGADO 1000 X 29 X 230MM A=40 P=40 - 185.451",
+    "dimensions": "1000 X 29 X 230",
+    "unit_weight_kg": 137.34,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215216,
+    "name": "P. CORRUGADO 1000 X 29 X 230MM A=45 P=45 - 215.216",
+    "specification": "P. CORRUGADO 1000 X 29 X 230MM A=45 P=45 - 215.216",
+    "dimensions": "1000 X 29 X 230",
+    "unit_weight_kg": 138.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215252,
+    "name": "P. CORRUGADO 1000 X 29 X 280MM A=45 P=45 - 215.252",
+    "specification": "P. CORRUGADO 1000 X 29 X 280MM A=45 P=45 - 215.252",
+    "dimensions": "1000 X 29 X 280",
+    "unit_weight_kg": 166.12,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215151,
+    "name": "P. CORRUGADO 1000 X 14 X 320MM A=50 P=40 - 215.151",
+    "specification": "P. CORRUGADO 1000 X 14 X 320MM A=50 P=40 - 215.151",
+    "dimensions": "1000 X 14 X 320",
+    "unit_weight_kg": 90.62,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2986,
+    "name": "P. CORRUGADO 1000 X 29 X 290MM",
+    "specification": "P. CORRUGADO 1000 X 29 X 290MM",
+    "dimensions": "1000 X 29 X 290",
+    "unit_weight_kg": 171.59,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215121,
+    "name": "P. CORRUGADO 1000 X 29 X 290MM A=45 P=40 - 215.121",
+    "specification": "P. CORRUGADO 1000 X 29 X 290MM A=45 P=40 - 215.121",
+    "dimensions": "1000 X 29 X 290",
+    "unit_weight_kg": 170.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600041,
+    "name": "P. CORRUGADO 1000 X 29 X 300MM",
+    "specification": "P. CORRUGADO 1000 X 29 X 300MM",
+    "dimensions": "1000 X 29 X 300",
+    "unit_weight_kg": 177.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5122,
+    "name": "P. CORRUGADO 1000 X 30 X 210MM",
+    "specification": "P. CORRUGADO 1000 X 30 X 210MM",
+    "dimensions": "1000 X 30 X 210",
+    "unit_weight_kg": 130.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6369550,
+    "name": "P. CORRUGADO 1000 X 30 X 210MM A=46,5 P=40 - 369.550",
+    "specification": "P. CORRUGADO 1000 X 30 X 210MM A=46,5 P=40 - 369.550",
+    "dimensions": "1000 X 30 X 210",
+    "unit_weight_kg": 130.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215298,
+    "name": "P. CORRUGADO 1000 X 30 X 250MM A=45 P=45 - 215.298",
+    "specification": "P. CORRUGADO 1000 X 30 X 250MM A=45 P=45 - 215.298",
+    "dimensions": "1000 X 30 X 250",
+    "unit_weight_kg": 154.86,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2491,
+    "name": "P. CORRUGADO 1000 X 31 X 230MM",
+    "specification": "P. CORRUGADO 1000 X 31 X 230MM",
+    "dimensions": "1000 X 31 X 230",
+    "unit_weight_kg": 134.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215226,
+    "name": "P. CORRUGADO 1000 X 31 X 270MM A=45 P=45 - 215.226",
+    "specification": "P. CORRUGADO 1000 X 31 X 270MM A=45 P=45 - 215.226",
+    "dimensions": "1000 X 31 X 270",
+    "unit_weight_kg": 171.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3949,
+    "name": "P. CORRUGADO 1000 X 31 X 330MM",
+    "specification": "P. CORRUGADO 1000 X 31 X 330MM",
+    "dimensions": "1000 X 31 X 330",
+    "unit_weight_kg": 206.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215207,
+    "name": "P. CORRUGADO 1000 X 31 X 340MM A=55 P=45 - 215.207",
+    "specification": "P. CORRUGADO 1000 X 31 X 340MM A=55 P=45 - 215.207",
+    "dimensions": "1000 X 31 X 340",
+    "unit_weight_kg": 212.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363654,
+    "name": "P. CORRUGADO 1000 X 32 X 260MM A=56,5 P=40 - 363.654",
+    "specification": "P. CORRUGADO 1000 X 32 X 260MM A=56,5 P=40 - 363.654",
+    "dimensions": "1000 X 32 X 260",
+    "unit_weight_kg": 169.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215232,
+    "name": "P. CORRUGADO 1000 X 32 X 310MM A=45 P=45 - 215.232",
+    "specification": "P. CORRUGADO 1000 X 32 X 310MM A=45 P=45 - 215.232",
+    "dimensions": "1000 X 32 X 310",
+    "unit_weight_kg": 201.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215241,
+    "name": "P. CORRUGADO 1000 X 32 X 330MM A=45 P=45 - 215.241",
+    "specification": "P. CORRUGADO 1000 X 32 X 330MM A=45 P=45 - 215.241",
+    "dimensions": "1000 X 32 X 330",
+    "unit_weight_kg": 213.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5381,
+    "name": "P. CORRUGADO 1000 X 34 X 210MM",
+    "specification": "P. CORRUGADO 1000 X 34 X 210MM",
+    "dimensions": "1000 X 34 X 210",
+    "unit_weight_kg": 148.2,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215222,
+    "name": "P. CORRUGADO 1000 X 34 X 250MM A=45 P=45 - 215.222",
+    "specification": "P. CORRUGADO 1000 X 34 X 250MM A=45 P=45 - 215.222",
+    "dimensions": "1000 X 34 X 250",
+    "unit_weight_kg": 175.4,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215220,
+    "name": "P. CORRUGADO 1000 X 34 X 280MM A=45 P=45 - 215.220",
+    "specification": "P. CORRUGADO 1000 X 34 X 280MM A=45 P=45 - 215.220",
+    "dimensions": "1000 X 34 X 280",
+    "unit_weight_kg": 194.62,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6395032,
+    "name": "P. CORRUGADO 1000 X 36 X 280MM A=45 P=40 - 395.032",
+    "specification": "P. CORRUGADO 1000 X 36 X 280MM A=45 P=40 - 395.032",
+    "dimensions": "1000 X 36 X 280",
+    "unit_weight_kg": 204.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6172934,
+    "name": "P. CORRUGADO 1100 X 04 X 120MM A=35 P=40 - 172.934",
+    "specification": "P. CORRUGADO 1100 X 04 X 120MM A=35 P=40 - 172.934",
+    "dimensions": "1100 X 04 X 120",
+    "unit_weight_kg": 12.37,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6237600,
+    "name": "P. CORRUGADO 1100 X 04 X 90MM A=35 P=40 - 237.600",
+    "specification": "P. CORRUGADO 1100 X 04 X 90MM A=35 P=40 - 237.600",
+    "dimensions": "1100 X 04 X 90",
+    "unit_weight_kg": 9.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215073,
+    "name": "P. CORRUGADO 1100 X 12 X 150MM A=90 P=40 - 215.073",
+    "specification": "P. CORRUGADO 1100 X 12 X 150MM A=90 P=40 - 215.073",
+    "dimensions": "1100 X 12 X 150",
+    "unit_weight_kg": 44.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2890,
+    "name": "P. CORRUGADO 1100 X 12 X 160MM",
+    "specification": "P. CORRUGADO 1100 X 12 X 160MM",
+    "dimensions": "1100 X 12 X 160",
+    "unit_weight_kg": 46.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6920000,
+    "name": "P. CORRUGADO 1100 X 12 X 240MM A=52,5 P=45 - 04.016.1037",
+    "specification": "P. CORRUGADO 1100 X 12 X 240MM A=52,5 P=45 - 04.016.1037",
+    "dimensions": "1100 X 12 X 240",
+    "unit_weight_kg": 66.37,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600015,
+    "name": "P. CORRUGADO 1100 X 12 X 250MM",
+    "specification": "P. CORRUGADO 1100 X 12 X 250MM",
+    "dimensions": "1100 X 12 X 250",
+    "unit_weight_kg": 69.11,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4018,
+    "name": "P. CORRUGADO 1100 X 13 X 100MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 100MM",
+    "dimensions": "1100 X 13 X 100",
+    "unit_weight_kg": 33.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363778,
+    "name": "P. CORRUGADO 1100 X 13 X 100MM A=55 P=40 - 363.778",
+    "specification": "P. CORRUGADO 1100 X 13 X 100MM A=55 P=40 - 363.778",
+    "dimensions": "1100 X 13 X 100",
+    "unit_weight_kg": 33.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2972,
+    "name": "P. CORRUGADO 1100 X 13 X 110MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 110MM",
+    "dimensions": "1100 X 13 X 110",
+    "unit_weight_kg": 36.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5363,
+    "name": "P. CORRUGADO 1100 X 13 X 180MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 180MM",
+    "dimensions": "1100 X 13 X 180",
+    "unit_weight_kg": 55.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3064,
+    "name": "P. CORRUGADO 1100 X 13 X 190MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 190MM",
+    "dimensions": "1100 X 13 X 190",
+    "unit_weight_kg": 58.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600010,
+    "name": "P. CORRUGADO 1100 X 13 X 280MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 280MM",
+    "dimensions": "1100 X 13 X 280",
+    "unit_weight_kg": 82.74,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4904,
+    "name": "P. CORRUGADO 1100 X 13 X 300MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 300MM",
+    "dimensions": "1100 X 13 X 300",
+    "unit_weight_kg": 87.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600012,
+    "name": "P. CORRUGADO 1100 X 13 X 300MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 300MM",
+    "dimensions": "1100 X 13 X 300",
+    "unit_weight_kg": 88.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3161,
+    "name": "P. CORRUGADO 1100 X 13 X 340MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 340MM",
+    "dimensions": "1100 X 13 X 340",
+    "unit_weight_kg": 98.44,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2663,
+    "name": "P. CORRUGADO 1100 X 13 X 350MM",
+    "specification": "P. CORRUGADO 1100 X 13 X 350MM",
+    "dimensions": "1100 X 13 X 350",
+    "unit_weight_kg": 94.29,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3992,
+    "name": "P. CORRUGADO 1100 X 14 X  90MM",
+    "specification": "P. CORRUGADO 1100 X 14 X  90MM",
+    "dimensions": "1100 X 14 X 90",
+    "unit_weight_kg": 32.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363727,
+    "name": "P. CORRUGADO 1100 X 14 X  90MM A=50 P=40 - 363.727",
+    "specification": "P. CORRUGADO 1100 X 14 X  90MM A=50 P=40 - 363.727",
+    "dimensions": "1100 X 14 X 90",
+    "unit_weight_kg": 32.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2976,
+    "name": "P. CORRUGADO 1100 X 14 X 100MM",
+    "specification": "P. CORRUGADO 1100 X 14 X 100MM",
+    "dimensions": "1100 X 14 X 100",
+    "unit_weight_kg": 36.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6373858,
+    "name": "P. CORRUGADO 1100 X 14 X 150MM A=57 P=40 - 373.858",
+    "specification": "P. CORRUGADO 1100 X 14 X 150MM A=57 P=40 - 373.858",
+    "dimensions": "1100 X 14 X 150",
+    "unit_weight_kg": 50.5,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3952,
+    "name": "P. CORRUGADO 1100 X 14 X 190MM",
+    "specification": "P. CORRUGADO 1100 X 14 X 190MM",
+    "dimensions": "1100 X 14 X 190",
+    "unit_weight_kg": 61.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3081,
+    "name": "P. CORRUGADO 1100 X 15 X 220MM",
+    "specification": "P. CORRUGADO 1100 X 15 X 220MM",
+    "dimensions": "1100 X 15 X 220",
+    "unit_weight_kg": 76.26,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2791,
+    "name": "P. CORRUGADO 1100 X 15 X 330MM",
+    "specification": "P. CORRUGADO 1100 X 15 X 330MM",
+    "dimensions": "1100 X 15 X 330",
+    "unit_weight_kg": 110.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215078,
+    "name": "P. CORRUGADO 1100 X 15 X 330MM A=60 P=40 - 215.078",
+    "specification": "P. CORRUGADO 1100 X 15 X 330MM A=60 P=40 - 215.078",
+    "dimensions": "1100 X 15 X 330",
+    "unit_weight_kg": 110.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215094,
+    "name": "P. CORRUGADO 1100 X 15 X 350MM A=70 P=40 - 215.094",
+    "specification": "P. CORRUGADO 1100 X 15 X 350MM A=70 P=40 - 215.094",
+    "dimensions": "1100 X 15 X 350",
+    "unit_weight_kg": 116.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2743,
+    "name": "P. CORRUGADO 1100 X 16 X 200MM",
+    "specification": "P. CORRUGADO 1100 X 16 X 200MM",
+    "dimensions": "1100 X 16 X 200",
+    "unit_weight_kg": 66.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3042,
+    "name": "P. CORRUGADO 1100 X 17 X 300MM",
+    "specification": "P. CORRUGADO 1100 X 17 X 300MM",
+    "dimensions": "1100 X 17 X 300",
+    "unit_weight_kg": 105.69,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3044,
+    "name": "P. CORRUGADO 1100 X 19 X 200MM",
+    "specification": "P. CORRUGADO 1100 X 19 X 200MM",
+    "dimensions": "1100 X 19 X 200",
+    "unit_weight_kg": 78.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2882,
+    "name": "P. CORRUGADO 1100 X 23 X 220MM",
+    "specification": "P. CORRUGADO 1100 X 23 X 220MM",
+    "dimensions": "1100 X 23 X 220",
+    "unit_weight_kg": 115.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6920001,
+    "name": "P. CORRUGADO 1100 X 23 X 240MM A=45 P=45 - 04.016.1037",
+    "specification": "P. CORRUGADO 1100 X 23 X 240MM A=45 P=45 - 04.016.1037",
+    "dimensions": "1100 X 23 X 240",
+    "unit_weight_kg": 126.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6172933,
+    "name": "P. CORRUGADO 1100 X 25 X 120MM A=35 P=41 - 172.933",
+    "specification": "P. CORRUGADO 1100 X 25 X 120MM A=35 P=41 - 172.933",
+    "dimensions": "1100 X 25 X 120",
+    "unit_weight_kg": 73.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6237602,
+    "name": "P. CORRUGADO 1100 X 25 X 100MM A=35 P=40 - 237.602",
+    "specification": "P. CORRUGADO 1100 X 25 X 100MM A=35 P=40 - 237.602",
+    "dimensions": "1100 X 25 X 100",
+    "unit_weight_kg": 62.9,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215278,
+    "name": "P. CORRUGADO 1100 X 32 X 350MM A=45 P=45 - 215.278",
+    "specification": "P. CORRUGADO 1100 X 32 X 350MM A=45 P=45 - 215.278",
+    "dimensions": "1100 X 32 X 350",
+    "unit_weight_kg": 247.96,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215279,
+    "name": "P. CORRUGADO 1100 X 25 X 350MM A=65 P=45 - 215.278",
+    "specification": "P. CORRUGADO 1100 X 25 X 350MM A=65 P=45 - 215.278",
+    "dimensions": "1100 X 25 X 350",
+    "unit_weight_kg": 194.34,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2888,
+    "name": "P. CORRUGADO 1100 X 25 X 330MM",
+    "specification": "P. CORRUGADO 1100 X 25 X 330MM",
+    "dimensions": "1100 X 25 X 330",
+    "unit_weight_kg": 182.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600029,
+    "name": "P. CORRUGADO 1100 X 26 X 340MM",
+    "specification": "P. CORRUGADO 1100 X 26 X 340MM",
+    "dimensions": "1100 X 26 X 340",
+    "unit_weight_kg": 196.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2414,
+    "name": "P. CORRUGADO 1100 X 27 X 200MM",
+    "specification": "P. CORRUGADO 1100 X 27 X 200MM",
+    "dimensions": "1100 X 27 X 200",
+    "unit_weight_kg": 124.03,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600016,
+    "name": "P. CORRUGADO 1100 X 27 X 240MM",
+    "specification": "P. CORRUGADO 1100 X 27 X 240MM",
+    "dimensions": "1100 X 27 X 240",
+    "unit_weight_kg": 147.7,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2869,
+    "name": "P. CORRUGADO 1100 X 27 X 280MM",
+    "specification": "P. CORRUGADO 1100 X 27 X 280MM",
+    "dimensions": "1100 X 27 X 280",
+    "unit_weight_kg": 168.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215104,
+    "name": "P. CORRUGADO 1100 X 27 X 280MM A=45 P=40 - 215.103",
+    "specification": "P. CORRUGADO 1100 X 27 X 280MM A=45 P=40 - 215.103",
+    "dimensions": "1100 X 27 X 280",
+    "unit_weight_kg": 168.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2681,
+    "name": "P. CORRUGADO 1100 X 27 X 300MM",
+    "specification": "P. CORRUGADO 1100 X 27 X 300MM",
+    "dimensions": "1100 X 27 X 300",
+    "unit_weight_kg": 167.86,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3095,
+    "name": "P. CORRUGADO 1100 X 27 X 360MM",
+    "specification": "P. CORRUGADO 1100 X 27 X 360MM",
+    "dimensions": "1100 X 27 X 360",
+    "unit_weight_kg": 213.56,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2974,
+    "name": "P. CORRUGADO 1100 X 28 X 130MM",
+    "specification": "P. CORRUGADO 1100 X 28 X 130MM",
+    "dimensions": "1100 X 28 X 130",
+    "unit_weight_kg": 88.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2684,
+    "name": "P. CORRUGADO 1100 X 29 X 250MM",
+    "specification": "P. CORRUGADO 1100 X 29 X 250MM",
+    "dimensions": "1100 X 29 X 250",
+    "unit_weight_kg": 150.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215103,
+    "name": "P. CORRUGADO 1100 X 29 X 280MM A=45 P=40 - 215.103",
+    "specification": "P. CORRUGADO 1100 X 29 X 280MM A=45 P=40 - 215.103",
+    "dimensions": "1100 X 29 X 280",
+    "unit_weight_kg": 181.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215018,
+    "name": "P. CORRUGADO 1100 X 29 X 300MM A=45 P=40 - 215.018",
+    "specification": "P. CORRUGADO 1100 X 29 X 300MM A=45 P=40 - 215.018",
+    "dimensions": "1100 X 29 X 300",
+    "unit_weight_kg": 193.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215019,
+    "name": "P. CORRUGADO 1100 X 27 X 200MM A=45 P=40 - 215.019",
+    "specification": "P. CORRUGADO 1100 X 27 X 200MM A=45 P=40 - 215.019",
+    "dimensions": "1100 X 27 X 200",
+    "unit_weight_kg": 155.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3096,
+    "name": "P. CORRUGADO 1100 X 29 X 360MM",
+    "specification": "P. CORRUGADO 1100 X 29 X 360MM",
+    "dimensions": "1100 X 29 X 360",
+    "unit_weight_kg": 229.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215107,
+    "name": "P. CORRUGADO 1100 X 30 X 220MM A=45 P=40 - 215.107",
+    "specification": "P. CORRUGADO 1100 X 30 X 220MM A=45 P=40 - 215.107",
+    "dimensions": "1100 X 30 X 220",
+    "unit_weight_kg": 150.15,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3177,
+    "name": "P. CORRUGADO 1100 X 30 X 330MM",
+    "specification": "P. CORRUGADO 1100 X 30 X 330MM",
+    "dimensions": "1100 X 30 X 330",
+    "unit_weight_kg": 218.53,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2782,
+    "name": "P. CORRUGADO 1100 X 30 X 360MM",
+    "specification": "P. CORRUGADO 1100 X 30 X 360MM",
+    "dimensions": "1100 X 30 X 360",
+    "unit_weight_kg": 237.19,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2971,
+    "name": "P. CORRUGADO 1100 X 31X 280MM",
+    "specification": "P. CORRUGADO 1100 X 31X 280MM",
+    "dimensions": "1100 X 31X 280",
+    "unit_weight_kg": 193.77,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2889,
+    "name": "P. CORRUGADO 1100 X 32 X  250MM",
+    "specification": "P. CORRUGADO 1100 X 32 X  250MM",
+    "dimensions": "1100 X 32 X 250",
+    "unit_weight_kg": 32.12,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3951,
+    "name": "P. CORRUGADO 1100 X 32 X 190MM",
+    "specification": "P. CORRUGADO 1100 X 32 X 190MM",
+    "dimensions": "1100 X 32 X 190",
+    "unit_weight_kg": 139.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215246,
+    "name": "P. CORRUGADO 1100 X 32 X 250MM A=45 P=45 - 215.246",
+    "specification": "P. CORRUGADO 1100 X 32 X 250MM A=45 P=45 - 215.246",
+    "dimensions": "1100 X 32 X 250",
+    "unit_weight_kg": 181.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215250,
+    "name": "P. CORRUGADO 1100 X 32 X 280MM A=45 P=45 - 215.250",
+    "specification": "P. CORRUGADO 1100 X 32 X 280MM A=45 P=45 - 215.250",
+    "dimensions": "1100 X 32 X 280",
+    "unit_weight_kg": 201.54,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2973,
+    "name": "P. CORRUGADO 1100 X 32 X 310MM",
+    "specification": "P. CORRUGADO 1100 X 32 X 310MM",
+    "dimensions": "1100 X 32 X 310",
+    "unit_weight_kg": 219.57,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215262,
+    "name": "P. CORRUGADO 1100 X 32 X 340MM A=45 P=45 - 215262",
+    "specification": "P. CORRUGADO 1100 X 32 X 340MM A=45 P=45 - 215262",
+    "dimensions": "1100 X 32 X 340",
+    "unit_weight_kg": 241.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215205,
+    "name": "P. CORRUGADO 1100 X 33 X 300MM A=45 P=45 - 215.205",
+    "specification": "P. CORRUGADO 1100 X 33 X 300MM A=45 P=45 - 215.205",
+    "dimensions": "1100 X 33 X 300",
+    "unit_weight_kg": 221.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363777,
+    "name": "P. CORRUGADO 1100 X 34 X 230MM A=41,5 P=40 - 363.777",
+    "specification": "P. CORRUGADO 1100 X 34 X 230MM A=41,5 P=40 - 363.777",
+    "dimensions": "1100 X 34 X 230",
+    "unit_weight_kg": 177.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6372398,
+    "name": "P. CORRUGADO 1100 X 34 X 230MM A=46,5 P=40 - 372.398",
+    "specification": "P. CORRUGADO 1100 X 34 X 230MM A=46,5 P=40 - 372.398",
+    "dimensions": "1100 X 34 X 230",
+    "unit_weight_kg": 177.12,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6374475,
+    "name": "P. CORRUGADO 1100 X 34 X 260MM A=45 P=40 - 374.475",
+    "specification": "P. CORRUGADO 1100 X 34 X 260MM A=45 P=40 - 374.475",
+    "dimensions": "1100 X 34 X 260",
+    "unit_weight_kg": 198.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215254,
+    "name": "P. CORRUGADO 1100 X 34 X 300MM A=45 P=45 - 215.254",
+    "specification": "P. CORRUGADO 1100 X 34 X 300MM A=45 P=45 - 215.254",
+    "dimensions": "1100 X 34 X 300",
+    "unit_weight_kg": 228.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215079,
+    "name": "P. CORRUGADO 1100 X 34 X 330MM A=45 P=40 - 215.079",
+    "specification": "P. CORRUGADO 1100 X 34 X 330MM A=45 P=40 - 215.079",
+    "dimensions": "1100 X 34 X 330",
+    "unit_weight_kg": 247.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363726,
+    "name": "P. CORRUGADO 1100 X 35 X 230MM A=51,5 P=40 - 363.726",
+    "specification": "P. CORRUGADO 1100 X 35 X 230MM A=51,5 P=40 - 363.726",
+    "dimensions": "1100 X 35 X 230",
+    "unit_weight_kg": 182.4,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2664,
+    "name": "P. CORRUGADO 1100 X 35 X 350MM",
+    "specification": "P. CORRUGADO 1100 X 35 X 350MM",
+    "dimensions": "1100 X 35 X 350",
+    "unit_weight_kg": 269.37,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215133,
+    "name": "P. CORRUGADO 1100 X 36 X 190MM A=45 P=40 - 215.133",
+    "specification": "P. CORRUGADO 1100 X 36 X 190MM A=45 P=40 - 215.133",
+    "dimensions": "1100 X 36 X 190",
+    "unit_weight_kg": 157.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5120,
+    "name": "P. CORRUGADO 1100 X 36 X 230MM",
+    "specification": "P. CORRUGADO 1100 X 36 X 230MM",
+    "dimensions": "1100 X 36 X 230",
+    "unit_weight_kg": 187.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6352992,
+    "name": "P. CORRUGADO 1100 X 37 X 250MM A=60 P=40 - 352992",
+    "specification": "P. CORRUGADO 1100 X 37 X 250MM A=60 P=40 - 352992",
+    "dimensions": "1100 X 37 X 250",
+    "unit_weight_kg": 208.28,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6377772,
+    "name": "P. CORRUGADO 1100 X 37 X 260MM A=55 P=40 - 377.772",
+    "specification": "P. CORRUGADO 1100 X 37 X 260MM A=55 P=40 - 377.772",
+    "dimensions": "1100 X 37 X 260",
+    "unit_weight_kg": 215.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3080,
+    "name": "P. CORRUGADO 1100 X 39 X 220MM",
+    "specification": "P. CORRUGADO 1100 X 39 X 220MM",
+    "dimensions": "1100 X 39 X 220",
+    "unit_weight_kg": 194.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2847,
+    "name": "P. CORRUGADO 1100 X 42 X 340MM",
+    "specification": "P. CORRUGADO 1100 X 42 X 340MM",
+    "dimensions": "1100 X 42 X 340",
+    "unit_weight_kg": 314.28,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215277,
+    "name": "P. CORRUGADO 1100X 12 X 300MM A=65 P=45 - 215.277",
+    "specification": "P. CORRUGADO 1100X 12 X 300MM A=65 P=45 - 215.277",
+    "dimensions": "1100X 12 X 300",
+    "unit_weight_kg": 81.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215330,
+    "name": "P. CORRUGADO 1100X 13 X 220MM A=65 P=45 - 215.330",
+    "specification": "P. CORRUGADO 1100X 13 X 220MM A=65 P=45 - 215.330",
+    "dimensions": "1100X 13 X 220",
+    "unit_weight_kg": 66.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215304,
+    "name": "P. CORRUGADO 1100X 24 X 270MM A=65 P=45 - 215.304",
+    "specification": "P. CORRUGADO 1100X 24 X 270MM A=65 P=45 - 215.304",
+    "dimensions": "1100X 24 X 270",
+    "unit_weight_kg": 146.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215306,
+    "name": "P. CORRUGADO 1100X 26 X 290MM A=65 P=45 - 215.306",
+    "specification": "P. CORRUGADO 1100X 26 X 290MM A=65 P=45 - 215.306",
+    "dimensions": "1100X 26 X 290",
+    "unit_weight_kg": 169.73,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215305,
+    "name": "P. CORRUGADO 1100X 32 X 270MM A=45 P=45 - 215.305",
+    "specification": "P. CORRUGADO 1100X 32 X 270MM A=45 P=45 - 215.305",
+    "dimensions": "1100X 32 X 270",
+    "unit_weight_kg": 194.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215276,
+    "name": "P. CORRUGADO 1100X 32 X 300MM A=45 P=45 - 215.276",
+    "specification": "P. CORRUGADO 1100X 32 X 300MM A=45 P=45 - 215.276",
+    "dimensions": "1100X 32 X 300",
+    "unit_weight_kg": 214.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215329,
+    "name": "P. CORRUGADO 1100X 33 X 220MM A=45 P=45 - 215.329",
+    "specification": "P. CORRUGADO 1100X 33 X 220MM A=45 P=45 - 215.329",
+    "dimensions": "1100X 33 X 220",
+    "unit_weight_kg": 166.78,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2508,
+    "name": "P. CORRUGADO 112,5 KVA PC 0110",
+    "specification": "P. CORRUGADO 112,5 KVA PC 0110",
+    "dimensions": "112,5 KVA PC 0110",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215111,
+    "name": "P. CORRUGADO 1200 X 08 X 360MM A=45 P=40 - 215.111",
+    "specification": "P. CORRUGADO 1200 X 08 X 360MM A=45 P=40 - 215.111",
+    "dimensions": "1200 X 08 X 360",
+    "unit_weight_kg": 69.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2942,
+    "name": "P. CORRUGADO 1200 X 10 X 360 MM",
+    "specification": "P. CORRUGADO 1200 X 10 X 360 MM",
+    "dimensions": "1200 X 10 X 360",
+    "unit_weight_kg": 86.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3113,
+    "name": "P. CORRUGADO 1200 X 12 X 90MM",
+    "specification": "P. CORRUGADO 1200 X 12 X 90MM",
+    "dimensions": "1200 X 12 X 90",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3107,
+    "name": "P. CORRUGADO 1200 X 13 X 250MM",
+    "specification": "P. CORRUGADO 1200 X 13 X 250MM",
+    "dimensions": "1200 X 13 X 250",
+    "unit_weight_kg": 81.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2892,
+    "name": "P. CORRUGADO 1200 X 14 X 160MM",
+    "specification": "P. CORRUGADO 1200 X 14 X 160MM",
+    "dimensions": "1200 X 14 X 160",
+    "unit_weight_kg": 58.44,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2894,
+    "name": "P. CORRUGADO 1200 X 14 X 160MM",
+    "specification": "P. CORRUGADO 1200 X 14 X 160MM",
+    "dimensions": "1200 X 14 X 160",
+    "unit_weight_kg": 50.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3062,
+    "name": "P. CORRUGADO 1200 X 14 X 210MM",
+    "specification": "P. CORRUGADO 1200 X 14 X 210MM",
+    "dimensions": "1200 X 14 X 210",
+    "unit_weight_kg": 74.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3337,
+    "name": "P. CORRUGADO 1200 X 14 X 350MM",
+    "specification": "P. CORRUGADO 1200 X 14 X 350MM",
+    "dimensions": "1200 X 14 X 350",
+    "unit_weight_kg": 118.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5555,
+    "name": "P. CORRUGADO 1200 X 14 X 380MM",
+    "specification": "P. CORRUGADO 1200 X 14 X 380MM",
+    "dimensions": "1200 X 14 X 380",
+    "unit_weight_kg": 128.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600018,
+    "name": "P. CORRUGADO 1200 X 15 X 100MM",
+    "specification": "P. CORRUGADO 1200 X 15 X 100MM",
+    "dimensions": "1200 X 15 X 100",
+    "unit_weight_kg": 41.94,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3067,
+    "name": "P. CORRUGADO 1200 X 15 X 210MM",
+    "specification": "P. CORRUGADO 1200 X 15 X 210MM",
+    "dimensions": "1200 X 15 X 210",
+    "unit_weight_kg": 79.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2982,
+    "name": "P. CORRUGADO 1200 X 16 X 100MM",
+    "specification": "P. CORRUGADO 1200 X 16 X 100MM",
+    "dimensions": "1200 X 16 X 100",
+    "unit_weight_kg": 45.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3018,
+    "name": "P. CORRUGADO 1200 X 16 X 110MM",
+    "specification": "P. CORRUGADO 1200 X 16 X 110MM",
+    "dimensions": "1200 X 16 X 110",
+    "unit_weight_kg": 48.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3041,
+    "name": "P. CORRUGADO 1200 X 24 X 330MM",
+    "specification": "P. CORRUGADO 1200 X 24 X 330MM",
+    "dimensions": "1200 X 24 X 330",
+    "unit_weight_kg": 179.06,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215317,
+    "name": "P. CORRUGADO 1200 X 27 X 330MM A=65 P=45 - 215.317",
+    "specification": "P. CORRUGADO 1200 X 27 X 330MM A=65 P=45 - 215.317",
+    "dimensions": "1200 X 27 X 330",
+    "unit_weight_kg": 216.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215166,
+    "name": "P. CORRUGADO 1200 X 27 X 390MM A=45 P=45 - 215.166",
+    "specification": "P. CORRUGADO 1200 X 27 X 390MM A=45 P=45 - 215.166",
+    "dimensions": "1200 X 27 X 390",
+    "unit_weight_kg": 252.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215109,
+    "name": "P. CORRUGADO 1200 X 28 X 360 MM A=45 P=40 - 215.109",
+    "specification": "P. CORRUGADO 1200 X 28 X 360 MM A=45 P=40 - 215.109",
+    "dimensions": "1200 X 28 X 360",
+    "unit_weight_kg": 241.57,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215194,
+    "name": "P. CORRUGADO 1200 X 28 X 370MM A=45 P=45 - 215.194",
+    "specification": "P. CORRUGADO 1200 X 28 X 370MM A=45 P=45 - 215.194",
+    "dimensions": "1200 X 28 X 370",
+    "unit_weight_kg": 249.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215327,
+    "name": "P. CORRUGADO 1200 X 29 X 340MM A=65 P=45 - 215.327",
+    "specification": "P. CORRUGADO 1200 X 29 X 340MM A=65 P=45 - 215.327",
+    "dimensions": "1200 X 29 X 340",
+    "unit_weight_kg": 239.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2712,
+    "name": "P. CORRUGADO 1200 X 30 X 400MM",
+    "specification": "P. CORRUGADO 1200 X 30 X 400MM",
+    "dimensions": "1200 X 30 X 400",
+    "unit_weight_kg": 271.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3076,
+    "name": "P. CORRUGADO 1200 X 31 X 350MM",
+    "specification": "P. CORRUGADO 1200 X 31 X 350MM",
+    "dimensions": "1200 X 31 X 350",
+    "unit_weight_kg": 262.08,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6217361,
+    "name": "P. CORRUGADO 1200 X 32 X 350MM A=45 P=50 - 217.361",
+    "specification": "P. CORRUGADO 1200 X 32 X 350MM A=45 P=50 - 217.361",
+    "dimensions": "1200 X 32 X 350",
+    "unit_weight_kg": 272.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2715,
+    "name": "P. CORRUGADO 1200 X 32 X 360MM",
+    "specification": "P. CORRUGADO 1200 X 32 X 360MM",
+    "dimensions": "1200 X 32 X 360",
+    "unit_weight_kg": 275.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215047,
+    "name": "P. CORRUGADO 1200 X 32 X 360MM A=45 P=40 - 215.047",
+    "specification": "P. CORRUGADO 1200 X 32 X 360MM A=45 P=40 - 215.047",
+    "dimensions": "1200 X 32 X 360",
+    "unit_weight_kg": 275.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215213,
+    "name": "P. CORRUGADO 1200 X 32 X 380MM A=45 P=45 - 215.213",
+    "specification": "P. CORRUGADO 1200 X 32 X 380MM A=45 P=45 - 215.213",
+    "dimensions": "1200 X 32 X 380",
+    "unit_weight_kg": 292.21,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2636,
+    "name": "P. CORRUGADO 1200 X 33 X 190MM",
+    "specification": "P. CORRUGADO 1200 X 33 X 190MM",
+    "dimensions": "1200 X 33 X 190",
+    "unit_weight_kg": 141.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4362,
+    "name": "P. CORRUGADO 1200 X 33 X 370MM",
+    "specification": "P. CORRUGADO 1200 X 33 X 370MM",
+    "dimensions": "1200 X 33 X 370",
+    "unit_weight_kg": 294.19,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6356167,
+    "name": "P. CORRUGADO 1200 X 34 X 240MM A=65 P=45 - 356167",
+    "specification": "P. CORRUGADO 1200 X 34 X 240MM A=65 P=45 - 356167",
+    "dimensions": "1200 X 34 X 240",
+    "unit_weight_kg": 203.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2761,
+    "name": "P. CORRUGADO 1200 X 34 X 270MM",
+    "specification": "P. CORRUGADO 1200 X 34 X 270MM",
+    "dimensions": "1200 X 34 X 270",
+    "unit_weight_kg": 225.51,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3075,
+    "name": "P. CORRUGADO 1200 X 34 X 350MM",
+    "specification": "P. CORRUGADO 1200 X 34 X 350MM",
+    "dimensions": "1200 X 34 X 350",
+    "unit_weight_kg": 285.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2891,
+    "name": "P. CORRUGADO 1200 X 35 X 260MM",
+    "specification": "P. CORRUGADO 1200 X 35 X 260MM",
+    "dimensions": "1200 X 35 X 260",
+    "unit_weight_kg": 224.21,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215316,
+    "name": "P. CORRUGADO 1200 X 35 X 330MM A=45 P=45 - 215.316",
+    "specification": "P. CORRUGADO 1200 X 35 X 330MM A=45 P=45 - 215.316",
+    "dimensions": "1200 X 35 X 330",
+    "unit_weight_kg": 279.94,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2893,
+    "name": "P. CORRUGADO 1200 X 36 X 330MM",
+    "specification": "P. CORRUGADO 1200 X 36 X 330MM",
+    "dimensions": "1200 X 36 X 330",
+    "unit_weight_kg": 268.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600003,
+    "name": "P. CORRUGADO 1200 X 36 X 380MM",
+    "specification": "P. CORRUGADO 1200 X 36 X 380MM",
+    "dimensions": "1200 X 36 X 380",
+    "unit_weight_kg": 328.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3106,
+    "name": "P. CORRUGADO 1200 X 37 X 250MM",
+    "specification": "P. CORRUGADO 1200 X 37 X 250MM",
+    "dimensions": "1200 X 37 X 250",
+    "unit_weight_kg": 226.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6377753,
+    "name": "P. CORRUGADO 1200 X 38 X 230MM A=55 P=40 - 377.753",
+    "specification": "P. CORRUGADO 1200 X 38 X 230MM A=55 P=40 - 377.753",
+    "dimensions": "1200 X 38 X 230",
+    "unit_weight_kg": 216.02,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215127,
+    "name": "P. CORRUGADO 1200 X 38 X 360MM A=45 P=40 - 215.127",
+    "specification": "P. CORRUGADO 1200 X 38 X 360MM A=45 P=40 - 215.127",
+    "dimensions": "1200 X 38 X 360",
+    "unit_weight_kg": 327.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3063,
+    "name": "P. CORRUGADO 1200 X 39 X 210MM",
+    "specification": "P. CORRUGADO 1200 X 39 X 210MM",
+    "dimensions": "1200 X 39 X 210",
+    "unit_weight_kg": 203.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3066,
+    "name": "P. CORRUGADO 1200 X 40 X 210MM",
+    "specification": "P. CORRUGADO 1200 X 40 X 210MM",
+    "dimensions": "1200 X 40 X 210",
+    "unit_weight_kg": 209.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6353090,
+    "name": "P. CORRUGADO 1200 X 40 X 260MM A=67 P=40 - 353.090",
+    "specification": "P. CORRUGADO 1200 X 40 X 260MM A=67 P=40 - 353.090",
+    "dimensions": "1200 X 40 X 260",
+    "unit_weight_kg": 254.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6353733,
+    "name": "P. CORRUGADO 1200 X 42 X 280MM A=47 P=40 - 353.733",
+    "specification": "P. CORRUGADO 1200 X 42 X 280MM A=47 P=40 - 353.733",
+    "dimensions": "1200 X 42 X 280",
+    "unit_weight_kg": 285.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215061,
+    "name": "P. CORRUGADO 1300 X 10 X 340MM A=45 P=45 - 215.061",
+    "specification": "P. CORRUGADO 1300 X 10 X 340MM A=45 P=45 - 215.061",
+    "dimensions": "1300 X 10 X 340",
+    "unit_weight_kg": 112.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3197,
+    "name": "P. CORRUGADO 1300 X 10 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 10 X 360MM",
+    "dimensions": "1300 X 10 X 360",
+    "unit_weight_kg": 118.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2729,
+    "name": "P. CORRUGADO 1300 X 12 X 260MM",
+    "specification": "P. CORRUGADO 1300 X 12 X 260MM",
+    "dimensions": "1300 X 12 X 260",
+    "unit_weight_kg": 95.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3074,
+    "name": "P. CORRUGADO 1300 X 14 X 250MM",
+    "specification": "P. CORRUGADO 1300 X 14 X 250MM",
+    "dimensions": "1300 X 14 X 250",
+    "unit_weight_kg": 118.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215268,
+    "name": "P. CORRUGADO 1300 X 14 X 350MM A=60 P=45 - 215.268",
+    "specification": "P. CORRUGADO 1300 X 14 X 350MM A=60 P=45 - 215.268",
+    "dimensions": "1300 X 14 X 350",
+    "unit_weight_kg": 161.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600031,
+    "name": "P. CORRUGADO 1300 X 14 X 390MM",
+    "specification": "P. CORRUGADO 1300 X 14 X 390MM",
+    "dimensions": "1300 X 14 X 390",
+    "unit_weight_kg": 178.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215149,
+    "name": "P. CORRUGADO 1300 X 17 X 320MM A=45 P=40 - 215.149",
+    "specification": "P. CORRUGADO 1300 X 17 X 320MM A=45 P=40 - 215.149",
+    "dimensions": "1300 X 17 X 320",
+    "unit_weight_kg": 178.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215075,
+    "name": "P. CORRUGADO 1300 X 17 X 330MM A=45 P=45 - 215.075",
+    "specification": "P. CORRUGADO 1300 X 17 X 330MM A=45 P=45 - 215.075",
+    "dimensions": "1300 X 17 X 330",
+    "unit_weight_kg": 184.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215062,
+    "name": "P. CORRUGADO 1300 X 24 X 340MM A=60 P=45 - 215.062",
+    "specification": "P. CORRUGADO 1300 X 24 X 340MM A=60 P=45 - 215.062",
+    "dimensions": "1300 X 24 X 340",
+    "unit_weight_kg": 268.19,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3196,
+    "name": "P. CORRUGADO 1300 X 24 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 24 X 360MM",
+    "dimensions": "1300 X 24 X 360",
+    "unit_weight_kg": 282.42,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2730,
+    "name": "P. CORRUGADO 1300 X 27 X 260MM",
+    "specification": "P. CORRUGADO 1300 X 27 X 260MM",
+    "dimensions": "1300 X 27 X 260",
+    "unit_weight_kg": 214.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2790,
+    "name": "P. CORRUGADO 1300 X 27 X 330MM",
+    "specification": "P. CORRUGADO 1300 X 27 X 330MM",
+    "dimensions": "1300 X 27 X 330",
+    "unit_weight_kg": 293.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2842,
+    "name": "P. CORRUGADO 1300 X 28 X 300MM",
+    "specification": "P. CORRUGADO 1300 X 28 X 300MM",
+    "dimensions": "1300 X 28 X 300",
+    "unit_weight_kg": 275.69,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215259,
+    "name": "P. CORRUGADO 1300 X 28 X 360MM A=60 P=45 - 215.259",
+    "specification": "P. CORRUGADO 1300 X 28 X 360MM A=60 P=45 - 215.259",
+    "dimensions": "1300 X 28 X 360",
+    "unit_weight_kg": 329.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215131,
+    "name": "P. CORRUGADO 1300 X 29 X 360MM A=45 P=40 - 215.131",
+    "specification": "P. CORRUGADO 1300 X 29 X 360MM A=45 P=40 - 215.131",
+    "dimensions": "1300 X 29 X 360",
+    "unit_weight_kg": 338.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3019,
+    "name": "P. CORRUGADO 1300 X 31 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 31 X 360MM",
+    "dimensions": "1300 X 31 X 360",
+    "unit_weight_kg": 362.02,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6393127,
+    "name": "P. CORRUGADO 1300 X 32 X 150MM A=70 P=40 - 393.127",
+    "specification": "P. CORRUGADO 1300 X 32 X 150MM A=70 P=40 - 393.127",
+    "dimensions": "1300 X 32 X 150",
+    "unit_weight_kg": 134.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6366130,
+    "name": "P. CORRUGADO 1300 X 32 X 150MM A=80 P=40 - 366.130",
+    "specification": "P. CORRUGADO 1300 X 32 X 150MM A=80 P=40 - 366.130",
+    "dimensions": "1300 X 32 X 150",
+    "unit_weight_kg": 168.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2965,
+    "name": "P. CORRUGADO 1300 X 32 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 32 X 360MM",
+    "dimensions": "1300 X 32 X 360",
+    "unit_weight_kg": 352.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5383,
+    "name": "P. CORRUGADO 1300 X 33 X 150MM",
+    "specification": "P. CORRUGADO 1300 X 33 X 150MM",
+    "dimensions": "1300 X 33 X 150",
+    "unit_weight_kg": 174.2,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6373878,
+    "name": "P. CORRUGADO 1300 X 33 X 150MM A=80 P=40 - 373.878",
+    "specification": "P. CORRUGADO 1300 X 33 X 150MM A=80 P=40 - 373.878",
+    "dimensions": "1300 X 33 X 150",
+    "unit_weight_kg": 174.2,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600021,
+    "name": "P. CORRUGADO 1300 X 35 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 35 X 360MM",
+    "dimensions": "1300 X 35 X 360",
+    "unit_weight_kg": 411.24,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215258,
+    "name": "P. CORRUGADO 1300 X 35 X 360MM A=45 P=45 - 215.258",
+    "specification": "P. CORRUGADO 1300 X 35 X 360MM A=45 P=45 - 215.258",
+    "dimensions": "1300 X 35 X 360",
+    "unit_weight_kg": 411.24,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215309,
+    "name": "P. CORRUGADO 1300 X 38 X 340MM A=45 P=45 - 215.309",
+    "specification": "P. CORRUGADO 1300 X 38 X 340MM A=45 P=45 - 215.309",
+    "dimensions": "1300 X 38 X 340",
+    "unit_weight_kg": 423.1,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215308,
+    "name": "P. CORRUGADO 1300 X 29 X 340MM A=65 P=45 - 215.308",
+    "specification": "P. CORRUGADO 1300 X 29 X 340MM A=65 P=45 - 215.308",
+    "dimensions": "1300 X 29 X 340",
+    "unit_weight_kg": 323.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3037,
+    "name": "P. CORRUGADO 1300 X 35 X 370MM",
+    "specification": "P. CORRUGADO 1300 X 35 X 370MM",
+    "dimensions": "1300 X 35 X 370",
+    "unit_weight_kg": 396.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3073,
+    "name": "P. CORRUGADO 1300 X 37 X 250MM",
+    "specification": "P. CORRUGADO 1300 X 37 X 250MM",
+    "dimensions": "1300 X 37 X 250",
+    "unit_weight_kg": 307.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215264,
+    "name": "P. CORRUGADO 1300 X 37 X 390MM A=45 P=45 - 215.264",
+    "specification": "P. CORRUGADO 1300 X 37 X 390MM A=45 P=45 - 215.264",
+    "dimensions": "1300 X 37 X 390",
+    "unit_weight_kg": 468.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215092,
+    "name": "P. CORRUGADO 1300 X 38 X 330MM A=50 P=40 - 215.092",
+    "specification": "P. CORRUGADO 1300 X 38 X 330MM A=50 P=40 - 215.092",
+    "dimensions": "1300 X 38 X 330",
+    "unit_weight_kg": 408.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4484,
+    "name": "P. CORRUGADO 1300 X 38 X 350MM",
+    "specification": "P. CORRUGADO 1300 X 38 X 350MM",
+    "dimensions": "1300 X 38 X 350",
+    "unit_weight_kg": 431.98,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6366129,
+    "name": "P. CORRUGADO 1300 X 38 X 350MM A=50 P=40 - 366.129",
+    "specification": "P. CORRUGADO 1300 X 38 X 350MM A=50 P=40 - 366.129",
+    "dimensions": "1300 X 38 X 350",
+    "unit_weight_kg": 345.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600044,
+    "name": "P. CORRUGADO 1300 X 40 X 350MM",
+    "specification": "P. CORRUGADO 1300 X 40 X 350MM",
+    "dimensions": "1300 X 40 X 350",
+    "unit_weight_kg": 363.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6393126,
+    "name": "P. CORRUGADO 1300 X 40 X 350MM A=50 P=40 - 393.126",
+    "specification": "P. CORRUGADO 1300 X 40 X 350MM A=50 P=40 - 393.126",
+    "dimensions": "1300 X 40 X 350",
+    "unit_weight_kg": 363.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6373877,
+    "name": "P. CORRUGADO 1300 X 42 X 350MM A=60 P=40 - 373.877",
+    "specification": "P. CORRUGADO 1300 X 42 X 350MM A=60 P=40 - 373.877",
+    "dimensions": "1300 X 42 X 350",
+    "unit_weight_kg": 477.59,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2660,
+    "name": "P. CORRUGADO 1300 X 50 X 360MM",
+    "specification": "P. CORRUGADO 1300 X 50 X 360MM",
+    "dimensions": "1300 X 50 X 360",
+    "unit_weight_kg": 551.07,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2649,
+    "name": "P. CORRUGADO 1300 X 56 X 340MM",
+    "specification": "P. CORRUGADO 1300 X 56 X 340MM",
+    "dimensions": "1300 X 56 X 340",
+    "unit_weight_kg": 582.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215064,
+    "name": "P. CORRUGADO 1400 X 12 X 360MM A=45 P=40 - 215.064",
+    "specification": "P. CORRUGADO 1400 X 12 X 360MM A=45 P=40 - 215.064",
+    "dimensions": "1400 X 12 X 360",
+    "unit_weight_kg": 151.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215203,
+    "name": "P. CORRUGADO 1400 X 14 X 250MM A=75 P=45 - 215.203",
+    "specification": "P. CORRUGADO 1400 X 14 X 250MM A=75 P=45 - 215.203",
+    "dimensions": "1400 X 14 X 250",
+    "unit_weight_kg": 128.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5003,
+    "name": "P. CORRUGADO 1400 X 19 X 390MM",
+    "specification": "P. CORRUGADO 1400 X 19 X 390MM",
+    "dimensions": "1400 X 19 X 390",
+    "unit_weight_kg": 261.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3179,
+    "name": "P. CORRUGADO 1400 X 30 X 360MM",
+    "specification": "P. CORRUGADO 1400 X 30 X 360MM",
+    "dimensions": "1400 X 30 X 360",
+    "unit_weight_kg": 379.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3181,
+    "name": "P. CORRUGADO 1400 x 30 x 360MM",
+    "specification": "P. CORRUGADO 1400 x 30 x 360MM",
+    "dimensions": "1400 x 30 x 360",
+    "unit_weight_kg": 379.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4634,
+    "name": "P. CORRUGADO 1400 X 34 X 280MM",
+    "specification": "P. CORRUGADO 1400 X 34 X 280MM",
+    "dimensions": "1400 X 34 X 280",
+    "unit_weight_kg": 340.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215211,
+    "name": "P. CORRUGADO 1400 X 48 X 390MM A=45 P=50 - 215.211",
+    "specification": "P. CORRUGADO 1400 X 48 X 390MM A=45 P=50 - 215.211",
+    "dimensions": "1400 X 48 X 390",
+    "unit_weight_kg": 658.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2757,
+    "name": "P. CORRUGADO 1500 X 10 X 360MM",
+    "specification": "P. CORRUGADO 1500 X 10 X 360MM",
+    "dimensions": "1500 X 10 X 360",
+    "unit_weight_kg": 127.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215096,
+    "name": "P. CORRUGADO 1500 X 13 X 250MM A=45 P=40 - 215.096",
+    "specification": "P. CORRUGADO 1500 X 13 X 250MM A=45 P=40 - 215.096",
+    "dimensions": "1500 X 13 X 250",
+    "unit_weight_kg": 125.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2756,
+    "name": "P. CORRUGADO 1500 X 24 X 360MM",
+    "specification": "P. CORRUGADO 1500 X 24 X 360MM",
+    "dimensions": "1500 X 24 X 360",
+    "unit_weight_kg": 325.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215344,
+    "name": "P. CORRUGADO 1500 X 35 X 300MM A=65 P=45 - 215.344",
+    "specification": "P. CORRUGADO 1500 X 35 X 300MM A=65 P=45 - 215.344",
+    "dimensions": "1500 X 35 X 300",
+    "unit_weight_kg": 320.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2755,
+    "name": "P. CORRUGADO 1500 X 65 X 360MM",
+    "specification": "P. CORRUGADO 1500 X 65 X 360MM",
+    "dimensions": "1500 X 65 X 360",
+    "unit_weight_kg": 826.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2801,
+    "name": "P. CORRUGADO 160 KVA",
+    "specification": "P. CORRUGADO 160 KVA",
+    "dimensions": "160 KVA",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2509,
+    "name": "P. CORRUGADO 225 KVA PC 0111",
+    "specification": "P. CORRUGADO 225 KVA PC 0111",
+    "dimensions": "225 KVA PC 0111",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2832,
+    "name": "P. CORRUGADO 250 KVA",
+    "specification": "P. CORRUGADO 250 KVA",
+    "dimensions": "250 KVA",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6364635,
+    "name": "P. CORRUGADO 300 X 6 X 100MM A=40 P=40 - 364.635",
+    "specification": "P. CORRUGADO 300 X 6 X 100MM A=40 P=40 - 364.635",
+    "dimensions": "300 X 6 X 100",
+    "unit_weight_kg": 4.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215333,
+    "name": "P. CORRUGADO 400 X 06 X 100MM A=45 P=45 - 215.333",
+    "specification": "P. CORRUGADO 400 X 06 X 100MM A=45 P=45 - 215.333",
+    "dimensions": "400 X 06 X 100",
+    "unit_weight_kg": 5.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215255,
+    "name": "P. CORRUGADO 400 X 08 X 120MM A=45 P=45 - 215.255",
+    "specification": "P. CORRUGADO 400 X 08 X 120MM A=45 P=45 - 215.255",
+    "dimensions": "400 X 08 X 120",
+    "unit_weight_kg": 8.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3060,
+    "name": "P. CORRUGADO 400 X 10 X 100MM",
+    "specification": "P. CORRUGADO 400 X 10 X 100MM",
+    "dimensions": "400 X 10 X 100",
+    "unit_weight_kg": 9.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6169287,
+    "name": "P. CORRUGADO 400 X 10 X 120MM A=35 P=40 - 169.287",
+    "specification": "P. CORRUGADO 400 X 10 X 120MM A=35 P=40 - 169.287",
+    "dimensions": "400 X 10 X 120",
+    "unit_weight_kg": 10.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2739,
+    "name": "P. CORRUGADO 400 X 10 X 130MM",
+    "specification": "P. CORRUGADO 400 X 10 X 130MM",
+    "dimensions": "400 X 10 X 130",
+    "unit_weight_kg": 11.57,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6209698,
+    "name": "P. CORRUGADO 400 X 10 X 150MM A=35 P=40 - 209.698",
+    "specification": "P. CORRUGADO 400 X 10 X 150MM A=35 P=40 - 209.698",
+    "dimensions": "400 X 10 X 150",
+    "unit_weight_kg": 13.07,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2825,
+    "name": "P. CORRUGADO 400 X 11 X 140MM",
+    "specification": "P. CORRUGADO 400 X 11 X 140MM",
+    "dimensions": "400 X 11 X 140",
+    "unit_weight_kg": 13.6,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215046,
+    "name": "P. CORRUGADO 400 X 12 X 100MM A=45 P=45 - 215.046",
+    "specification": "P. CORRUGADO 400 X 12 X 100MM A=45 P=45 - 215.046",
+    "dimensions": "400 X 12 X 100",
+    "unit_weight_kg": 11.42,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2574,
+    "name": "P. CORRUGADO 400 X 12 X 130MM",
+    "specification": "P. CORRUGADO 400 X 12 X 130MM",
+    "dimensions": "400 X 12 X 130",
+    "unit_weight_kg": 13.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215040,
+    "name": "P. CORRUGADO 400 X 12 X 130MM A=45 P=40 - 215.040",
+    "specification": "P. CORRUGADO 400 X 12 X 130MM A=45 P=40 - 215.040",
+    "dimensions": "400 X 12 X 130",
+    "unit_weight_kg": 13.9,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3269,
+    "name": "P. CORRUGADO 400 X 12 X 180MM",
+    "specification": "P. CORRUGADO 400 X 12 X 180MM",
+    "dimensions": "400 X 12 X 180",
+    "unit_weight_kg": 18.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6163365,
+    "name": "P. CORRUGADO 400 X 13 X 120MM A=35 P=40 - 163.365",
+    "specification": "P. CORRUGADO 400 X 13 X 120MM A=35 P=40 - 163.365",
+    "dimensions": "400 X 13 X 120",
+    "unit_weight_kg": 13.98,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2717,
+    "name": "P. CORRUGADO 400 X 13 X 130MM",
+    "specification": "P. CORRUGADO 400 X 13 X 130MM",
+    "dimensions": "400 X 13 X 130",
+    "unit_weight_kg": 14.96,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2540,
+    "name": "P. CORRUGADO 400 X 13 X 140MM",
+    "specification": "P. CORRUGADO 400 X 13 X 140MM",
+    "dimensions": "400 X 13 X 140",
+    "unit_weight_kg": 13.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215338,
+    "name": "P. CORRUGADO 400 X 13 X 140MM A=45 P=45 - 215.338",
+    "specification": "P. CORRUGADO 400 X 13 X 140MM A=45 P=45 - 215.338",
+    "dimensions": "400 X 13 X 140",
+    "unit_weight_kg": 16.26,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2736,
+    "name": "P. CORRUGADO 400 X 13 X 160MM",
+    "specification": "P. CORRUGADO 400 X 13 X 160MM",
+    "dimensions": "400 X 13 X 160",
+    "unit_weight_kg": 17.9,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215341,
+    "name": "P. CORRUGADO 400 X 14 X 140MM A=45 P=45 - 215.341",
+    "specification": "P. CORRUGADO 400 X 14 X 140MM A=45 P=45 - 215.341",
+    "dimensions": "400 X 14 X 140",
+    "unit_weight_kg": 17.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6159775,
+    "name": "P. CORRUGADO 400 X 15 X 150MM A=35 P=40 - 159.775",
+    "specification": "P. CORRUGADO 400 X 15 X 150MM A=35 P=40 - 159.775",
+    "dimensions": "400 X 15 X 150",
+    "unit_weight_kg": 19.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6231929,
+    "name": "P. CORRUGADO 400 X 15 X 120MM A=35 P=40 - 231.929",
+    "specification": "P. CORRUGADO 400 X 15 X 120MM A=35 P=40 - 231.929",
+    "dimensions": "400 X 15 X 120",
+    "unit_weight_kg": 16.09,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2698,
+    "name": "P. CORRUGADO 400 X 15 X 160MM",
+    "specification": "P. CORRUGADO 400 X 15 X 160MM",
+    "dimensions": "400 X 15 X 160",
+    "unit_weight_kg": 20.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215038,
+    "name": "P. CORRUGADO 400 X 15 X 190MM A=45 P=40 - 215.038",
+    "specification": "P. CORRUGADO 400 X 15 X 190MM A=45 P=40 - 215.038",
+    "dimensions": "400 X 15 X 190",
+    "unit_weight_kg": 24.08,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6229665,
+    "name": "P. CORRUGADO 400 X 15 X150MM A=35 P=40 - 229.665",
+    "specification": "P. CORRUGADO 400 X 15 X150MM A=35 P=40 - 229.665",
+    "dimensions": "400 X 15 X150",
+    "unit_weight_kg": 19.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3301,
+    "name": "P. CORRUGADO 400 X 16 X 150MM",
+    "specification": "P. CORRUGADO 400 X 16 X 150MM",
+    "dimensions": "400 X 16 X 150",
+    "unit_weight_kg": 20.76,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2705,
+    "name": "P. CORRUGADO 400 X 16 X 160MM",
+    "specification": "P. CORRUGADO 400 X 16 X 160MM",
+    "dimensions": "400 X 16 X 160",
+    "unit_weight_kg": 21.97,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6171633,
+    "name": "P. CORRUGADO 400 X 17 X 150MM A=35 P=40 - 171.633",
+    "specification": "P. CORRUGADO 400 X 17 X 150MM A=35 P=40 - 171.633",
+    "dimensions": "400 X 17 X 150",
+    "unit_weight_kg": 22.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2701,
+    "name": "P. CORRUGADO 400 X 17 X 160MM",
+    "specification": "P. CORRUGADO 400 X 17 X 160MM",
+    "dimensions": "400 X 17 X 160",
+    "unit_weight_kg": 23.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215035,
+    "name": "P. CORRUGADO 400 X 18 X 230MM A=45 P=40 - 215.035",
+    "specification": "P. CORRUGADO 400 X 18 X 230MM A=45 P=40 - 215.035",
+    "dimensions": "400 X 18 X 230",
+    "unit_weight_kg": 34.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2725,
+    "name": "P. CORRUGADO 400 X 19 X 160MM",
+    "specification": "P. CORRUGADO 400 X 19 X 160MM",
+    "dimensions": "400 X 19 X 160",
+    "unit_weight_kg": 26.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6209295,
+    "name": "P. CORRUGADO 400 X 20 X 150MM A=35 P=40 - 209.295",
+    "specification": "P. CORRUGADO 400 X 20 X 150MM A=35 P=40 - 209.295",
+    "dimensions": "400 X 20 X 150",
+    "unit_weight_kg": 25.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6216755,
+    "name": "P. CORRUGADO 400 X 20 X 150MM A=35 P=40 - 216.755",
+    "specification": "P. CORRUGADO 400 X 20 X 150MM A=35 P=40 - 216.755",
+    "dimensions": "400 X 20 X 150",
+    "unit_weight_kg": 25.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2699,
+    "name": "P. CORRUGADO 400 X 20 X 160MM",
+    "specification": "P. CORRUGADO 400 X 20 X 160MM",
+    "dimensions": "400 X 20 X 160",
+    "unit_weight_kg": 27.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6217360,
+    "name": "P. CORRUGADO 400 X 21 X 120MM A=45 P=50 - 04.016.1360",
+    "specification": "P. CORRUGADO 400 X 21 X 120MM A=45 P=50 - 04.016.1360",
+    "dimensions": "400 X 21 X 120",
+    "unit_weight_kg": 23.29,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2700,
+    "name": "P. CORRUGADO 400 X 21 X 160MM",
+    "specification": "P. CORRUGADO 400 X 21 X 160MM",
+    "dimensions": "400 X 21 X 160",
+    "unit_weight_kg": 28.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6162015,
+    "name": "P. CORRUGADO 400 X 22 X 150MM A=35 P=40 - 162.015",
+    "specification": "P. CORRUGADO 400 X 22 X 150MM A=35 P=40 - 162.015",
+    "dimensions": "400 X 22 X 150",
+    "unit_weight_kg": 28.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2737,
+    "name": "P. CORRUGADO 400 X 22 X 160MM",
+    "specification": "P. CORRUGADO 400 X 22 X 160MM",
+    "dimensions": "400 X 22 X 160",
+    "unit_weight_kg": 30.11,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3300,
+    "name": "P. CORRUGADO 400 X 23 X 150MM",
+    "specification": "P. CORRUGADO 400 X 23 X 150MM",
+    "dimensions": "400 X 23 X 150",
+    "unit_weight_kg": 29.73,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2697,
+    "name": "P. CORRUGADO 400 X 23 X 160MM",
+    "specification": "P. CORRUGADO 400 X 23 X 160MM",
+    "dimensions": "400 X 23 X 160",
+    "unit_weight_kg": 31.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3270,
+    "name": "P. CORRUGADO 400 X 23 X 180MM",
+    "specification": "P. CORRUGADO 400 X 23 X 180MM",
+    "dimensions": "400 X 23 X 180",
+    "unit_weight_kg": 34.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2703,
+    "name": "P. CORRUGADO 400 X 24 X 160MM",
+    "specification": "P. CORRUGADO 400 X 24 X 160MM",
+    "dimensions": "400 X 24 X 160",
+    "unit_weight_kg": 32.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4041,
+    "name": "P. CORRUGADO 400 X 25 X 160MM",
+    "specification": "P. CORRUGADO 400 X 25 X 160MM",
+    "dimensions": "400 X 25 X 160",
+    "unit_weight_kg": 34.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6166167,
+    "name": "P. CORRUGADO 400 X 25 X 160MM A=35 P=40 - 166.167",
+    "specification": "P. CORRUGADO 400 X 25 X 160MM A=35 P=40 - 166.167",
+    "dimensions": "400 X 25 X 160",
+    "unit_weight_kg": 34.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2702,
+    "name": "P. CORRUGADO 400 X 26 X 160MM",
+    "specification": "P. CORRUGADO 400 X 26 X 160MM",
+    "dimensions": "400 X 26 X 160",
+    "unit_weight_kg": 35.53,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2695,
+    "name": "P. CORRUGADO 400 X 29 X 160MM",
+    "specification": "P. CORRUGADO 400 X 29 X 160MM",
+    "dimensions": "400 X 29 X 160",
+    "unit_weight_kg": 39.6,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2704,
+    "name": "P. CORRUGADO 400 X 31 X 160MM",
+    "specification": "P. CORRUGADO 400 X 31 X 160MM",
+    "dimensions": "400 X 31 X 160",
+    "unit_weight_kg": 42.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6136392,
+    "name": "P. CORRUGADO 400 X 32 X 160MM A=35 P=40 - 136.392",
+    "specification": "P. CORRUGADO 400 X 32 X 160MM A=35 P=40 - 136.392",
+    "dimensions": "1100 X 12 X 300",
+    "unit_weight_kg": 43.67,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4699,
+    "name": "P. CORRUGADO 400 X 33 X 150MM",
+    "specification": "P. CORRUGADO 400 X 33 X 150MM",
+    "dimensions": "400 X 33 X 150",
+    "unit_weight_kg": 42.54,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6166636,
+    "name": "P. CORRUGADO 400 X 33 X 150MM A=35 P=40 - 166.636",
+    "specification": "P. CORRUGADO 400 X 33 X 150MM A=35 P=40 - 166.636",
+    "dimensions": "400 X 33 X 150",
+    "unit_weight_kg": 42.54,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3608,
+    "name": "P. CORRUGADO 400 X 34 X 150MM",
+    "specification": "P. CORRUGADO 400 X 34 X 150MM",
+    "dimensions": "400 X 34 X 150",
+    "unit_weight_kg": 43.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6162014,
+    "name": "P. CORRUGADO 400 X 34 X 150MM A=35 P=40 - 162.014",
+    "specification": "P. CORRUGADO 400 X 34 X 150MM A=35 P=40 - 162.014",
+    "dimensions": "400 X 34 X 150",
+    "unit_weight_kg": 43.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2745,
+    "name": "P. CORRUGADO 400 X 34 X 160MM",
+    "specification": "P. CORRUGADO 400 X 34 X 160MM",
+    "dimensions": "400 X 34 X 160",
+    "unit_weight_kg": 46.38,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2775,
+    "name": "P. CORRUGADO 400 X 35 X 160MM",
+    "specification": "P. CORRUGADO 400 X 35 X 160MM",
+    "dimensions": "400 X 35 X 160",
+    "unit_weight_kg": 47.74,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6137015,
+    "name": "P. CORRUGADO 400 X 36 X 160MM A=35 P=40 - 137.015",
+    "specification": "P. CORRUGADO 400 X 36 X 160MM A=35 P=40 - 137.015",
+    "dimensions": "400 X 36 X 160",
+    "unit_weight_kg": 49.1,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2706,
+    "name": "P. CORRUGADO 400 X 37 X 160MM",
+    "specification": "P. CORRUGADO 400 X 37 X 160MM",
+    "dimensions": "400 X 37 X 160",
+    "unit_weight_kg": 50.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6152525,
+    "name": "P. CORRUGADO 400 X 42 X 150MM A=35 P=40 - 162.014",
+    "specification": "P. CORRUGADO 400 X 42 X 150MM A=35 P=40 - 162.014",
+    "dimensions": "400 X 42 X 150",
+    "unit_weight_kg": 54.07,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2740,
+    "name": "P. CORRUGADO 400 X 46 X 160MM",
+    "specification": "P. CORRUGADO 400 X 46 X 160MM",
+    "dimensions": "400 X 46 X 160",
+    "unit_weight_kg": 62.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215041,
+    "name": "P. CORRUGADO 400 X 6 X 100MM A=45 P=45 - 215.041",
+    "specification": "P. CORRUGADO 400 X 6 X 100MM A=45 P=45 - 215.041",
+    "dimensions": "400 X 6 X 100",
+    "unit_weight_kg": 5.77,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215032,
+    "name": "P. CORRUGADO 400 X 8 X 120MM A=45 P=40 - 215.032",
+    "specification": "P. CORRUGADO 400 X 8 X 120MM A=45 P=40 - 215.032",
+    "dimensions": "400 X 8 X 120",
+    "unit_weight_kg": 8.78,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2788,
+    "name": "P. CORRUGADO 50 KVA",
+    "specification": "P. CORRUGADO 50 KVA",
+    "dimensions": "50 KVA",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2904,
+    "name": "P. CORRUGADO 50 KVA - PC0117",
+    "specification": "P. CORRUGADO 50 KVA - PC0117",
+    "dimensions": "50 KVA - PC0117",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6164390,
+    "name": "P. CORRUGADO 500 X 05 X 120MM A=35 P=40 - 164.390",
+    "specification": "P. CORRUGADO 500 X 05 X 120MM A=35 P=40 - 164.390",
+    "dimensions": "500 X 05 X 120",
+    "unit_weight_kg": 6.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161395,
+    "name": "P. CORRUGADO 500 X 08 X 050MM A=45 P= 050 - 016.1395",
+    "specification": "P. CORRUGADO 500 X 08 X 050MM A=45 P= 050 - 016.1395",
+    "dimensions": "500 X 08 X 050",
+    "unit_weight_kg": 6.08,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161396,
+    "name": "P. CORRUGADO 500 X 08 X 180MM A=45 P=50 - 016.1396",
+    "specification": "P. CORRUGADO 500 X 08 X 180MM A=45 P=50 - 016.1396",
+    "dimensions": "500 X 08 X 180",
+    "unit_weight_kg": 15.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3938,
+    "name": "P. CORRUGADO 500 X 10 X 120MM",
+    "specification": "P. CORRUGADO 500 X 10 X 120MM",
+    "dimensions": "500 X 10 X 120",
+    "unit_weight_kg": 13.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161686,
+    "name": "P. CORRUGADO 500 X 10 X 120MM A=35 P=40 - 161.686",
+    "specification": "P. CORRUGADO 500 X 10 X 120MM A=35 P=40 - 161.686",
+    "dimensions": "500 X 10 X 120",
+    "unit_weight_kg": 13.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161741,
+    "name": "P. CORRUGADO 500 X 10 X 150MM A=35 P=40 - 161.741",
+    "specification": "P. CORRUGADO 500 X 10 X 150MM A=35 P=40 - 161.741",
+    "dimensions": "500 X 10 X 150",
+    "unit_weight_kg": 16.34,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3940,
+    "name": "P. CORRUGADO 500 X 10 X 190MM",
+    "specification": "P. CORRUGADO 500 X 10 X 190MM",
+    "dimensions": "500 X 10 X 190",
+    "unit_weight_kg": 20.21,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215154,
+    "name": "P. CORRUGADO 500 X 10 X 90MM A=45 P=45 - 215.154",
+    "specification": "P. CORRUGADO 500 X 10 X 90MM A=45 P=45 - 215.154",
+    "dimensions": "500 X 10 X 90",
+    "unit_weight_kg": 11.02,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4023,
+    "name": "P. CORRUGADO 500 X 15 X 120MM",
+    "specification": "P. CORRUGADO 500 X 15 X 120MM",
+    "dimensions": "500 X 15 X 120",
+    "unit_weight_kg": 20.11,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6165366,
+    "name": "P. CORRUGADO 500 X 15 X 120MM A=35 P=40 - 165.366",
+    "specification": "P. CORRUGADO 500 X 15 X 120MM A=35 P=40 - 165.366",
+    "dimensions": "500 X 15 X 120",
+    "unit_weight_kg": 20.11,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161397,
+    "name": "P. CORRUGADO 500 X 16 X 180MM A=45 P=50 - 016.1397",
+    "specification": "P. CORRUGADO 500 X 16 X 180MM A=45 P=50 - 016.1397",
+    "dimensions": "500 X 16 X 180",
+    "unit_weight_kg": 31.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2903,
+    "name": "P. CORRUGADO 500 X 17 X 120MM",
+    "specification": "P. CORRUGADO 500 X 17 X 120MM",
+    "dimensions": "500 X 17 X 120",
+    "unit_weight_kg": 19.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215266,
+    "name": "P. CORRUGADO 500 X 18 X 150MM A=45 P=45 - 215.266",
+    "specification": "P. CORRUGADO 500 X 18 X 150MM A=45 P=45 - 215.266",
+    "dimensions": "500 X 18 X 150",
+    "unit_weight_kg": 29.67,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215202,
+    "name": "P. CORRUGADO 500 X 18 X 170MM A=45 P=45 - 215.202",
+    "specification": "P. CORRUGADO 500 X 18 X 170MM A=45 P=45 - 215.202",
+    "dimensions": "500 X 18 X 170",
+    "unit_weight_kg": 33.06,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161968,
+    "name": "P. CORRUGADO 500 X 20 X 150MM A=35 P=40 - 161.968",
+    "specification": "P. CORRUGADO 500 X 20 X 150MM A=35 P=40 - 161.968",
+    "dimensions": "500 X 20 X 150",
+    "unit_weight_kg": 32.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215256,
+    "name": "P. CORRUGADO 500 X 22 X 200MM A=45 P=45 215.256",
+    "specification": "P. CORRUGADO 500 X 22 X 200MM A=45 P=45 215.256",
+    "dimensions": "500 X 22 X 200",
+    "unit_weight_kg": 46.53,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2902,
+    "name": "P. CORRUGADO 500 X 7 X 120MM",
+    "specification": "P. CORRUGADO 500 X 7 X 120MM",
+    "dimensions": "500 X 7 X 120",
+    "unit_weight_kg": 7.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215243,
+    "name": "P. CORRUGADO 500 X 8 X 100MM A=45 P=45 - 215.243",
+    "specification": "P. CORRUGADO 500 X 8 X 100MM A=45 P=45 - 215.243",
+    "dimensions": "500 X 8 X 100",
+    "unit_weight_kg": 9.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215020,
+    "name": "P. CORRUGADO 535 X 10 X 130MM A=45 P=45 - 215.020",
+    "specification": "P. CORRUGADO 535 X 10 X 130MM A=45 P=45 - 215.020",
+    "dimensions": "535 X 10 X 130",
+    "unit_weight_kg": 15.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2824,
+    "name": "P. CORRUGADO 535 X 10 X 140MM",
+    "specification": "P. CORRUGADO 535 X 10 X 140MM",
+    "dimensions": "535 X 10 X 140",
+    "unit_weight_kg": 16.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2416,
+    "name": "P. CORRUGADO 535 X 10 X 170MM",
+    "specification": "P. CORRUGADO 535 X 10 X 170MM",
+    "dimensions": "535 X 10 X 170",
+    "unit_weight_kg": 19.6,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215021,
+    "name": "P. CORRUGADO 535 X 10 X 170MM A=45 P=40 - 215.021",
+    "specification": "P. CORRUGADO 535 X 10 X 170MM A=45 P=40 - 215.021",
+    "dimensions": "535 X 10 X 170",
+    "unit_weight_kg": 19.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3159,
+    "name": "P. CORRUGADO 535 x 10 x 240MM",
+    "specification": "P. CORRUGADO 535 x 10 x 240MM",
+    "dimensions": "700 x 12 x 200",
+    "unit_weight_kg": 26.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215030,
+    "name": "P. CORRUGADO 535 X 12 X 170MM A=45 P=40 - 215.030",
+    "specification": "P. CORRUGADO 535 X 12 X 170MM A=45 P=40 - 215.030",
+    "dimensions": "535 X 12 X 170",
+    "unit_weight_kg": 23.43,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2474,
+    "name": "P. CORRUGADO 535 X 12 X 200MM",
+    "specification": "P. CORRUGADO 535 X 12 X 200MM",
+    "dimensions": "535 X 12 X 200",
+    "unit_weight_kg": 27.06,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3059,
+    "name": "P. CORRUGADO 535 X 14 X 150MM",
+    "specification": "P. CORRUGADO 535 X 14 X 150MM",
+    "dimensions": "535 X 14 X 150",
+    "unit_weight_kg": 21.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215077,
+    "name": "P. CORRUGADO 535 X 15 X 150MM A=45 P=40 - 215.077",
+    "specification": "P. CORRUGADO 535 X 15 X 150MM A=45 P=40 - 215.077",
+    "dimensions": "535 X 15 X 150",
+    "unit_weight_kg": 26.16,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215081,
+    "name": "P. CORRUGADO 535 X 15 X 170MM A=45 P=40 - 215.081",
+    "specification": "P. CORRUGADO 535 X 15 X 170MM A=45 P=40 - 215.081",
+    "dimensions": "535 X 15 X 170",
+    "unit_weight_kg": 29.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2836,
+    "name": "P. CORRUGADO 535 X 16 X 140MM",
+    "specification": "P. CORRUGADO 535 X 16 X 140MM",
+    "dimensions": "535 X 16 X 140",
+    "unit_weight_kg": 26.26,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3058,
+    "name": "P. CORRUGADO 535 X 16 X 170MM",
+    "specification": "P. CORRUGADO 535 X 16 X 170MM",
+    "dimensions": "535 X 16 X 170",
+    "unit_weight_kg": 27.42,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215022,
+    "name": "P. CORRUGADO 535 X 18 X 150MM A=45 P=40 - 215.022",
+    "specification": "P. CORRUGADO 535 X 18 X 150MM A=45 P=40 - 215.022",
+    "dimensions": "535 X 18 X 150",
+    "unit_weight_kg": 31.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215113,
+    "name": "P. CORRUGADO 535 X 18 X 200MM A=45 P=40 - 215.113",
+    "specification": "P. CORRUGADO 535 X 18 X 200MM A=45 P=40 - 215.113",
+    "dimensions": "535 X 18 X 200",
+    "unit_weight_kg": 40.37,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3116,
+    "name": "P. CORRUGADO 535 x 26 x 240MM",
+    "specification": "P. CORRUGADO 535 x 26 x 240MM",
+    "dimensions": "535 x 26 x 240",
+    "unit_weight_kg": 68.59,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3012,
+    "name": "P. CORRUGADO 535 X 30 X 280MM",
+    "specification": "P. CORRUGADO 535 X 30 X 280MM",
+    "dimensions": "535 X 30 X 280",
+    "unit_weight_kg": 91.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2476,
+    "name": "P. CORRUGADO 535 X 6 X 100MM",
+    "specification": "P. CORRUGADO 535 X 6 X 100MM",
+    "dimensions": "535 X 6 X 100",
+    "unit_weight_kg": 7.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2945,
+    "name": "P. CORRUGADO 535 X 8 X 100 MM",
+    "specification": "P. CORRUGADO 535 X 8 X 100 MM",
+    "dimensions": "535 X 8 X 100",
+    "unit_weight_kg": 10.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215183,
+    "name": "P. CORRUGADO 600 X 10 X 100MM A=45 P=45 - 215.183",
+    "specification": "P. CORRUGADO 600 X 10 X 100MM A=45 P=45 - 215.183",
+    "dimensions": "600 X 10 X 100",
+    "unit_weight_kg": 14.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161942,
+    "name": "P. CORRUGADO 600 x 10 x 150MM A=35 P=40 - 161.942",
+    "specification": "P. CORRUGADO 600 x 10 x 150MM A=35 P=40 - 161.942",
+    "dimensions": "600 x 10 x 150",
+    "unit_weight_kg": 19.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3047,
+    "name": "P. CORRUGADO 600 X 11 X 180MM",
+    "specification": "P. CORRUGADO 600 X 11 X 180MM",
+    "dimensions": "600 X 11 X 180",
+    "unit_weight_kg": 22.38,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215171,
+    "name": "P. CORRUGADO 600 X 12 X 100MM A=45 P=45 - 215.171",
+    "specification": "P. CORRUGADO 600 X 12 X 100MM A=45 P=45 - 215.171",
+    "dimensions": "600 X 12 X 100",
+    "unit_weight_kg": 17.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215155,
+    "name": "P. CORRUGADO 600 X 12 X 120MM A=45 P=45 - 215.155",
+    "specification": "P. CORRUGADO 600 X 12 X 120MM A=45 P=45 - 215.155",
+    "dimensions": "600 X 12 X 120",
+    "unit_weight_kg": 19.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215176,
+    "name": "P. CORRUGADO 600 X 12 X 150MM A=45 P=45 - 215.176",
+    "specification": "P. CORRUGADO 600 X 12 X 150MM A=45 P=45 - 215.176",
+    "dimensions": "600 X 12 X 150",
+    "unit_weight_kg": 23.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3052,
+    "name": "P. CORRUGADO 600 X 12 X 160MM",
+    "specification": "P. CORRUGADO 600 X 12 X 160MM",
+    "dimensions": "600 X 12 X 160",
+    "unit_weight_kg": 21.7,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3048,
+    "name": "P. CORRUGADO 600 X 13 X 180MM",
+    "specification": "P. CORRUGADO 600 X 13 X 180MM",
+    "dimensions": "600 X 13 X 180",
+    "unit_weight_kg": 26.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215236,
+    "name": "P. CORRUGADO 600 X 14 X 130MM A=45 P=45 - 215.236",
+    "specification": "P. CORRUGADO 600 X 14 X 130MM A=45 P=45 - 215.236",
+    "dimensions": "600 X 14 X 130",
+    "unit_weight_kg": 24.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2767,
+    "name": "P. CORRUGADO 600 X 14 X 140MM",
+    "specification": "P. CORRUGADO 600 X 14 X 140MM",
+    "dimensions": "600 X 14 X 140",
+    "unit_weight_kg": 22.16,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215159,
+    "name": "P. CORRUGADO 600 X 14 X 160MM A=45 P=40 - 215.159",
+    "specification": "P. CORRUGADO 600 X 14 X 160MM A=45 P=40 - 215.159",
+    "dimensions": "600 X 14 X 160",
+    "unit_weight_kg": 28.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215179,
+    "name": "P. CORRUGADO 600 X 14 X 160MM A=45 P=45 - 215.179",
+    "specification": "P. CORRUGADO 600 X 14 X 160MM A=45 P=45 - 215.179",
+    "dimensions": "600 X 14 X 160",
+    "unit_weight_kg": 29.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215170,
+    "name": "P. CORRUGADO 600 X 14 X 180MM A=45 P=45 - 215.170",
+    "specification": "P. CORRUGADO 600 X 14 X 180MM A=45 P=45 - 215.170",
+    "dimensions": "1100 X 32 X 300",
+    "unit_weight_kg": 32.56,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215066,
+    "name": "P. CORRUGADO 600 X 14 X 200MM A=45 P=40 - 215.066",
+    "specification": "P. CORRUGADO 600 X 14 X 200MM A=45 P=40 - 215.066",
+    "dimensions": "600 X 14 X 200",
+    "unit_weight_kg": 35.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215169,
+    "name": "P. CORRUGADO 600 X 14 X 200MM A=45 P=45 - 215.169",
+    "specification": "P. CORRUGADO 600 X 14 X 200MM A=45 P=45 - 215.169",
+    "dimensions": "600 X 14 X 200",
+    "unit_weight_kg": 35.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3055,
+    "name": "P. CORRUGADO 600 X 14 X 210MM",
+    "specification": "P. CORRUGADO 600 X 14 X 210MM",
+    "dimensions": "600 X 14 X 210",
+    "unit_weight_kg": 33.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215028,
+    "name": "P. CORRUGADO 600 X 14 X 220MM A=45 P=40 - 215.028",
+    "specification": "P. CORRUGADO 600 X 14 X 220MM A=45 P=40 - 215.028",
+    "dimensions": "600 X 14 X 220",
+    "unit_weight_kg": 38.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2488,
+    "name": "P. CORRUGADO 600 X 14 X 270MM",
+    "specification": "P. CORRUGADO 600 X 14 X 270MM",
+    "dimensions": "600 X 14 X 270",
+    "unit_weight_kg": 46.4,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215031,
+    "name": "P. CORRUGADO 600 X 14 X 270MM A=45 P=40 - 215.031",
+    "specification": "P. CORRUGADO 600 X 14 X 270MM A=45 P=40 - 215.031",
+    "dimensions": "600 X 14 X 270",
+    "unit_weight_kg": 46.35,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3944,
+    "name": "P. CORRUGADO 600 X 15 X 100MM",
+    "specification": "P. CORRUGADO 600 X 15 X 100MM",
+    "dimensions": "600 X 15 X 100",
+    "unit_weight_kg": 21.02,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6209703,
+    "name": "P. CORRUGADO 600 X 15 X 120MM A=35 P=40 - 209.703",
+    "specification": "P. CORRUGADO 600 X 15 X 120MM A=35 P=40 - 209.703",
+    "dimensions": "600 X 15 X 120",
+    "unit_weight_kg": 24.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6162465,
+    "name": "P. CORRUGADO 600 X 15 X 150MM A=35 P=40 162.465",
+    "specification": "P. CORRUGADO 600 X 15 X 150MM A=35 P=40 162.465",
+    "dimensions": "600 X 15 X 150",
+    "unit_weight_kg": 29.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3056,
+    "name": "P. CORRUGADO 600 X 15 X 170MM",
+    "specification": "P. CORRUGADO 600 X 15 X 170MM",
+    "dimensions": "600 X 15 X 170",
+    "unit_weight_kg": 28.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3051,
+    "name": "P. CORRUGADO 600 X 17 X 160MM",
+    "specification": "P. CORRUGADO 600 X 17 X 160MM",
+    "dimensions": "600 X 17 X 160",
+    "unit_weight_kg": 30.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215173,
+    "name": "P. CORRUGADO 600 X 18 X 160MM A=45 P=45 - 215.173",
+    "specification": "P. CORRUGADO 600 X 18 X 160MM A=45 P=45 - 215.173",
+    "dimensions": "600 X 18 X 160",
+    "unit_weight_kg": 37.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4093,
+    "name": "P. CORRUGADO 600 X 18 X 180MM",
+    "specification": "P. CORRUGADO 600 X 18 X 180MM",
+    "dimensions": "600 X 18 X 180",
+    "unit_weight_kg": 41.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215187,
+    "name": "P. CORRUGADO 600 X 18 X 180MM A=45 P=45 - 215.187",
+    "specification": "P. CORRUGADO 600 X 18 X 180MM A=45 P=45 - 215.187",
+    "dimensions": "600 X 18 X 180",
+    "unit_weight_kg": 41.71,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4364,
+    "name": "P. CORRUGADO 600 X 18 X 250MM",
+    "specification": "P. CORRUGADO 600 X 18 X 250MM",
+    "dimensions": "600 X 18 X 250",
+    "unit_weight_kg": 55.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215195,
+    "name": "P. CORRUGADO 600 X 18 X 250MM A=45 P=45 - 215.195",
+    "specification": "P. CORRUGADO 600 X 18 X 250MM A=45 P=45 - 215.195",
+    "dimensions": "600 X 18 X 250",
+    "unit_weight_kg": 55.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2769,
+    "name": "P. CORRUGADO 600 X 18 X 80MM",
+    "specification": "P. CORRUGADO 600 X 18 X 80MM",
+    "dimensions": "600 X 18 X 80",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3049,
+    "name": "P. CORRUGADO 600 X 19 X 160MM",
+    "specification": "P. CORRUGADO 600 X 19 X 160MM",
+    "dimensions": "600 X 19 X 160",
+    "unit_weight_kg": 34.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3057,
+    "name": "P. CORRUGADO 600 X 19 X 170MM",
+    "specification": "P. CORRUGADO 600 X 19 X 170MM",
+    "dimensions": "600 X 19 X 170",
+    "unit_weight_kg": 36.51,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2905,
+    "name": "P. CORRUGADO 600 X 20 X 100MM",
+    "specification": "P. CORRUGADO 600 X 20 X 100MM",
+    "dimensions": "600 X 20 X 100",
+    "unit_weight_kg": 22.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6219451,
+    "name": "P. CORRUGADO 600 X 20 X 120MM A=35 P=40 - 219.451",
+    "specification": "P. CORRUGADO 600 X 20 X 120MM A=35 P=40 - 219.451",
+    "dimensions": "600 X 20 X 120",
+    "unit_weight_kg": 32.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6163814,
+    "name": "P. CORRUGADO 600 X 20 X 150MM A=35 P=40 163.814",
+    "specification": "P. CORRUGADO 600 X 20 X 150MM A=35 P=40 163.814",
+    "dimensions": "600 X 20 X 150",
+    "unit_weight_kg": 38.83,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2418,
+    "name": "P. CORRUGADO 600 X 20 X 170MM",
+    "specification": "P. CORRUGADO 600 X 20 X 170MM",
+    "dimensions": "600 X 20 X 170",
+    "unit_weight_kg": 43.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215023,
+    "name": "P. CORRUGADO 600 X 20 X 170MM A=45 P=40 - 215.023",
+    "specification": "P. CORRUGADO 600 X 20 X 170MM A=45 P=40 - 215.023",
+    "dimensions": "600 X 20 X 170",
+    "unit_weight_kg": 43.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215196,
+    "name": "P. CORRUGADO 600 X 20 X 170MM A=45 P=45 - 215.196",
+    "specification": "P. CORRUGADO 600 X 20 X 170MM A=45 P=45 - 215.196",
+    "dimensions": "600 X 20 X 170",
+    "unit_weight_kg": 44.03,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2419,
+    "name": "P. CORRUGADO 600 X 22 X 180MM",
+    "specification": "P. CORRUGADO 600 X 22 X 180MM",
+    "dimensions": "600 X 22 X 180",
+    "unit_weight_kg": 50.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215024,
+    "name": "P. CORRUGADO 600 X 22 X 180MM A=45 P=40 - 215.024",
+    "specification": "P. CORRUGADO 600 X 22 X 180MM A=45 P=40 - 215.024",
+    "dimensions": "600 X 22 X 180",
+    "unit_weight_kg": 50.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215184,
+    "name": "P. CORRUGADO 600 X 22 X 180MM A=45 P=45 - 215.184",
+    "specification": "P. CORRUGADO 600 X 22 X 180MM A=45 P=45 - 215.184",
+    "dimensions": "600 X 22 X 180",
+    "unit_weight_kg": 50.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215234,
+    "name": "P. CORRUGADO 600 X 22 X 220MM A=45 P=45 - 215.234",
+    "specification": "P. CORRUGADO 600 X 22 X 220MM A=45 P=45 - 215.234",
+    "dimensions": "600 X 22 X 220",
+    "unit_weight_kg": 60.82,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2758,
+    "name": "P. CORRUGADO 600 X 24 X 180MM",
+    "specification": "P. CORRUGADO 600 X 24 X 180MM",
+    "dimensions": "600 X 24 X 180",
+    "unit_weight_kg": 54.77,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215168,
+    "name": "P. CORRUGADO 600 X 24 X 180MM A=45 P=45 - 215.168",
+    "specification": "P. CORRUGADO 600 X 24 X 180MM A=45 P=45 - 215.168",
+    "dimensions": "600 X 24 X 180",
+    "unit_weight_kg": 55.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3947,
+    "name": "P. CORRUGADO 600 X 24 X 240MM",
+    "specification": "P. CORRUGADO 600 X 24 X 240MM",
+    "dimensions": "600 X 24 X 240",
+    "unit_weight_kg": 71.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4474,
+    "name": "P. CORRUGADO 600 X 24 X 280MM",
+    "specification": "P. CORRUGADO 600 X 24 X 280MM",
+    "dimensions": "600 X 24 X 280",
+    "unit_weight_kg": 82.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6176718,
+    "name": "P. CORRUGADO 600 X 25 X 150MM A=35 P=40 - 176.718",
+    "specification": "P. CORRUGADO 600 X 25 X 150MM A=35 P=40 - 176.718",
+    "dimensions": "600 X 25 X 150",
+    "unit_weight_kg": 48.44,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3050,
+    "name": "P. CORRUGADO 600 X 25 X 160MM",
+    "specification": "P. CORRUGADO 600 X 25 X 160MM",
+    "dimensions": "600 X 25 X 160",
+    "unit_weight_kg": 45.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3046,
+    "name": "P. CORRUGADO 600 X 25 X 180MM",
+    "specification": "P. CORRUGADO 600 X 25 X 180MM",
+    "dimensions": "600 X 25 X 180",
+    "unit_weight_kg": 50.87,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3054,
+    "name": "P. CORRUGADO 600 X 25 X 200MM",
+    "specification": "P. CORRUGADO 600 X 25 X 200MM",
+    "dimensions": "600 X 25 X 200",
+    "unit_weight_kg": 56.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6135352,
+    "name": "P. CORRUGADO 600 X 26 X 160MM A=35 P=40 - 135.352",
+    "specification": "P. CORRUGADO 600 X 26 X 160MM A=35 P=40 - 135.352",
+    "dimensions": "600 X 26 X 160",
+    "unit_weight_kg": 53.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2535,
+    "name": "P. CORRUGADO 600 X 26 X 180MM",
+    "specification": "P. CORRUGADO 600 X 26 X 180MM",
+    "dimensions": "600 X 26 X 180",
+    "unit_weight_kg": 59.29,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2569,
+    "name": "P. CORRUGADO 600 X 26 X 200MM",
+    "specification": "P. CORRUGADO 600 X 26 X 200MM",
+    "dimensions": "600 X 26 X 200",
+    "unit_weight_kg": 65.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215190,
+    "name": "P. CORRUGADO 600 X 26 X 240MM A=45 P=45 - 215.190",
+    "specification": "P. CORRUGADO 600 X 26 X 240MM A=45 P=45 - 215.190",
+    "dimensions": "600 X 26 X 240",
+    "unit_weight_kg": 77.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215125,
+    "name": "P. CORRUGADO 600 X 28 X 190MM A=45 P=40 - 215.125",
+    "specification": "P. CORRUGADO 600 X 28 X 190MM A=45 P=40 - 215.125",
+    "dimensions": "600 X 28 X 190",
+    "unit_weight_kg": 66.98,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215042,
+    "name": "P. CORRUGADO 600 X 28 X 200MM A=45 P=40 - 215.042",
+    "specification": "P. CORRUGADO 600 X 28 X 200MM A=45 P=40 - 215.042",
+    "dimensions": "600 X 28 X 200",
+    "unit_weight_kg": 70.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215119,
+    "name": "P. CORRUGADO 600 X 28 X 210MM A=45 P=40 - 215.119",
+    "specification": "P. CORRUGADO 600 X 28 X 210MM A=45 P=40 - 215.119",
+    "dimensions": "600 X 28 X 210",
+    "unit_weight_kg": 73.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3033,
+    "name": "P. CORRUGADO 600 X 28 X 220MM",
+    "specification": "P. CORRUGADO 600 X 28 X 220MM",
+    "dimensions": "600 X 28 X 220",
+    "unit_weight_kg": 76.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6219404,
+    "name": "P. CORRUGADO 600 X 30 X 150MM A=35 P=40 - 219.404",
+    "specification": "P. CORRUGADO 600 X 30 X 150MM A=35 P=40 - 219.404",
+    "dimensions": "600 X 30 X 150",
+    "unit_weight_kg": 58.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2668,
+    "name": "P. CORRUGADO 600 X 30 X 160MM",
+    "specification": "P. CORRUGADO 600 X 30 X 160MM",
+    "dimensions": "600 X 30 X 160",
+    "unit_weight_kg": 61.44,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215105,
+    "name": "P. CORRUGADO 600 X 30 X 240MM A=45 P=40 - 215.105",
+    "specification": "P. CORRUGADO 600 X 30 X 240MM A=45 P=40 - 215.105",
+    "dimensions": "600 X 30 X 240",
+    "unit_weight_kg": 88.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3943,
+    "name": "P. CORRUGADO 600 X 32 X 100MM",
+    "specification": "P. CORRUGADO 600 X 32 X 100MM",
+    "dimensions": "600 X 32 X 100",
+    "unit_weight_kg": 43.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2691,
+    "name": "P. CORRUGADO 600 X 32 X 160MM",
+    "specification": "P. CORRUGADO 600 X 32 X 160MM",
+    "dimensions": "600 X 32 X 160",
+    "unit_weight_kg": 65.51,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3206,
+    "name": "P. CORRUGADO 600 x 34 x 150MM",
+    "specification": "P. CORRUGADO 600 x 34 x 150MM",
+    "dimensions": "600 x 34 x 150",
+    "unit_weight_kg": 65.73,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2690,
+    "name": "P. CORRUGADO 600 X 34 X 160MM",
+    "specification": "P. CORRUGADO 600 X 34 X 160MM",
+    "dimensions": "600 X 34 X 160",
+    "unit_weight_kg": 69.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6179544,
+    "name": "P. CORRUGADO 600 X 35 X 150MM A=35 P=40 - 179.544",
+    "specification": "P. CORRUGADO 600 X 35 X 150MM A=35 P=40 - 179.544",
+    "dimensions": "600 X 35 X 150",
+    "unit_weight_kg": 67.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2638,
+    "name": "P. CORRUGADO 600 X 35 X 160MM",
+    "specification": "P. CORRUGADO 600 X 35 X 160MM",
+    "dimensions": "600 X 35 X 160",
+    "unit_weight_kg": 71.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2970,
+    "name": "P. CORRUGADO 600 X 36 X 160MM",
+    "specification": "P. CORRUGADO 600 X 36 X 160MM",
+    "dimensions": "600 X 36 X 160",
+    "unit_weight_kg": 73.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6151953,
+    "name": "P. CORRUGADO 600 X 38 X 150MM A=35 P=40 - 151.953",
+    "specification": "P. CORRUGADO 600 X 38 X 150MM A=35 P=40 - 151.953",
+    "dimensions": "600 X 38 X 150",
+    "unit_weight_kg": 73.42,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2678,
+    "name": "P. CORRUGADO 600 X 38 X 160MM",
+    "specification": "P. CORRUGADO 600 X 38 X 160MM",
+    "dimensions": "600 X 38 X 160",
+    "unit_weight_kg": 77.72,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6135064,
+    "name": "P. CORRUGADO 600 X 40 X 160MM A=35 P=40 - 135.064",
+    "specification": "P. CORRUGADO 600 X 40 X 160MM A=35 P=40 - 135.064",
+    "dimensions": "600 X 40 X 160",
+    "unit_weight_kg": 81.78,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3207,
+    "name": "P. CORRUGADO 600 X 42 X 150MM",
+    "specification": "P. CORRUGADO 600 X 42 X 150MM",
+    "dimensions": "600 X 42 X 150",
+    "unit_weight_kg": 81.11,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6135016,
+    "name": "P. CORRUGADO 600 X 42 X 160MM A=35 P=40 - 135.016",
+    "specification": "P. CORRUGADO 600 X 42 X 160MM A=35 P=40 - 135.016",
+    "dimensions": "600 X 42 X 160",
+    "unit_weight_kg": 85.85,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2639,
+    "name": "P. CORRUGADO 600 X 45 X 160MM",
+    "specification": "P. CORRUGADO 600 X 45 X 160MM",
+    "dimensions": "600 X 45 X 160",
+    "unit_weight_kg": 91.96,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2785,
+    "name": "P. CORRUGADO 600 X 46 X 160MM",
+    "specification": "P. CORRUGADO 600 X 46 X 160MM",
+    "dimensions": "600 X 46 X 160",
+    "unit_weight_kg": 93.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3201,
+    "name": "P. CORRUGADO 600 x 48 x 160MM",
+    "specification": "P. CORRUGADO 600 x 48 x 160MM",
+    "dimensions": "600 x 48 x 160",
+    "unit_weight_kg": 98.06,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6164841,
+    "name": "P. CORRUGADO 600 X 5 X 120MM A=35 P=40 - 164.841",
+    "specification": "P. CORRUGADO 600 X 5 X 120MM A=35 P=40 - 164.841",
+    "dimensions": "600 X 5 X 120",
+    "unit_weight_kg": 8.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2985,
+    "name": "P. CORRUGADO 600 X 50 X 160MM",
+    "specification": "P. CORRUGADO 600 X 50 X 160MM",
+    "dimensions": "600 X 50 X 160",
+    "unit_weight_kg": 102.13,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2766,
+    "name": "P. CORRUGADO 600 X 6 X 140MM",
+    "specification": "P. CORRUGADO 600 X 6 X 140MM",
+    "dimensions": "600 X 6 X 140",
+    "unit_weight_kg": 9.5,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2768,
+    "name": "P. CORRUGADO 600 X 7 X 50MM",
+    "specification": "P. CORRUGADO 600 X 7 X 50MM",
+    "dimensions": "600 X 7 X 50",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215271,
+    "name": "P. CORRUGADO 600 X 8 X 100MM A=45 P=40 - 215.271",
+    "specification": "P. CORRUGADO 600 X 8 X 100MM A=45 P=40 - 215.271",
+    "dimensions": "600 X 8 X 100",
+    "unit_weight_kg": 11.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2453,
+    "name": "P. CORRUGADO 650 KVA PC 0112",
+    "specification": "P. CORRUGADO 650 KVA PC 0112",
+    "dimensions": "650 KVA PC 0112",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6360340,
+    "name": "P. CORRUGADO 700 X 10 X 100MM A=30 P=40 - 360.340",
+    "specification": "P. CORRUGADO 700 X 10 X 100MM A=30 P=40 - 360.340",
+    "dimensions": "700 X 10 X 100",
+    "unit_weight_kg": 16.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215303,
+    "name": "P. CORRUGADO 700 X 10 X 180MM A=45 P=40 - 215.303",
+    "specification": "P. CORRUGADO 700 X 10 X 180MM A=45 P=40 - 215.303",
+    "dimensions": "700 X 10 X 180",
+    "unit_weight_kg": 26.97,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2434,
+    "name": "P. CORRUGADO 700 X 11 X  60MM",
+    "specification": "P. CORRUGADO 700 X 11 X  60MM",
+    "dimensions": "700 X 11 X 60",
+    "unit_weight_kg": 8.7,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3307,
+    "name": "P. CORRUGADO 700 X 11 X 100MM",
+    "specification": "P. CORRUGADO 700 X 11 X 100MM",
+    "dimensions": "700 X 11 X 100",
+    "unit_weight_kg": 18.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5216,
+    "name": "P. CORRUGADO 700 X 11 X 240MM",
+    "specification": "P. CORRUGADO 700 X 11 X 240MM",
+    "dimensions": "700 X 11 X 240",
+    "unit_weight_kg": 39.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215026,
+    "name": "P. CORRUGADO 700 X 11 X 60MM A=45 P=45 - 215.026",
+    "specification": "P. CORRUGADO 700 X 11 X 60MM A=45 P=45 - 215.026",
+    "dimensions": "700 X 11 X 60",
+    "unit_weight_kg": 15.7,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3227,
+    "name": "P. CORRUGADO 700 X 12 X 220MM",
+    "specification": "P. CORRUGADO 700 X 12 X 220MM",
+    "dimensions": "700 X 12 X 220",
+    "unit_weight_kg": 38.9,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6364698,
+    "name": "P. CORRUGADO 700 X 14 X 100MM A=40 P=40 - 364698",
+    "specification": "P. CORRUGADO 700 X 14 X 100MM A=40 P=40 - 364698",
+    "dimensions": "700 X 14 X 100",
+    "unit_weight_kg": 22.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6171316,
+    "name": "P. CORRUGADO 700 X 15 X 150MM A=35 P=40 - 171.316",
+    "specification": "P. CORRUGADO 700 X 15 X 150MM A=35 P=40 - 171.316",
+    "dimensions": "700 X 15 X 150",
+    "unit_weight_kg": 34.09,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6164805,
+    "name": "P. CORRUGADO 700 X 16 X 200MM A=35 P=40 - 164.805",
+    "specification": "P. CORRUGADO 700 X 16 X 200MM A=35 P=40 - 164.805",
+    "dimensions": "700 X 16 X 200",
+    "unit_weight_kg": 46.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6164801,
+    "name": "P. CORRUGADO 700 X 16 X 200MM A=35 P=40 - 164.805",
+    "specification": "P. CORRUGADO 700 X 16 X 200MM A=35 P=40 - 164.805",
+    "dimensions": "700 X 16 X 200",
+    "unit_weight_kg": 46.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215058,
+    "name": "P. CORRUGADO 700 X 17 X 200MM A=65 P=40 - 215.058",
+    "specification": "P. CORRUGADO 700 X 17 X 200MM A=65 P=40 - 215.058",
+    "dimensions": "700 X 17 X 200",
+    "unit_weight_kg": 50.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6167518,
+    "name": "P. CORRUGADO 700 X 20 X 150MM A=35 P=40 - 167.518",
+    "specification": "P. CORRUGADO 700 X 20 X 150MM A=35 P=40 - 167.518",
+    "dimensions": "700 X 20 X 150",
+    "unit_weight_kg": 45.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215172,
+    "name": "P. CORRUGADO 700 X 20 X 200MM A=45 P=45 - 215.172",
+    "specification": "P. CORRUGADO 700 X 20 X 200MM A=45 P=45 - 215.172",
+    "dimensions": "700 X 20 X 200",
+    "unit_weight_kg": 59.28,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215293,
+    "name": "P. CORRUGADO 700 X 22 X 200MM A=45 P=45 - 215.293",
+    "specification": "P. CORRUGADO 700 X 22 X 200MM A=45 P=45 - 215.293",
+    "dimensions": "700 X 22 X 200",
+    "unit_weight_kg": 65.15,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215160,
+    "name": "P. CORRUGADO 700 X 22 X 220MM A=45 P=45 - 215.160",
+    "specification": "P. CORRUGADO 700 X 22 X 220MM A=45 P=45 - 215.160",
+    "dimensions": "700 X 22 X 220",
+    "unit_weight_kg": 70.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3228,
+    "name": "P. CORRUGADO 500 X 14 X 150MM A=45 P=45 - 215.192",
+    "specification": "P. CORRUGADO 500 X 14 X 150MM A=45 P=45 - 215.192",
+    "dimensions": "500 X 14 X 150",
+    "unit_weight_kg": 73.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215175,
+    "name": "P. CORRUGADO 700 X 24 X 240MM A=45 P=45 - 215.175",
+    "specification": "P. CORRUGADO 700 X 24 X 240MM A=45 P=45 - 215.175",
+    "dimensions": "700 X 24 X 240",
+    "unit_weight_kg": 83.68,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6175612,
+    "name": "P. CORRUGADO 700 X 25 X 150MM A=35 P=40 - 175.612",
+    "specification": "P. CORRUGADO 700 X 25 X 150MM A=35 P=40 - 175.612",
+    "dimensions": "700 X 25 X 150",
+    "unit_weight_kg": 56.51,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2876,
+    "name": "P. CORRUGADO 700 X 25 X 240MM",
+    "specification": "P. CORRUGADO 700 X 25 X 240MM",
+    "dimensions": "700 X 25 X 240",
+    "unit_weight_kg": 86.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2692,
+    "name": "P. CORRUGADO 700 X 25 X 70MM",
+    "specification": "P. CORRUGADO 700 X 25 X 70MM",
+    "dimensions": "700 X 25 X 70",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2543,
+    "name": "P. CORRUGADO 700 X 26 X 200MM",
+    "specification": "P. CORRUGADO 700 X 26 X 200MM",
+    "dimensions": "700 X 26 X 200",
+    "unit_weight_kg": 76.03,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215228,
+    "name": "P. CORRUGADO 700 X 26 X 200MM A=45 P=45 - 215.228",
+    "specification": "P. CORRUGADO 700 X 26 X 200MM A=45 P=45 - 215.228",
+    "dimensions": "700 X 26 X 200",
+    "unit_weight_kg": 76.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215200,
+    "name": "P. CORRUGADO 700 X 26 X 300MM A=45 P=45 - 215.200",
+    "specification": "P. CORRUGADO 700 X 26 X 300MM A=45 P=45 - 215.200",
+    "dimensions": "700 X 26 X 300",
+    "unit_weight_kg": 111.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2433,
+    "name": "P. CORRUGADO 700 X 27 X 190MM",
+    "specification": "P. CORRUGADO 700 X 27 X 190MM",
+    "dimensions": "700 X 27 X 190",
+    "unit_weight_kg": 67.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215224,
+    "name": "P. CORRUGADO 700 X 28 X 240MM A=45 P=45 - 215.224",
+    "specification": "P. CORRUGADO 700 X 28 X 240MM A=45 P=45 - 215.224",
+    "dimensions": "700 X 28 X 240",
+    "unit_weight_kg": 97.53,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361317,
+    "name": "P. CORRUGADO 700 X 28 X 250MM A=41,5 P=40 - 361.317",
+    "specification": "P. CORRUGADO 700 X 28 X 250MM A=41,5 P=40 - 361.317",
+    "dimensions": "700 X 28 X 250",
+    "unit_weight_kg": 100.25,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5291,
+    "name": "P. CORRUGADO 700 X 30 X  80MM",
+    "specification": "P. CORRUGADO 700 X 30 X  80MM",
+    "dimensions": "700 X 30 X 80",
+    "unit_weight_kg": 40.16,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215129,
+    "name": "P. CORRUGADO 700 X 30 X 240MM A=45 P=40 - 215.129",
+    "specification": "P. CORRUGADO 700 X 30 X 240MM A=45 P=40 - 215.129",
+    "dimensions": "700 X 30 X 240",
+    "unit_weight_kg": 103.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215130,
+    "name": "P. CORRUGADO 700 X 30 X 280MM A=45 P=40 - 215.130",
+    "specification": "P. CORRUGADO 700 X 30 X 280MM A=45 P=40 - 215.130",
+    "dimensions": "700 X 30 X 280",
+    "unit_weight_kg": 119.29,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2693,
+    "name": "P. CORRUGADO 700 X 31 X 150MM",
+    "specification": "P. CORRUGADO 700 X 31 X 150MM",
+    "dimensions": "700 X 31 X 150",
+    "unit_weight_kg": 61.32,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3072,
+    "name": "P. CORRUGADO 700 X 34 X 240MM",
+    "specification": "P. CORRUGADO 700 X 34 X 240MM",
+    "dimensions": "700 X 34 X 240",
+    "unit_weight_kg": 107.61,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6237597,
+    "name": "P. CORRUGADO 800 X 04 X 095MM A=35 P=40 - 237.598",
+    "specification": "P. CORRUGADO 800 X 04 X 095MM A=35 P=40 - 237.598",
+    "dimensions": "800 X 04 X 095",
+    "unit_weight_kg": 7.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6237598,
+    "name": "P. CORRUGADO 800 X 22 X 070MM A=35 P=40 - 237.598",
+    "specification": "P. CORRUGADO 800 X 22 X 070MM A=35 P=40 - 237.598",
+    "dimensions": "800 X 22 X 070",
+    "unit_weight_kg": 30.37,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6240579,
+    "name": "P. CORRUGADO 700 X 40 X 150MM A=35 P=40 - 240.579",
+    "specification": "P. CORRUGADO 700 X 40 X 150MM A=35 P=40 - 240.579",
+    "dimensions": "700 X 40 X 150",
+    "unit_weight_kg": 90.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6241990,
+    "name": "P. CORRUGADO 700 X 35 X 200MM A=35 P=40 - 241.990",
+    "specification": "P. CORRUGADO 700 X 35 X 200MM A=35 P=40 - 241.990",
+    "dimensions": "700 X 35 X 200",
+    "unit_weight_kg": 102.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6182767,
+    "name": "P. CORRUGADO 700 X 35 X 150MM A=35 P=40 - 182.767",
+    "specification": "P. CORRUGADO 700 X 35 X 150MM A=35 P=40 - 182.767",
+    "dimensions": "700 X 35 X 150",
+    "unit_weight_kg": 78.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6156866,
+    "name": "P. CORRUGADO 700 X 42 X 150MM A=35 P=40 - 156.866",
+    "specification": "P. CORRUGADO 700 X 42 X 150MM A=35 P=40 - 156.866",
+    "dimensions": "700 X 42 X 150",
+    "unit_weight_kg": 94.62,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 280,
+    "name": "P. CORRUGADO 700 X 43 X 180MM",
+    "specification": "P. CORRUGADO 700 X 43 X 180MM",
+    "dimensions": "700 X 43 X 180",
+    "unit_weight_kg": 113.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2802,
+    "name": "P. CORRUGADO 700 X 43 X 180MM",
+    "specification": "P. CORRUGADO 700 X 43 X 180MM",
+    "dimensions": "700 X 43 X 180",
+    "unit_weight_kg": 113.88,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4054,
+    "name": "P. CORRUGADO 700 X 7 X 100MM",
+    "specification": "P. CORRUGADO 700 X 7 X 100MM",
+    "dimensions": "700 X 7 X 100",
+    "unit_weight_kg": 11.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2452,
+    "name": "P. CORRUGADO 500 X 10 X 130MM A=45 P=45 - 215.235",
+    "specification": "P. CORRUGADO 500 X 10 X 130MM A=45 P=45 - 215.235",
+    "dimensions": "500 X 10 X 130",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6397391,
+    "name": "P. CORRUGADO 800 X 10 X 240MM A=67,5 P=45 - 397391",
+    "specification": "P. CORRUGADO 800 X 10 X 240MM A=67,5 P=45 - 397391",
+    "dimensions": "800 X 10 X 240",
+    "unit_weight_kg": 16.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5364,
+    "name": "P. CORRUGADO 800 X 11 X 230MM",
+    "specification": "P. CORRUGADO 800 X 11 X 230MM",
+    "dimensions": "800 X 11 X 230",
+    "unit_weight_kg": 42.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215231,
+    "name": "P. CORRUGADO 800 X 11 X 230MM A=70 P=45 - 215.231",
+    "specification": "P. CORRUGADO 800 X 11 X 230MM A=70 P=45 - 215.231",
+    "dimensions": "800 X 11 X 230",
+    "unit_weight_kg": 42.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6397393,
+    "name": "P. CORRUGADO 800 X 11 X 240MM A=50 P=45 - 397393",
+    "specification": "P. CORRUGADO 800 X 11 X 240MM A=50 P=45 - 397393",
+    "dimensions": "800 X 11 X 240",
+    "unit_weight_kg": 17.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6365002,
+    "name": "P. CORRUGADO 800 X 11 X 90 MM A=80 P=40 - 365.002",
+    "specification": "P. CORRUGADO 800 X 11 X 90 MM A=80 P=40 - 365.002",
+    "dimensions": "800 X 11 X 90",
+    "unit_weight_kg": 19.44,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3110,
+    "name": "P. CORRUGADO 800 x 11 x 90MM",
+    "specification": "P. CORRUGADO 800 x 11 x 90MM",
+    "dimensions": "800 x 11 x 90",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4012,
+    "name": "P. CORRUGADO 800 X 12 X  80MM",
+    "specification": "P. CORRUGADO 800 X 12 X  80MM",
+    "dimensions": "1100 X 32 X 270",
+    "unit_weight_kg": 18.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215086,
+    "name": "P. CORRUGADO 800 X 12 X 110MM A=45 P=40 - 215.086",
+    "specification": "P. CORRUGADO 800 X 12 X 110MM A=45 P=40 - 215.086",
+    "dimensions": "800 X 12 X 110",
+    "unit_weight_kg": 24.19,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3309,
+    "name": "P. CORRUGADO 800 X 12 X 130MM",
+    "specification": "P. CORRUGADO 800 X 12 X 130MM",
+    "dimensions": "800 X 12 X 130",
+    "unit_weight_kg": 27.97,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215349,
+    "name": "P. CORRUGADO 800 X 12 X 200MM A=70 P=45 - 215.349",
+    "specification": "P. CORRUGADO 800 X 12 X 200MM A=70 P=45 - 215.349",
+    "dimensions": "800 X 12 X 200",
+    "unit_weight_kg": 41.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215257,
+    "name": "P. CORRUGADO 800 X 12 X 240MM A=45 P=45 - 215.257",
+    "specification": "P. CORRUGADO 800 X 12 X 240MM A=45 P=45 - 215.257",
+    "dimensions": "800 X 12 X 240",
+    "unit_weight_kg": 48.16,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215328,
+    "name": "P. CORRUGADO 800 X 12 X 300MM A=45 P=45 - 215.328",
+    "specification": "P. CORRUGADO 800 X 12 X 300MM A=45 P=45 - 215.328",
+    "dimensions": "800 X 12 X 300",
+    "unit_weight_kg": 59.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363725,
+    "name": "P. CORRUGADO 800 X 12 X 80MM A=60 P=40 - 363.725",
+    "specification": "P. CORRUGADO 800 X 12 X 80MM A=60 P=40 - 363.725",
+    "dimensions": "800 X 12 X 80",
+    "unit_weight_kg": 18.99,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4014,
+    "name": "P. CORRUGADO 800 X 13 X  80MM",
+    "specification": "P. CORRUGADO 800 X 13 X  80MM",
+    "dimensions": "800 X 13 X 80",
+    "unit_weight_kg": 20.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3311,
+    "name": "P. CORRUGADO 800 X 13 X 110MM",
+    "specification": "P. CORRUGADO 800 X 13 X 110MM",
+    "dimensions": "800 X 13 X 110",
+    "unit_weight_kg": 26.23,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215048,
+    "name": "P. CORRUGADO 800 X 13 X 130MM A=45 P=40 - 215.048",
+    "specification": "P. CORRUGADO 800 X 13 X 130MM A=45 P=40 - 215.048",
+    "dimensions": "800 X 13 X 130",
+    "unit_weight_kg": 30.07,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6419154,
+    "name": "P. CORRUGADO 800 X 13 X 80MM A=50 P=40 - 419.154",
+    "specification": "P. CORRUGADO 800 X 13 X 80MM A=50 P=40 - 419.154",
+    "dimensions": "800 X 13 X 80",
+    "unit_weight_kg": 20.35,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2794,
+    "name": "P. CORRUGADO 800 X 19 X 100MM",
+    "specification": "P. CORRUGADO 800 X 19 X 100MM",
+    "dimensions": "800 X 19 X 100",
+    "unit_weight_kg": 28.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2686,
+    "name": "P. CORRUGADO 800 X 20 X 140MM",
+    "specification": "P. CORRUGADO 800 X 20 X 140MM",
+    "dimensions": "800 X 20 X 140",
+    "unit_weight_kg": 48.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3045,
+    "name": "P. CORRUGADO 800 X 20 X 90MM",
+    "specification": "P. CORRUGADO 800 X 20 X 90MM",
+    "dimensions": "800 X 20 X 90",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2820,
+    "name": "P. CORRUGADO 800 X 21 X 90MM",
+    "specification": "P. CORRUGADO 800 X 21 X 90MM",
+    "dimensions": "800 X 21 X 90",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3247,
+    "name": "P. CORRUGADO 800 X 24 X 140MM",
+    "specification": "P. CORRUGADO 800 X 24 X 140MM",
+    "dimensions": "800 X 24 X 140",
+    "unit_weight_kg": 58.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215297,
+    "name": "P. CORRUGADO 800 X 25 X 100MM A=65 P=40 - 215.297",
+    "specification": "P. CORRUGADO 800 X 25 X 100MM A=65 P=40 - 215.297",
+    "dimensions": "800 X 25 X 100",
+    "unit_weight_kg": 46.2,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6397390,
+    "name": "P. CORRUGADO 800 X 26 X 240MM A=52,5 P=45 - 397390",
+    "specification": "P. CORRUGADO 800 X 26 X 240MM A=52,5 P=45 - 397390",
+    "dimensions": "800 X 26 X 240",
+    "unit_weight_kg": 103.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215296,
+    "name": "P. CORRUGADO 800 X 27 X 240MM A=45 P=40 - 215.296",
+    "specification": "P. CORRUGADO 800 X 27 X 240MM A=45 P=40 - 215.296",
+    "dimensions": "800 X 27 X 240",
+    "unit_weight_kg": 106.48,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6397392,
+    "name": "P. CORRUGADO 800 X 27 X 240MM A=57,5 P=45 - 397392",
+    "specification": "P. CORRUGADO 800 X 27 X 240MM A=57,5 P=45 - 397392",
+    "dimensions": "800 X 27 X 240",
+    "unit_weight_kg": 107.69,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215350,
+    "name": "P. CORRUGADO 800 X 28 X 200MM A=45 P=45 - 215.350",
+    "specification": "P. CORRUGADO 800 X 28 X 200MM A=45 P=45 - 215.350",
+    "dimensions": "800 X 28 X 200",
+    "unit_weight_kg": 94.58,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2949,
+    "name": "P. CORRUGADO 800 X 28 X 230 MM",
+    "specification": "P. CORRUGADO 800 X 28 X 230 MM",
+    "dimensions": "800 X 28 X 230",
+    "unit_weight_kg": 106.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215230,
+    "name": "P. CORRUGADO 800 X 29 X 230MM A=45 P=45 - 215.230",
+    "specification": "P. CORRUGADO 800 X 29 X 230MM A=45 P=45 - 215.230",
+    "dimensions": "800 X 29 X 230",
+    "unit_weight_kg": 111.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361312,
+    "name": "P. CORRUGADO 800 X 29 X 230MM A=46,5 P=40 - 361312",
+    "specification": "P. CORRUGADO 800 X 29 X 230MM A=46,5 P=40 - 361312",
+    "dimensions": "800 X 29 X 230",
+    "unit_weight_kg": 109.97,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361321,
+    "name": "P. CORRUGADO 800 X 29 X 300MM A=51,5 P=40 - 361.321",
+    "specification": "P. CORRUGADO 800 X 29 X 300MM A=51,5 P=40 - 361.321",
+    "dimensions": "800 X 29 X 300",
+    "unit_weight_kg": 140.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3109,
+    "name": "P. CORRUGADO 800 x 30 x 230MM",
+    "specification": "P. CORRUGADO 800 x 30 x 230MM",
+    "dimensions": "900 X 28 X 300",
+    "unit_weight_kg": 113.94,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363724,
+    "name": "P. CORRUGADO 800 X 31 X 230MM A=46,5 P=40 - 363.724",
+    "specification": "P. CORRUGADO 800 X 31 X 230MM A=46,5 P=40 - 363.724",
+    "dimensions": "800 X 31 X 230",
+    "unit_weight_kg": 117.51,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363781,
+    "name": "P. CORRUGADO 800 X 32 X 230MM A=56,5 P=40 - 363.781",
+    "specification": "P. CORRUGADO 800 X 32 X 230MM A=56,5 P=40 - 363.781",
+    "dimensions": "800 X 32 X 230",
+    "unit_weight_kg": 121.43,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6419153,
+    "name": "P. CORRUGADO 800 X 32 X 240MM A=51,5 P=40 - 419.153",
+    "specification": "P. CORRUGADO 800 X 32 X 240MM A=51,5 P=40 - 419.153",
+    "dimensions": "800 X 32 X 240",
+    "unit_weight_kg": 126.18,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361325,
+    "name": "P. CORRUGADO 800 X 32 X 290MM A=41,5 P=40 - 361325",
+    "specification": "P. CORRUGADO 800 X 32 X 290MM A=41,5 P=40 - 361325",
+    "dimensions": "800 X 32 X 290",
+    "unit_weight_kg": 150.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6363779,
+    "name": "P. CORRUGADO 800 X 34 X 230MM A=46,5 P=40 - 363.779",
+    "specification": "P. CORRUGADO 800 X 34 X 230MM A=46,5 P=40 - 363.779",
+    "dimensions": "800 X 34 X 230",
+    "unit_weight_kg": 128.81,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215117,
+    "name": "P. CORRUGADO 800 X 6 X 110MM A=45 P=40 - 215.117",
+    "specification": "P. CORRUGADO 800 X 6 X 110MM A=45 P=40 - 215.117",
+    "dimensions": "800 X 6 X 110",
+    "unit_weight_kg": 12.43,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2793,
+    "name": "P. CORRUGADO 800 X 7 X 70MM",
+    "specification": "P. CORRUGADO 800 X 7 X 70MM",
+    "dimensions": "900 x 10 x 240",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2821,
+    "name": "P. CORRUGADO 800 X 8 X 90MM",
+    "specification": "P. CORRUGADO 800 X 8 X 90MM",
+    "dimensions": "800 X 8 X 90",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600024,
+    "name": "P. CORRUGADO 900 X 06 X 140MM",
+    "specification": "P. CORRUGADO 900 X 06 X 140MM",
+    "dimensions": "900 X 06 X 140",
+    "unit_weight_kg": 17.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215260,
+    "name": "P. CORRUGADO 900 X 06 X 140MM A=45 P=45 - 215.260",
+    "specification": "P. CORRUGADO 900 X 06 X 140MM A=45 P=45 - 215.260",
+    "dimensions": "900 X 06 X 140",
+    "unit_weight_kg": 17.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600037,
+    "name": "P. CORRUGADO 900 X 09 X 190MM",
+    "specification": "P. CORRUGADO 900 X 09 X 190MM",
+    "dimensions": "900 X 09 X 190",
+    "unit_weight_kg": 33.62,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2689,
+    "name": "P. CORRUGADO 900 X 10 X 150MM",
+    "specification": "P. CORRUGADO 900 X 10 X 150MM",
+    "dimensions": "900 X 10 X 150",
+    "unit_weight_kg": 29.93,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215185,
+    "name": "P. CORRUGADO 900 X 10 X 200MM A=45 P=45 - 215.185",
+    "specification": "P. CORRUGADO 900 X 10 X 200MM A=45 P=45 - 215.185",
+    "dimensions": "900 X 10 X 200",
+    "unit_weight_kg": 38.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215014,
+    "name": "P. CORRUGADO 900 X 10 X 210MM A=65 P=40 - 215.014",
+    "specification": "P. CORRUGADO 900 X 10 X 210MM A=65 P=40 - 215.014",
+    "dimensions": "900 X 10 X 210",
+    "unit_weight_kg": 40.1,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215310,
+    "name": "P. CORRUGADO 900 X 10 X 210MM A=65 P=45 - 215.310",
+    "specification": "P. CORRUGADO 900 X 10 X 210MM A=65 P=45 - 215.310",
+    "dimensions": "900 X 10 X 210",
+    "unit_weight_kg": 40.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215083,
+    "name": "P. CORRUGADO 900 X 10 X 210MM A=75 P=40 - 215.083",
+    "specification": "P. CORRUGADO 900 X 10 X 210MM A=75 P=40 - 215.083",
+    "dimensions": "900 X 10 X 210",
+    "unit_weight_kg": 40.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2621,
+    "name": "P. CORRUGADO 900 X 10 X 270MM",
+    "specification": "P. CORRUGADO 900 X 10 X 270MM",
+    "dimensions": "900 X 10 X 270",
+    "unit_weight_kg": 50.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215043,
+    "name": "P. CORRUGADO 900 X 10 X 270MM A=65 P=40 - 215.043",
+    "specification": "P. CORRUGADO 900 X 10 X 270MM A=65 P=40 - 215.043",
+    "dimensions": "900 X 10 X 270",
+    "unit_weight_kg": 50.27,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215060,
+    "name": "P. CORRUGADO 900 X 11 X 210MM A=65 P=40 - 215.060",
+    "specification": "P. CORRUGADO 900 X 11 X 210MM A=65 P=40 - 215.060",
+    "dimensions": "900 X 11 X 210",
+    "unit_weight_kg": 44.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215188,
+    "name": "P. CORRUGADO 900 X 11 X 210MM A=70 P=45 - 215.188",
+    "specification": "P. CORRUGADO 900 X 11 X 210MM A=70 P=45 - 215.188",
+    "dimensions": "900 X 11 X 210",
+    "unit_weight_kg": 44.55,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215181,
+    "name": "P. CORRUGADO 900 X 11 X 250MM A=70 P=45 - 215.181",
+    "specification": "P. CORRUGADO 900 X 11 X 250MM A=70 P=45 - 215.181",
+    "dimensions": "900 X 11 X 250",
+    "unit_weight_kg": 52.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600045,
+    "name": "P. CORRUGADO 900 X 11 X 260mm",
+    "specification": "P. CORRUGADO 900 X 11 X 260mm",
+    "dimensions": "900 X 11 X 260",
+    "unit_weight_kg": 54.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215294,
+    "name": "P. CORRUGADO 900 X 11 X 260MM A=80 P=45 - 215.294",
+    "specification": "P. CORRUGADO 900 X 11 X 260MM A=80 P=45 - 215.294",
+    "dimensions": "900 X 11 X 260",
+    "unit_weight_kg": 54.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5139,
+    "name": "P. CORRUGADO 900 X 11 X 290MM",
+    "specification": "P. CORRUGADO 900 X 11 X 290MM",
+    "dimensions": "900 X 11 X 290",
+    "unit_weight_kg": 59.05,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215312,
+    "name": "P. CORRUGADO 900 X 11 X 290MM A=65 P=45 - 215.312",
+    "specification": "P. CORRUGADO 900 X 11 X 290MM A=65 P=45 - 215.312",
+    "dimensions": "900 X 11 X 290",
+    "unit_weight_kg": 59.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600033,
+    "name": "P. CORRUGADO 900 X 12 X 220MM",
+    "specification": "P. CORRUGADO 900 X 12 X 220MM",
+    "dimensions": "900 X 12 X 220",
+    "unit_weight_kg": 50.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215270,
+    "name": "P. CORRUGADO 900 X 12 X 220MM A=60 P=45 - 215.347",
+    "specification": "P. CORRUGADO 900 X 12 X 220MM A=60 P=45 - 215.347",
+    "dimensions": "900 X 12 X 220",
+    "unit_weight_kg": 50.36,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215347,
+    "name": "P. CORRUGADO 900 X 12 X 220MM A=70 P=45 - 215.347",
+    "specification": "P. CORRUGADO 900 X 12 X 220MM A=70 P=45 - 215.347",
+    "dimensions": "900 X 12 X 220",
+    "unit_weight_kg": 50.53,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215016,
+    "name": "P. CORRUGADO 900 X 12 X 240MM A=60 P=40 - 215.016",
+    "specification": "P. CORRUGADO 900 X 12 X 240MM A=60 P=40 - 215.016",
+    "dimensions": "900 X 12 X 240",
+    "unit_weight_kg": 53.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3317,
+    "name": "P. CORRUGADO 900 X 13 X 120MM",
+    "specification": "P. CORRUGADO 900 X 13 X 120MM",
+    "dimensions": "900 X 13 X 120",
+    "unit_weight_kg": 31.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3313,
+    "name": "P. CORRUGADO 900 X 13 X 130MM",
+    "specification": "P. CORRUGADO 900 X 13 X 130MM",
+    "dimensions": "900 X 13 X 130",
+    "unit_weight_kg": 34.01,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2864,
+    "name": "P. CORRUGADO 900 X 13 X 210MM",
+    "specification": "P. CORRUGADO 900 X 13 X 210MM",
+    "dimensions": "900 X 13 X 210",
+    "unit_weight_kg": 51.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215238,
+    "name": "P. CORRUGADO 900 X 13 X 340MM A=60 P=45 - 215.238",
+    "specification": "P. CORRUGADO 900 X 13 X 340MM A=60 P=45 - 215.238",
+    "dimensions": "900 X 13 X 340",
+    "unit_weight_kg": 80.92,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2750,
+    "name": "P. CORRUGADO 900 X 14 X 230MM",
+    "specification": "P. CORRUGADO 900 X 14 X 230MM",
+    "dimensions": "900 X 14 X 230",
+    "unit_weight_kg": 59.85,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5553,
+    "name": "P. CORRUGADO 900 X 14 X 250MM",
+    "specification": "P. CORRUGADO 900 X 14 X 250MM",
+    "dimensions": "900 X 14 X 250",
+    "unit_weight_kg": 65.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215215,
+    "name": "P. CORRUGADO 900 X 14 X 250MM A=45 P=45 - 215.215",
+    "specification": "P. CORRUGADO 900 X 14 X 250MM A=45 P=45 - 215.215",
+    "dimensions": "900 X 14 X 250",
+    "unit_weight_kg": 65.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215162,
+    "name": "P. CORRUGADO 900 X 14 X 280MM A=45 P=40 - 215.162",
+    "specification": "P. CORRUGADO 900 X 14 X 280MM A=45 P=40 - 215.162",
+    "dimensions": "900 X 14 X 280",
+    "unit_weight_kg": 71.98,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3025,
+    "name": "P. CORRUGADO 900 X 16 X 140MM",
+    "specification": "P. CORRUGADO 900 X 16 X 140MM",
+    "dimensions": "900 X 16 X 140",
+    "unit_weight_kg": 44.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215126,
+    "name": "P. CORRUGADO 900 X 16 X 140MM A=45 P=40 - 215.126",
+    "specification": "P. CORRUGADO 900 X 16 X 140MM A=45 P=40 - 215.126",
+    "dimensions": "900 X 16 X 140",
+    "unit_weight_kg": 44.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4052,
+    "name": "P. CORRUGADO 900 X 17 X 150MM",
+    "specification": "P. CORRUGADO 900 X 17 X 150MM",
+    "dimensions": "900 X 17 X 150",
+    "unit_weight_kg": 50.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3043,
+    "name": "P. CORRUGADO 900 X 20 X 240MM",
+    "specification": "P. CORRUGADO 900 X 20 X 240MM",
+    "dimensions": "900 X 20 X 240",
+    "unit_weight_kg": 81.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2951,
+    "name": "P. CORRUGADO 900 X 21 X 210 MM",
+    "specification": "P. CORRUGADO 900 X 21 X 210 MM",
+    "dimensions": "900 X 21 X 210",
+    "unit_weight_kg": 82.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215116,
+    "name": "P. CORRUGADO 900 X 21 X 210MM A=45 P=40 - 215.116",
+    "specification": "P. CORRUGADO 900 X 21 X 210MM A=45 P=40 - 215.116",
+    "dimensions": "900 X 21 X 210",
+    "unit_weight_kg": 103.33,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3520,
+    "name": "P. CORRUGADO 900 X 21 X 260MM",
+    "specification": "P. CORRUGADO 900 X 21 X 260MM",
+    "dimensions": "900 X 21 X 260",
+    "unit_weight_kg": 101.35,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215286,
+    "name": "P. CORRUGADO 900 X 22 X 190MM A=45 P=45 - 215.286",
+    "specification": "P. CORRUGADO 900 X 22 X 190MM A=45 P=45 - 215.286",
+    "dimensions": "900 X 22 X 190",
+    "unit_weight_kg": 80.03,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215189,
+    "name": "P. CORRUGADO 900 X 22 X 210MM A=45 P=45 - 215.189",
+    "specification": "P. CORRUGADO 900 X 22 X 210MM A=45 P=45 - 215.189",
+    "dimensions": "900 X 22 X 210",
+    "unit_weight_kg": 87.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215013,
+    "name": "P. CORRUGADO 900 X 22 X 210MM A=85 P=40 - 215.013",
+    "specification": "P. CORRUGADO 900 X 22 X 210MM A=85 P=40 - 215.013",
+    "dimensions": "900 X 22 X 210",
+    "unit_weight_kg": 87.24,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2967,
+    "name": "P. CORRUGADO 900 X 23 X 200MM",
+    "specification": "P. CORRUGADO 900 X 23 X 200MM",
+    "dimensions": "900 X 23 X 200",
+    "unit_weight_kg": 78.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2822,
+    "name": "P. CORRUGADO 900 X 23 X 210MM",
+    "specification": "P. CORRUGADO 900 X 23 X 210MM",
+    "dimensions": "900 X 23 X 210",
+    "unit_weight_kg": 90.63,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215082,
+    "name": "P. CORRUGADO 900 X 23 X 210MM A=55 P=40 - 215.082",
+    "specification": "P. CORRUGADO 900 X 23 X 210MM A=55 P=40 - 215.082",
+    "dimensions": "900 X 23 X 210",
+    "unit_weight_kg": 90.63,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4979,
+    "name": "P. CORRUGADO 900 X 23 X 240MM",
+    "specification": "P. CORRUGADO 900 X 23 X 240MM",
+    "dimensions": "900 X 23 X 240",
+    "unit_weight_kg": 104.41,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215289,
+    "name": "P. CORRUGADO 900 X 24 X 230MM A=45 P=40 - 215.289",
+    "specification": "P. CORRUGADO 900 X 24 X 230MM A=45 P=40 - 215.289",
+    "dimensions": "900 X 24 X 230",
+    "unit_weight_kg": 102.5,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215313,
+    "name": "P. CORRUGADO 900 X 24 X 250MM A=45 P=45 - 215.313",
+    "specification": "P. CORRUGADO 900 X 24 X 250MM A=45 P=45 - 215.313",
+    "dimensions": "900 X 24 X 250",
+    "unit_weight_kg": 111.66,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215291,
+    "name": "P. CORRUGADO 900 X 24 X 300MM A=45 P=45 - 215.291",
+    "specification": "P. CORRUGADO 900 X 24 X 300MM A=45 P=45 - 215.291",
+    "dimensions": "900 X 24 X 300",
+    "unit_weight_kg": 132.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2854,
+    "name": "P. CORRUGADO 900 X 25 X 200MM",
+    "specification": "P. CORRUGADO 900 X 25 X 200MM",
+    "dimensions": "900 X 25 X 200",
+    "unit_weight_kg": 94.02,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2718,
+    "name": "P. CORRUGADO 900 X 25 X 210MM",
+    "specification": "P. CORRUGADO 900 X 25 X 210MM",
+    "dimensions": "900 X 25 X 210",
+    "unit_weight_kg": 98.26,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215209,
+    "name": "P. CORRUGADO 900 X 25 X 240MM A=45 P=45 - 215.209",
+    "specification": "P. CORRUGADO 900 X 25 X 240MM A=45 P=45 - 215.209",
+    "dimensions": "900 X 25 X 240",
+    "unit_weight_kg": 112.04,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2683,
+    "name": "P. CORRUGADO 900 X 25 X 260MM",
+    "specification": "P. CORRUGADO 900 X 25 X 260MM",
+    "dimensions": "900 X 25 X 260",
+    "unit_weight_kg": 119.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215053,
+    "name": "P. CORRUGADO 900 X 25 X 260MM A=45 P=40 - 215.053",
+    "specification": "P. CORRUGADO 900 X 25 X 260MM A=45 P=40 - 215.053",
+    "dimensions": "900 X 25 X 260",
+    "unit_weight_kg": 119.46,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2687,
+    "name": "P. CORRUGADO 900 X 26 X 140MM",
+    "specification": "P. CORRUGADO 900 X 26 X 140MM",
+    "dimensions": "900 X 26 X 140",
+    "unit_weight_kg": 71.3,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215101,
+    "name": "P. CORRUGADO 900 X 26 X 210MM A=60 P=40 - 215.101",
+    "specification": "P. CORRUGADO 900 X 26 X 210MM A=60 P=40 - 215.101",
+    "dimensions": "900 X 26 X 210",
+    "unit_weight_kg": 102.41,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2751,
+    "name": "P. CORRUGADO 900 X 26 X 230MM",
+    "specification": "P. CORRUGADO 900 X 26 X 230MM",
+    "dimensions": "900 X 26 X 230",
+    "unit_weight_kg": 110.64,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215015,
+    "name": "P. CORRUGADO 900 X 26 X 240MM A=45 P=40 - 215.015",
+    "specification": "P. CORRUGADO 900 X 26 X 240MM A=45 P=40 - 215.015",
+    "dimensions": "900 X 26 X 240",
+    "unit_weight_kg": 115.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215156,
+    "name": "P. CORRUGADO 900 X 26 X 240MM A=45 P=40 - 215.156",
+    "specification": "P. CORRUGADO 900 X 26 X 240MM A=45 P=40 - 215.156",
+    "dimensions": "900 X 26 X 240",
+    "unit_weight_kg": 115.39,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215319,
+    "name": "P. CORRUGADO 900 X 26 X 240MM A=45 P=45 - 215.319",
+    "specification": "P. CORRUGADO 900 X 26 X 240MM A=45 P=45 - 215.319",
+    "dimensions": "900 X 26 X 240",
+    "unit_weight_kg": 116.49,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4027,
+    "name": "P. CORRUGADO 900 X 26 X 250MM",
+    "specification": "P. CORRUGADO 900 X 26 X 250MM",
+    "dimensions": "900 X 26 X 250",
+    "unit_weight_kg": 121.15,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2472,
+    "name": "P. CORRUGADO 900 X 26 X 300MM",
+    "specification": "P. CORRUGADO 900 X 26 X 300MM",
+    "dimensions": "900 X 26 X 300",
+    "unit_weight_kg": 141.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215017,
+    "name": "P. CORRUGADO 900 X 26 X 300MM A=45 P=40 - 215.017",
+    "specification": "P. CORRUGADO 900 X 26 X 300MM A=45 P=40 - 215.017",
+    "dimensions": "900 X 26 X 300",
+    "unit_weight_kg": 141.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215311,
+    "name": "P. CORRUGADO 900 X 26 X 300MM A=65 P=45 - 215.311",
+    "specification": "P. CORRUGADO 900 X 26 X 300MM A=65 P=45 - 215.311",
+    "dimensions": "900 X 26 X 300",
+    "unit_weight_kg": 143.28,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2855,
+    "name": "P. CORRUGADO 900 X 27 X 200MM",
+    "specification": "P. CORRUGADO 900 X 27 X 200MM",
+    "dimensions": "900 X 27 X 200",
+    "unit_weight_kg": 101.74,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2861,
+    "name": "P. CORRUGADO 900 X 27 X 210MM",
+    "specification": "P. CORRUGADO 900 X 27 X 210MM",
+    "dimensions": "900 X 27 X 210",
+    "unit_weight_kg": 106.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215115,
+    "name": "P. CORRUGADO 900 X 27 X 230 MM A=45 P=40 - 215.115",
+    "specification": "P. CORRUGADO 900 X 27 X 230 MM A=45 P=40 - 215.115",
+    "dimensions": "900 X 27 X 230",
+    "unit_weight_kg": 115.22,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215290,
+    "name": "P. CORRUGADO 900 X 27 X 230 MM A=60 P=40 - 215.290",
+    "specification": "P. CORRUGADO 900 X 27 X 230 MM A=60 P=40 - 215.290",
+    "dimensions": "900 X 27 X 230",
+    "unit_weight_kg": 115.47,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215052,
+    "name": "P. CORRUGADO 900 X 27 X 260MM A=45 P=40 - 215.052",
+    "specification": "P. CORRUGADO 900 X 27 X 260MM A=45 P=40 - 215.052",
+    "dimensions": "900 X 27 X 260",
+    "unit_weight_kg": 128.95,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 5320,
+    "name": "P. CORRUGADO 900 X 28 X 210MM",
+    "specification": "P. CORRUGADO 900 X 28 X 210MM",
+    "dimensions": "900 X 28 X 210",
+    "unit_weight_kg": 111.15,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2688,
+    "name": "P. CORRUGADO 900 X 28 X 220MM",
+    "specification": "P. CORRUGADO 900 X 28 X 220MM",
+    "dimensions": "900 X 28 X 220",
+    "unit_weight_kg": 104.45,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600046,
+    "name": "P. CORRUGADO 900 X 28 X 260mm",
+    "specification": "P. CORRUGADO 900 X 28 X 260mm",
+    "dimensions": "900 X 28 X 260",
+    "unit_weight_kg": 135.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215295,
+    "name": "P. CORRUGADO 900 X 28 X 260MM A=60 P=45 - 215.295",
+    "specification": "P. CORRUGADO 900 X 28 X 260MM A=60 P=45 - 215.295",
+    "dimensions": "900 X 28 X 260",
+    "unit_weight_kg": 135.14,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215218,
+    "name": "P. CORRUGADO 900 X 29 X 290MM A=45 P=45 - 215.218",
+    "specification": "P. CORRUGADO 900 X 29 X 290MM A=45 P=45 - 215.218",
+    "dimensions": "900 X 29 X 290",
+    "unit_weight_kg": 154.43,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 600007,
+    "name": "P. CORRUGADO 900 X 30 X 340MM",
+    "specification": "P. CORRUGADO 900 X 30 X 340MM",
+    "dimensions": "900 X 30 X 340",
+    "unit_weight_kg": 185.16,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215346,
+    "name": "P. CORRUGADO 900 X 31 X 220MM A=50 P=45 - 215.346",
+    "specification": "P. CORRUGADO 900 X 31 X 220MM A=50 P=45 - 215.346",
+    "dimensions": "900 X 31 X 220",
+    "unit_weight_kg": 128.31,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361329,
+    "name": "P. CORRUGADO 900 X 32 X 310MM A=46,5 P=40 - 361.329",
+    "specification": "P. CORRUGADO 900 X 32 X 310MM A=46,5 P=40 - 361.329",
+    "dimensions": "900 X 32 X 310",
+    "unit_weight_kg": 179.84,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6361333,
+    "name": "P. CORRUGADO 900 X 33 X 310MM A=51,5 P=40 - 361333",
+    "specification": "P. CORRUGADO 900 X 33 X 310MM A=51,5 P=40 - 361333",
+    "dimensions": "900 X 33 X 310",
+    "unit_weight_kg": 185.52,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3178,
+    "name": "P. CORRUGADO 900 X 34 X 240MM",
+    "specification": "P. CORRUGADO 900 X 34 X 240MM",
+    "dimensions": "900 X 34 X 240",
+    "unit_weight_kg": 150.65,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3267,
+    "name": "P. CORRUGADO 900 X 36 X 280MM",
+    "specification": "P. CORRUGADO 900 X 36 X 280MM",
+    "dimensions": "900 X 36 X 280",
+    "unit_weight_kg": 183.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2749,
+    "name": "P. CORRUGADO 900 X 40 X 150MM",
+    "specification": "P. CORRUGADO 900 X 40 X 150MM",
+    "dimensions": "900 X 40 X 150",
+    "unit_weight_kg": 115.89,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2612,
+    "name": "P. CORRUGADO DES MA 5257-06",
+    "specification": "P. CORRUGADO DES MA 5257-06",
+    "dimensions": "DES MA 5257-06",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2770,
+    "name": "P. CORRUGADO DES. TA 2898-07",
+    "specification": "P. CORRUGADO DES. TA 2898-07",
+    "dimensions": "DES. TA 2898-07",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 2940,
+    "name": "P. CORRUGADO MA 5257-06",
+    "specification": "P. CORRUGADO MA 5257-06",
+    "dimensions": "MA 5257-06",
+    "unit_weight_kg": 0.0,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6161640,
+    "name": "P. CORRUGAGO 500 X 15 X 150MM A=35 P=40 - 161.640",
+    "specification": "P. CORRUGAGO 500 X 15 X 150MM A=35 P=40 - 161.640",
+    "dimensions": "500 X 15 X 150",
+    "unit_weight_kg": 24.35,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215248,
+    "name": "P. CORRUGAGO 500 X 15 X 150MM A=45 P=45 - 215.248",
+    "specification": "P. CORRUGAGO 500 X 15 X 150MM A=45 P=45 - 215.248",
+    "dimensions": "500 X 15 X 150",
+    "unit_weight_kg": 24.8,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215235,
+    "name": "P. CORRUGADO 500 X 10 X 130MM A=45 P=45 - 215.235",
+    "specification": "P. CORRUGADO 500 X 10 X 130MM A=45 P=45 - 215.235",
+    "dimensions": "500 X 10 X 130",
+    "unit_weight_kg": 14.79,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6215192,
+    "name": "P. CORRUGADO 500 X 14 X 150MM A=45 P=45 - 215.192",
+    "specification": "P. CORRUGADO 500 X 14 X 150MM A=45 P=45 - 215.192",
+    "dimensions": "500 X 14 X 150",
+    "unit_weight_kg": 23.17,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 3956,
+    "name": "P. CORRUGADO 600 X 12 X 150MM",
+    "specification": "P. CORRUGADO 600 X 12 X 150MM",
+    "dimensions": "600 X 12 X 150",
+    "unit_weight_kg": 23.91,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 4260,
+    "name": "P. CORRUGADO 700 X 26 X 290MM",
+    "specification": "P. CORRUGADO 700 X 26 X 290MM",
+    "dimensions": "700 X 26 X 290",
+    "unit_weight_kg": 107.75,
+    "nominal_capacity_per_hour": 0.0
+  },
+  {
+    "code": 6165871,
+    "name": "P. CORRUGADO 700 X 30 X 150MM A=35 P=40 - 165.871",
+    "specification": "P. CORRUGADO 700 X 30 X 150MM A=35 P=40 - 165.871",
+    "dimensions": "700 X 30 X 150",
+    "unit_weight_kg": 67.72,
+    "nominal_capacity_per_hour": 0.0
+  }
+]
