@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         machines: [],
         productsCatalog: [],
         entries: [],
+        allDayEntries: [],
+        selectedFilterMachineId: null,
         currentEditingId: null,
         isOnline: false
     };
@@ -80,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const entriesTbody = document.getElementById('entries-tbody');
     const emptyEntriesView = document.getElementById('empty-entries-view');
     const entriesCountBadge = document.getElementById('entries-count');
-    const currentSheetTitle = document.getElementById('current-sheet-title');
     const currentSheetSubtitle = document.getElementById('current-sheet-subtitle');
+    const machineFilterPills = document.getElementById('machine-filter-pills');
     const dayTotalNet = document.getElementById('day-total-net');
     const dayTotalQty = document.getElementById('day-total-qty');
 
@@ -294,11 +296,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const machineName = selectedMachine ? selectedMachine.name : sessionMachineSelect.options[sessionMachineSelect.selectedIndex]?.text || 'Máquina';
         
         state.session = { ...state.session, ...payload, machine_name: machineName };
-        currentSheetTitle.textContent = machineName;
-        currentSheetSubtitle.textContent = `Data: ${payload.reference_date} | Turno: ${payload.shift} | Op: ${payload.operator_name}`;
+        if (currentSheetSubtitle) {
+            currentSheetSubtitle.textContent = `Data: ${payload.reference_date} | Turno: ${payload.shift}`;
+        }
 
         if (state.isOnline) {
             try {
+                // 1. Garante que a ficha da máquina ativa no topo existe no banco
                 const res = await fetch(`${API_BASE_URL}/api/sessions/sync`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -307,25 +311,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (res.ok) {
                     const sessionData = await res.json();
                     state.session.id = sessionData.id;
-                    state.entries = (sessionData.entries || []).map(e => ({
-                        id: e.id,
-                        productSpec: e.product_spec_custom,
-                        productCode: e.product_code,
-                        startTime: e.start_time,
-                        endTime: e.end_time,
-                        qty: e.qty_produced,
-                        grossMinutes: e.gross_minutes,
-                        totalStopMinutes: e.total_stop_minutes,
-                        netMinutes: e.net_minutes,
-                        ratePerHour: e.real_rate_per_hour,
-                        stops: (e.stops || []).map(s => ({
-                            id: s.id,
-                            startTime: s.start_time,
-                            endTime: s.end_time,
-                            reason: s.reason,
-                            durationMinutes: s.duration_minutes
-                        }))
-                    }));
+                }
+
+                // 2. Carrega todas as sessões e apontamentos de todas as máquinas apontadas nesta data e turno
+                const dayRes = await fetch(`${API_BASE_URL}/api/sessions/day-sessions?date=${payload.reference_date}&shift=${encodeURIComponent(payload.shift)}`);
+                if (dayRes.ok) {
+                    const allSessions = await dayRes.json();
+                    const allEntries = [];
+                    allSessions.forEach(s => {
+                        const mName = s.machine ? s.machine.name : `Máquina ${s.machine_id}`;
+                        (s.entries || []).forEach(e => {
+                            allEntries.push({
+                                id: e.id,
+                                sessionId: s.id,
+                                machineId: s.machine_id,
+                                machineName: mName,
+                                operatorName: s.operator_name,
+                                productSpec: e.product_spec_custom,
+                                productCode: e.product_code,
+                                startTime: e.start_time,
+                                endTime: e.end_time,
+                                qty: e.qty_produced,
+                                grossMinutes: e.gross_minutes,
+                                totalStopMinutes: e.total_stop_minutes,
+                                netMinutes: e.net_minutes,
+                                ratePerHour: e.real_rate_per_hour,
+                                stops: (e.stops || []).map(st => ({
+                                    id: st.id,
+                                    startTime: st.start_time,
+                                    endTime: st.end_time,
+                                    reason: st.reason,
+                                    durationMinutes: st.duration_minutes
+                                }))
+                            });
+                        });
+                    });
+                    state.allDayEntries = allEntries;
+                    renderMachineFilterPills();
                     renderEntriesTable();
                     return;
                 }
@@ -335,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Fallback local
+        renderMachineFilterPills();
         renderEntriesTable();
     }
 
@@ -625,10 +648,87 @@ document.addEventListener('DOMContentLoaded', () => {
         emptyEntriesView.classList.add('hidden');
         entriesCountBadge.textContent = state.entries.length;
 
+    function getMachineClass(name) {
+        const upper = (name || '').toUpperCase();
+        if (upper.includes('DOBRA')) return 'dobra';
+        if (upper.includes('LATERAL')) return 'solda-lateral';
+        if (upper.includes('PONTO')) return 'solda-ponto';
+        return 'outros';
+    }
+
+    function renderMachineFilterPills() {
+        if (!machineFilterPills) return;
+
+        const allEntries = state.allDayEntries || [];
+        const machineCounts = {};
+        
+        allEntries.forEach(e => {
+            if (!machineCounts[e.machineId]) {
+                machineCounts[e.machineId] = { id: e.machineId, name: e.machineName, count: 0 };
+            }
+            machineCounts[e.machineId].count++;
+        });
+
+        const machinesWithEntries = Object.values(machineCounts);
+        
+        let html = `
+            <button type="button" class="machine-pill ${state.selectedFilterMachineId === null ? 'active' : ''}" data-filter-id="all">
+                <i class="fa-solid fa-layer-group"></i> Todas as Máquinas 
+                <span class="machine-pill-count">${allEntries.length}</span>
+            </button>
+        `;
+
+        machinesWithEntries.forEach(m => {
+            html += `
+                <button type="button" class="machine-pill ${state.selectedFilterMachineId === m.id ? 'active' : ''}" data-filter-id="${m.id}">
+                    <i class="fa-solid fa-gear"></i> ${escapeHtml(m.name)} 
+                    <span class="machine-pill-count">${m.count}</span>
+                </button>
+            `;
+        });
+
+        machineFilterPills.innerHTML = html;
+
+        machineFilterPills.querySelectorAll('.machine-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filterVal = btn.dataset.filterId;
+                state.selectedFilterMachineId = filterVal === 'all' ? null : parseInt(filterVal, 10);
+                renderMachineFilterPills();
+                renderEntriesTable();
+            });
+        });
+    }
+
+    function renderEntriesTable() {
+        let entriesToDisplay = state.allDayEntries || [];
+        if (state.selectedFilterMachineId !== null) {
+            entriesToDisplay = entriesToDisplay.filter(e => e.machineId === state.selectedFilterMachineId);
+        }
+
+        if (entriesCountBadge) {
+            entriesCountBadge.textContent = entriesToDisplay.length;
+        }
+
+        if (entriesToDisplay.length === 0) {
+            entriesTbody.innerHTML = '';
+            emptyEntriesView.classList.remove('hidden');
+            dayTotalNet.textContent = '0h 00m';
+            dayTotalQty.textContent = '0';
+            return;
+        }
+
+        emptyEntriesView.classList.add('hidden');
+        entriesTbody.innerHTML = '';
+
         let sumNetMinutes = 0;
         let sumQty = 0;
 
-        const sortedEntries = [...state.entries].sort((a, b) => (a.startTime || '').localeCompare(b.startTime || ''));
+        // Ordena por máquina e depois por horário
+        const sortedEntries = [...entriesToDisplay].sort((a, b) => {
+            const mComp = (a.machineName || '').localeCompare(b.machineName || '');
+            if (mComp !== 0) return mComp;
+            return (a.startTime || '').localeCompare(b.startTime || '');
+        });
 
         sortedEntries.forEach(entry => {
             sumNetMinutes += entry.netMinutes || 0;
@@ -649,6 +749,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const rateDisplay = entry.ratePerHour ? `${entry.ratePerHour} pçs/h` : '--';
 
             tr.innerHTML = `
+                <td>
+                    <span class="badge-machine ${getMachineClass(entry.machineName)}">
+                        <i class="fa-solid fa-gear"></i> ${escapeHtml(entry.machineName)}
+                    </span>
+                </td>
                 <td><span class="badge-time">${entry.startTime} - ${entry.endTime}</span></td>
                 <td><strong>${escapeHtml(entry.productSpec)}</strong></td>
                 <td class="text-center"><span class="badge-qty">${entry.qty} pçs</span></td>
@@ -835,16 +940,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        state.entries = state.entries.filter(e => String(e.id) !== String(id));
+        state.allDayEntries = state.allDayEntries.filter(e => String(e.id) !== String(id));
+        renderMachineFilterPills();
         renderEntriesTable();
     }
 
     function startEditEntry(id) {
-        const entry = state.entries.find(e => String(e.id) === String(id));
+        const entry = (state.allDayEntries || []).find(e => String(e.id) === String(id));
         if (!entry) return;
 
+        // Se for de outra máquina, atualiza o seletor no topo para manter total sincronia
+        if (entry.machineId && entry.machineId !== state.session.machine_id) {
+            sessionMachineSelect.value = entry.machineId;
+            state.session.machine_id = entry.machineId;
+            state.session.machine_name = entry.machineName;
+            state.session.id = entry.sessionId;
+        }
+
         state.currentEditingId = id;
-        formCardTitle.textContent = 'Editar Intervalo Produtivo';
+        formCardTitle.textContent = `Editar Intervalo (${entry.machineName})`;
         btnSubmitEntry.innerHTML = '<i class="fa-solid fa-check"></i> Atualizar Intervalo';
         btnCancelEdit.classList.remove('hidden');
 
@@ -903,8 +1017,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function duplicateEntry(id) {
-        const entry = state.entries.find(e => String(e.id) === String(id));
+        const entry = (state.allDayEntries || []).find(e => String(e.id) === String(id));
         if (!entry) return;
+
+        if (entry.machineId && entry.machineId !== state.session.machine_id) {
+            sessionMachineSelect.value = entry.machineId;
+            state.session.machine_id = entry.machineId;
+            state.session.machine_name = entry.machineName;
+            state.session.id = entry.sessionId;
+        }
 
         productSpecInput.value = entry.productSpec;
         selectedProductCodeInput.value = entry.productCode || '';
@@ -930,11 +1051,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MODAL DE PARADAS ---
 
     function openStopsModal(entryId) {
-        const entry = state.entries.find(e => String(e.id) === String(entryId));
+        const entry = (state.allDayEntries || []).find(e => String(e.id) === String(entryId));
         if (!entry || !entry.stops || entry.stops.length === 0) return;
 
         let contentHtml = `
             <div style="margin-bottom: 1rem;">
+                <p><strong>Máquina:</strong> <span class="badge-machine ${getMachineClass(entry.machineName)}">${escapeHtml(entry.machineName)}</span></p>
                 <p><strong>Produto:</strong> ${escapeHtml(entry.productSpec)}</p>
                 <p><strong>Horário do Intervalo:</strong> ${entry.startTime} às ${entry.endTime} (${formatMinutesToHours(entry.grossMinutes)})</p>
                 <p><strong>Total em Paradas:</strong> <span style="color: var(--warning-600); font-weight: bold;">${formatMinutesToHours(entry.totalStopMinutes)}</span></p>

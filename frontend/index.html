@@ -55,7 +55,7 @@
             <div class="form-grid-session">
                 <div class="form-group">
                     <label for="session-machine">
-                        <i class="fa-solid fa-gears"></i> Máquina / Posto:
+                        <i class="fa-solid fa-gears"></i> Apontando Agora na Máquina:
                     </label>
                     <select id="session-machine" class="form-control font-semibold">
                         <!-- Carregado dinamicamente via API -->
@@ -229,14 +229,14 @@
                 </form>
             </section>
 
-            <!-- Lista / Grade de Registros da Ficha Atual -->
+            <!-- Lista / Grade de Registros de Todas as Máquinas do Turno -->
             <section class="records-card">
                 <div class="records-header">
                     <div class="section-title">
                         <i class="fa-solid fa-list-check"></i>
                         <div>
-                            <h2>Ficha: <span id="current-sheet-title">Dobra 1</span></h2>
-                            <small class="text-muted" id="current-sheet-subtitle">Apontamentos do turno</small>
+                            <h2>Apontamentos do Turno</h2>
+                            <small class="text-muted" id="current-sheet-subtitle">Todas as máquinas apontadas na data</small>
                         </div>
                         <span class="badge-count" id="entries-count">0</span>
                     </div>
@@ -247,12 +247,18 @@
                     </div>
                 </div>
 
+                <!-- Pílulas de Filtro Rápido por Máquina -->
+                <div class="machine-filter-pills" id="machine-filter-pills">
+                    <!-- Gerado dinamicamente via JS: [Todas as Máquinas (X)] [Dobra 1 (Y)] ... -->
+                </div>
+
                 <div class="table-responsive">
                     <table class="apontamentos-table" id="entries-table">
                         <thead>
                             <tr>
+                                <th>Máquina</th>
                                 <th>Horário</th>
-                                <th>Especificação do Painel</th>
+                                <th>Medida Base / Painel</th>
                                 <th class="text-center">Qtd</th>
                                 <th class="text-center">T. Bruto</th>
                                 <th class="text-center">Paradas</th>
@@ -269,8 +275,8 @@
 
                 <div id="empty-entries-view" class="empty-state">
                     <i class="fa-regular fa-folder-open"></i>
-                    <p>Nenhum intervalo apontado nesta ficha ainda.</p>
-                    <small>Preencha o formulário para registrar a produção desta máquina.</small>
+                    <p>Nenhum intervalo apontado neste turno ainda.</p>
+                    <small>Preencha o formulário ao lado para registrar a produção.</small>
                 </div>
             </section>
         </main>

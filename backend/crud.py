@@ -77,6 +77,13 @@ def get_or_create_session(db: Session, session_data: schemas.SessionCreate) -> m
 def get_session_by_id(db: Session, session_id: int) -> Optional[models.ProductionSession]:
     return db.query(models.ProductionSession).filter(models.ProductionSession.id == session_id).first()
 
+def get_sessions_by_date(db: Session, date: str, shift: Optional[str] = None) -> List[models.ProductionSession]:
+    query = db.query(models.ProductionSession).filter(models.ProductionSession.reference_date == date)
+    if shift:
+        query = query.filter(models.ProductionSession.shift == shift)
+    return query.order_by(models.ProductionSession.machine_id).all()
+
+
 
 # --- APONTAMENTOS / INTERVALOS ---
 def _calculate_time_difference_minutes(start_str: str, end_str: str) -> int:

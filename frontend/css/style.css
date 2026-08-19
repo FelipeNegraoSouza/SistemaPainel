@@ -600,6 +600,96 @@ body {
     font-size: 0.8rem;
 }
 
+/* Badges de Máquinas na Tabela Lateral */
+.badge-machine {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+.badge-machine.dobra {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+}
+
+.badge-machine.solda-lateral {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.badge-machine.solda-ponto {
+    background: #faf5ff;
+    color: #7e22ce;
+    border-color: #e9d5ff;
+}
+
+.badge-machine.outros {
+    background: #fefce8;
+    color: #a16207;
+    border-color: #fef08a;
+}
+
+/* Filtro por Pílulas de Máquinas na Lateral */
+.machine-filter-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.machine-pill {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.65rem;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: var(--transition);
+}
+
+.machine-pill:hover {
+    background: var(--primary-50);
+    border-color: var(--primary-300);
+    color: var(--primary-800);
+}
+
+.machine-pill.active {
+    background: var(--primary-600);
+    border-color: var(--primary-600);
+    color: #ffffff;
+}
+
+.machine-pill-count {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    font-size: 0.72rem;
+}
+
+.machine-pill.active .machine-pill-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
 /* Ações */
 .table-actions {
     display: flex;

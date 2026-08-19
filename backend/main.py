@@ -100,6 +100,12 @@ def sync_session(session_data: schemas.SessionCreate, db: Session = Depends(get_
     return session
 
 
+@app.get("/api/sessions/day-sessions", response_model=List[schemas.SessionResponse])
+def get_day_sessions(date: str, shift: Optional[str] = None, db: Session = Depends(get_db)):
+    """Retorna todas as sessões e apontamentos de todas as máquinas para a data e turno informados."""
+    return crud.get_sessions_by_date(db, date, shift)
+
+
 @app.get("/api/sessions/{session_id}", response_model=schemas.SessionResponse)
 def get_session(session_id: int, db: Session = Depends(get_db)):
     session = crud.get_session_by_id(db, session_id)
