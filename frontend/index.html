@@ -34,6 +34,9 @@
                 <button id="btn-sync-excel" class="btn btn-primary btn-sm" title="Gera a planilha do dia a partir do modelo e sincroniza os apontamentos">
                     <i class="fa-solid fa-file-excel"></i> <span id="btn-sync-excel-text">Sincronizar Excel Diário</span>
                 </button>
+                <button id="btn-open-regenerate-modal" class="btn btn-secondary btn-sm" title="Regerar ou exportar planilha do Excel para qualquer data passada">
+                    <i class="fa-solid fa-calendar-check"></i> Regerar Planilha Passada
+                </button>
                 <button id="btn-open-analytics" class="btn btn-secondary btn-sm" title="Ver Médias Históricas por Máquina e Medida (Pandas)">
                     <i class="fa-solid fa-chart-line"></i> Médias e Produtividade
                 </button>
@@ -104,9 +107,14 @@
                     <i class="fa-solid fa-file-excel" style="color: #107c41; font-size: 1.1rem;"></i>
                     <span><strong>Planilha do Dia (Y:):</strong> <span id="excel-target-path" style="color: var(--primary-700); font-family: monospace;">Y:\03 - PAINEL CORRUGADO\Fichas\...</span></span>
                 </div>
-                <span id="excel-status-tag" class="badge-status" style="background: rgba(16, 124, 65, 0.1); color: #107c41; border: 1px solid rgba(16, 124, 65, 0.3);">
-                    <i class="fa-solid fa-circle-check"></i> Modelo Vinculado
-                </span>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span id="excel-status-tag" class="badge-status" style="background: rgba(16, 124, 65, 0.1); color: #107c41; border: 1px solid rgba(16, 124, 65, 0.3);">
+                        <i class="fa-solid fa-circle-check"></i> Modelo Vinculado
+                    </span>
+                    <button type="button" id="btn-quick-regenerate" class="btn btn-outline btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.78rem;" title="Abrir assistente de regeneração para esta data">
+                        <i class="fa-solid fa-arrows-rotate"></i> Regerar / Baixar
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -140,11 +148,10 @@
                                 <button type="button" id="btn-clear-product" class="btn-clear-input hidden" title="Limpar seleção">
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
-                            </div>
-                            
-                            <!-- Dropdown Flutuante de Sugestões de Painéis -->
-                            <div id="product-suggestions" class="product-dropdown-menu hidden">
-                                <!-- Preenchido dinamicamente via JS -->
+                                <!-- Dropdown Flutuante de Sugestões de Painéis -->
+                                <div id="product-suggestions" class="product-dropdown-menu hidden">
+                                    <!-- Preenchido dinamicamente via JS -->
+                                </div>
                             </div>
 
                             <!-- Cartão Informativo de Detalhes do Painel Selecionado -->
@@ -425,6 +432,123 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btn-close-products-footer">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Regeneração de Planilha Excel por Data -->
+    <div id="modal-regenerate-excel" class="modal-backdrop hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <i class="fa-solid fa-file-excel modal-icon" style="color: #107c41;"></i>
+                    <div>
+                        <h2>Regerar Planilha Diária Excel por Data</h2>
+                        <p class="modal-subtitle">Escolha qualquer data passada para reconstruir a planilha com os apontamentos gravados no SQLite.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-modal" id="btn-close-regenerate">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Seletor de Data e Atalhos -->
+                <div class="regen-date-section">
+                    <div class="form-group" style="flex: 1; min-width: 220px;">
+                        <label for="regen-date-input" style="font-weight: 600;">
+                            <i class="fa-regular fa-calendar"></i> Data Referente da Planilha:
+                        </label>
+                        <input type="date" id="regen-date-input" class="form-control font-semibold" style="font-size: 1.05rem;">
+                    </div>
+                    <div class="regen-shortcuts">
+                        <label style="font-weight: 600; font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">Atalhos Rápidos:</label>
+                        <div class="shortcuts-group">
+                            <button type="button" class="btn btn-outline btn-sm" id="regen-btn-today"><i class="fa-solid fa-calendar-day"></i> Hoje</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="regen-btn-yesterday"><i class="fa-solid fa-arrow-left"></i> Ontem</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="regen-btn-last-workday"><i class="fa-solid fa-briefcase"></i> Último dia útil</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel de Prévia e Status -->
+                <div id="regen-preview-container" class="regen-preview-box">
+                    <div class="regen-preview-header">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-chart-pie" style="color: var(--primary-600);"></i>
+                            <h4 id="regen-preview-title" style="margin: 0; font-size: 0.95rem;">Resumo dos Apontamentos para a Data</h4>
+                        </div>
+                        <span id="regen-file-status-badge" class="badge-status">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Carregando...
+                        </span>
+                    </div>
+
+                    <div class="regen-stats-grid" id="regen-stats-grid">
+                        <div class="regen-stat-card">
+                            <span class="regen-stat-label">Máquinas / Fichas</span>
+                            <span class="regen-stat-val" id="regen-stat-sessions">0</span>
+                        </div>
+                        <div class="regen-stat-card">
+                            <span class="regen-stat-label">Intervalos Produtivos</span>
+                            <span class="regen-stat-val" id="regen-stat-entries">0</span>
+                        </div>
+                        <div class="regen-stat-card">
+                            <span class="regen-stat-label">Total de Peças</span>
+                            <span class="regen-stat-val" id="regen-stat-pieces">0</span>
+                        </div>
+                        <div class="regen-stat-card">
+                            <span class="regen-stat-label">Paradas Registradas</span>
+                            <span class="regen-stat-val" id="regen-stat-stops">0</span>
+                        </div>
+                    </div>
+
+                    <div id="regen-destination-info" class="regen-dest-info">
+                        <i class="fa-solid fa-folder-tree"></i>
+                        <span>Destino no Drive Y: <code id="regen-target-path">Y:\03 - PAINEL CORRUGADO\Fichas\...</code></span>
+                    </div>
+
+                    <!-- Tabela Resumo das Máquinas na Data -->
+                    <div class="table-responsive" style="max-height: 180px; overflow-y: auto; margin-top: 0.75rem;">
+                        <table class="apontamentos-table" id="regen-machines-table" style="font-size: 0.8rem;">
+                            <thead>
+                                <tr>
+                                    <th>Máquina</th>
+                                    <th>Operador</th>
+                                    <th>Turno</th>
+                                    <th class="text-center">Intervalos</th>
+                                    <th class="text-center">Peças</th>
+                                    <th class="text-center">Paradas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="regen-machines-tbody">
+                                <tr><td colspan="6" class="text-center text-muted" style="padding: 1rem;">Selecione uma data para carregar os apontamentos.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Opções de Regeneração -->
+                <div class="regen-options-box">
+                    <label class="custom-checkbox" style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="regen-force-recreate" checked>
+                        <span style="font-size: 0.88rem;">
+                            <strong>Recriar a partir do modelo limpo</strong>
+                            <span style="color: var(--text-muted); display: block; font-size: 0.78rem;">
+                                Substitui o arquivo no Drive Y: por uma cópia limpa do modelo base e preenche os lançamentos do banco do zero. Recomendado para corrigir planilhas corrompidas ou antigas.
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn btn-secondary" id="btn-close-regenerate-footer">Fechar</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button type="button" id="btn-regen-download" class="btn btn-outline" title="Baixa o arquivo .xlsx diretamente no seu navegador">
+                        <i class="fa-solid fa-download"></i> Baixar Planilha (.xlsx)
+                    </button>
+                    <button type="button" id="btn-regen-execute" class="btn btn-primary" title="Recria a planilha e salva na pasta correspondente do Drive Y:">
+                        <i class="fa-solid fa-file-excel"></i> <span id="btn-regen-execute-text">Regerar e Salvar no Drive Y:</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
