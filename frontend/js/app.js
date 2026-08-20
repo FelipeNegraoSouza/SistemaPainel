@@ -128,6 +128,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const catalogCountBadge = document.getElementById('catalog-count-badge');
     const productsCatalogTbody = document.getElementById('products-catalog-tbody');
     
+    // Modal de Regeneração de Planilha Excel
+    const btnOpenRegenerateModal = document.getElementById('btn-open-regenerate-modal');
+    const btnQuickRegenerate = document.getElementById('btn-quick-regenerate');
+    const modalRegenerateExcel = document.getElementById('modal-regenerate-excel');
+    const btnCloseRegenerate = document.getElementById('btn-close-regenerate');
+    const btnCloseRegenerateFooter = document.getElementById('btn-close-regenerate-footer');
+    const regenDateInput = document.getElementById('regen-date-input');
+    const regenBtnToday = document.getElementById('regen-btn-today');
+    const regenBtnYesterday = document.getElementById('regen-btn-yesterday');
+    const regenBtnLastWorkday = document.getElementById('regen-btn-last-workday');
+    const regenFileStatusBadge = document.getElementById('regen-file-status-badge');
+    const regenStatSessions = document.getElementById('regen-stat-sessions');
+    const regenStatEntries = document.getElementById('regen-stat-entries');
+    const regenStatPieces = document.getElementById('regen-stat-pieces');
+    const regenStatStops = document.getElementById('regen-stat-stops');
+    const regenTargetPath = document.getElementById('regen-target-path');
+    const regenMachinesTbody = document.getElementById('regen-machines-tbody');
+    const regenForceRecreate = document.getElementById('regen-force-recreate');
+    const btnRegenExecute = document.getElementById('btn-regen-execute');
+    const btnRegenExecuteText = document.getElementById('btn-regen-execute-text');
+    const btnRegenDownload = document.getElementById('btn-regen-download');
+
     let editingProductCode = null;
     let selectedSuggestionIndex = -1;
 
@@ -257,10 +279,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const res = await fetch(`${API_BASE_URL}/api/products`);
             if (res.ok) {
                 state.productsCatalog = await res.json();
+                try {
+                    localStorage.setItem('products_catalog_cache', JSON.stringify(state.productsCatalog));
+                } catch (e) {}
                 renderProductsCatalogTable(state.productsCatalog);
+                return;
             }
         } catch (e) {
-            console.warn("Usando catálogo local");
+            console.warn("Usando catálogo local / cache:", e);
+        }
+
+        try {
+            const cached = localStorage.getItem('products_catalog_cache');
+            if (cached) {
+                state.productsCatalog = JSON.parse(cached);
+                renderProductsCatalogTable(state.productsCatalog);
+            }
+        } catch (err) {
+            console.warn("Falha ao ler cache local de produtos:", err);
         }
     }
 
@@ -484,35 +520,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PESQUISA INTELIGENTE E AUTOCOMPLETE DE PAINÉIS (MEDIDA BASE) ---
 
-    function handleProductSearchInput() {
-        const query = productSpecInput.value.trim().toLowerCase();
-        
-        if (!query) {
-            btnClearProduct.classList.add('hidden');
-            hideProductSuggestions();
-            // Se o usuário limpou o campo, reseta a seleção
-            selectedProductCodeInput.value = '';
-            productCatalogHint.classList.add('hidden');
-            return;
-        }
+    function normalizeText(text) {
+        if (!text) return '';
+        return String(text)
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim();
+    }
 
-        btnClearProduct.classList.remove('hidden');
+    function tokenizeSearchQuery(text) {
+        const norm = normalizeText(text);
+        return norm.split(/[^a-z0-9]+/).filter(Boolean);
+    }
 
-        const cleanQuery = query.replace(/\s+/g, ' ');
+    function searchProducts(query) {
+        if (!query || !state.productsCatalog || state.productsCatalog.length === 0) return [];
+
+        const qNorm = normalizeText(query);
+        const qCode = qNorm.replace(/^#+/, '').trim();
+        const qTokens = tokenizeSearchQuery(query);
+        const qCompact = qNorm.replace(/[^a-z0-9]/g, '');
+
         const matches = [];
 
         for (const p of state.productsCatalog) {
-            const dimStr = (p.dimensions || '').toLowerCase();
-            const codeStr = String(p.code);
-            const nameStr = (p.name || '').toLowerCase();
+            const codeStr = String(p.code || '');
+            const dimNorm = normalizeText(p.dimensions || '');
+            const nameNorm = normalizeText(p.name || '');
+            const specNorm = normalizeText(p.specification || '');
+            const dimCompact = dimNorm.replace(/[^a-z0-9]/g, '');
+            const nameCompact = nameNorm.replace(/[^a-z0-9]/g, '');
 
             let score = 0;
-            if (dimStr === cleanQuery) score = 100;
-            else if (dimStr.startsWith(cleanQuery)) score = 80;
-            else if (dimStr.includes(cleanQuery)) score = 60;
-            else if (codeStr === cleanQuery) score = 90;
-            else if (codeStr.startsWith(cleanQuery)) score = 70;
-            else if (nameStr.includes(cleanQuery)) score = 40;
+
+            // 1. Código exato / parcial (ex: #280 ou 280)
+            if (qCode) {
+                if (codeStr === qCode) score += 1000;
+                else if (codeStr.startsWith(qCode)) score += 700;
+                else if (codeStr.includes(qCode)) score += 500;
+            }
+
+            // 2. Medida compacta direta (ex: "700x43", "700*43", "700 43 180" bate com "700 X 43 X 180")
+            if (qCompact) {
+                if (dimCompact === qCompact) score += 900;
+                else if (dimCompact.startsWith(qCompact)) score += 650;
+                else if (dimCompact.includes(qCompact)) score += 450;
+                else if (nameCompact.includes(qCompact)) score += 350;
+            }
+
+            // 3. Match de tokens em qualquer ordem
+            if (qTokens.length > 0) {
+                const fullPool = `${codeStr} ${dimNorm} ${nameNorm} ${specNorm}`;
+                const allTokensMatch = qTokens.every(token => fullPool.includes(token));
+                if (allTokensMatch) {
+                    score += 300 + (qTokens.length * 20);
+                    if (qTokens.every(token => dimNorm.includes(token))) {
+                        score += 200;
+                    }
+                }
+            }
 
             if (score > 0) {
                 matches.push({ product: p, score });
@@ -520,9 +587,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         matches.sort((a, b) => b.score - a.score);
-        const topResults = matches.slice(0, 15).map(m => m.product);
+        return matches.slice(0, 20).map(m => m.product);
+    }
 
+    function showProductHint(product) {
+        if (!product) {
+            productCatalogHint.classList.add('hidden');
+            return;
+        }
+        hintBaseVal.textContent = product.dimensions || product.name;
+        hintCodeVal.textContent = `#${product.code}`;
+        const weightVal = typeof product.unit_weight_kg === 'number' ? product.unit_weight_kg.toFixed(2) : (parseFloat(product.unit_weight_kg) || 0).toFixed(2);
+        hintWeight.innerHTML = `<i class="fa-solid fa-weight-hanging"></i> Peso: <strong>${weightVal} kg</strong>`;
+        hintDescText.textContent = product.name || product.dimensions;
+        productCatalogHint.classList.remove('hidden');
+    }
+
+    function handleProductSearchInput() {
+        const rawVal = productSpecInput.value;
+        const query = rawVal.trim();
+        
+        if (!query) {
+            btnClearProduct.classList.add('hidden');
+            hideProductSuggestions();
+            selectedProductCodeInput.value = '';
+            productCatalogHint.classList.add('hidden');
+            return;
+        }
+
+        btnClearProduct.classList.remove('hidden');
+
+        const topResults = searchProducts(query);
         renderProductSuggestions(topResults);
+
+        // Se o usuário digitou exatamente o código ou medida correspondente, atualiza o cartão de dados em tempo real
+        const qNorm = normalizeText(query);
+        const qCode = qNorm.replace(/^#+/, '').trim();
+        const qCompact = qNorm.replace(/[^a-z0-9]/g, '');
+
+        const exactMatch = topResults.find(p => {
+            const codeStr = String(p.code || '');
+            const dimCompact = normalizeText(p.dimensions || '').replace(/[^a-z0-9]/g, '');
+            const dimNorm = normalizeText(p.dimensions || '');
+            return (qCode && codeStr === qCode) || (qCompact && dimCompact === qCompact) || (dimNorm === qNorm);
+        });
+
+        if (exactMatch) {
+            selectedProductCodeInput.value = exactMatch.code;
+            showProductHint(exactMatch);
+        } else if (selectedProductCodeInput.value) {
+            const currentSelected = state.productsCatalog.find(p => p.code === parseInt(selectedProductCodeInput.value, 10));
+            if (currentSelected) {
+                const curDimCompact = normalizeText(currentSelected.dimensions || '').replace(/[^a-z0-9]/g, '');
+                if (!curDimCompact.includes(qCompact) && !String(currentSelected.code).includes(qCode)) {
+                    selectedProductCodeInput.value = '';
+                    productCatalogHint.classList.add('hidden');
+                }
+            }
+        }
     }
 
     function renderProductSuggestions(products) {
@@ -538,18 +660,21 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        productSuggestions.innerHTML = products.map((p, idx) => `
+        productSuggestions.innerHTML = products.map((p, idx) => {
+            const weightVal = typeof p.unit_weight_kg === 'number' ? p.unit_weight_kg.toFixed(2) : (parseFloat(p.unit_weight_kg) || 0).toFixed(2);
+            return `
             <div class="product-dropdown-item" data-code="${p.code}" data-index="${idx}">
                 <div class="p-item-top">
                     <span class="p-item-dim">${escapeHtml(p.dimensions || p.name)}</span>
                     <div class="p-item-badges">
                         <span class="p-item-code">#${p.code}</span>
-                        <span class="p-item-weight"><i class="fa-solid fa-weight-hanging"></i> ${p.unit_weight_kg ? p.unit_weight_kg.toFixed(2) + ' kg' : '0.00 kg'}</span>
+                        <span class="p-item-weight"><i class="fa-solid fa-weight-hanging"></i> ${weightVal} kg</span>
                     </div>
                 </div>
                 <div class="p-item-desc">${escapeHtml(p.name)}</div>
             </div>
-        `).join('');
+            `;
+        }).join('');
 
         selectedSuggestionIndex = -1;
         productSuggestions.classList.remove('hidden');
@@ -566,16 +691,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function selectProduct(product) {
-        // Padrão de apontamento: Medida Base!
         productSpecInput.value = product.dimensions || product.name;
         selectedProductCodeInput.value = product.code;
 
-        hintBaseVal.textContent = product.dimensions || product.name;
-        hintCodeVal.textContent = `#${product.code}`;
-        hintWeight.innerHTML = `<i class="fa-solid fa-weight-hanging"></i> Peso: <strong>${product.unit_weight_kg ? product.unit_weight_kg.toFixed(2) + ' kg' : '0.00 kg'}</strong>`;
-        hintDescText.textContent = product.name;
-
-        productCatalogHint.classList.remove('hidden');
+        showProductHint(product);
         btnClearProduct.classList.remove('hidden');
         hideProductSuggestions();
         startTimeInput.focus();
@@ -613,6 +732,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < items.length) {
                 e.preventDefault();
                 items[selectedSuggestionIndex].click();
+            } else if (items.length > 0) {
+                e.preventDefault();
+                items[0].click();
             }
         } else if (e.key === 'Escape') {
             hideProductSuggestions();
@@ -663,19 +785,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- RENDERIZAÇÃO DA TABELA DE APONTAMENTOS ---
 
-    function renderEntriesTable() {
-        entriesTbody.innerHTML = '';
-
-        if (!state.entries || state.entries.length === 0) {
-            emptyEntriesView.classList.remove('hidden');
-            entriesCountBadge.textContent = '0';
-            dayTotalNet.textContent = '0h 00m';
-            dayTotalQty.textContent = '0';
-            return;
-        }
-
-        emptyEntriesView.classList.add('hidden');
-        entriesCountBadge.textContent = state.entries.length;
 
     function getMachineClass(name) {
         const upper = (name || '').toUpperCase();
@@ -843,7 +952,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const startTime = startTimeInput.value;
         const endTime = endTimeInput.value;
         const qty = parseInt(productQtyInput.value, 10);
-        const productCode = selectedProductCodeInput.value ? parseInt(selectedProductCodeInput.value, 10) : null;
+        let productCode = selectedProductCodeInput.value ? parseInt(selectedProductCodeInput.value, 10) : null;
+
+        // Auto-identifica o código caso o operador tenha digitado manualmente sem clicar no dropdown
+        if (!productCode && productSpec) {
+            const matches = searchProducts(productSpec);
+            if (matches.length > 0) {
+                productCode = matches[0].code;
+            }
+        }
 
         if (!productSpec || !startTime || !endTime || isNaN(qty)) {
             alert('Por favor, preencha todos os campos obrigatórios.');
@@ -1150,19 +1267,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GESTÃO, EDIÇÃO E SINCRONIZAÇÃO DO CATÁLOGO DE PAINÉIS ---
 
     function filterCatalogTable() {
-        const query = (catalogSearchInput.value || '').trim().toLowerCase();
+        const query = (catalogSearchInput.value || '').trim();
         if (!query) {
             renderProductsCatalogTable(state.productsCatalog);
             return;
         }
 
-        const filtered = state.productsCatalog.filter(p => {
-            const dimStr = (p.dimensions || '').toLowerCase();
-            const codeStr = String(p.code);
-            const nameStr = (p.name || '').toLowerCase();
-            return dimStr.includes(query) || codeStr.includes(query) || nameStr.includes(query);
-        });
-
+        const filtered = searchProducts(query);
         renderProductsCatalogTable(filtered);
     }
 
@@ -1384,6 +1495,215 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- REGENERAÇÃO DE PLANILHA PASSADA POR DATA ---
+
+    function getFormattedDateOffset(daysOffset = 0) {
+        const d = new Date();
+        d.setDate(d.getDate() - daysOffset);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    }
+
+    async function loadRegeneratePreview(dateVal) {
+        if (!dateVal) return;
+        if (!state.isOnline) {
+            if (regenFileStatusBadge) {
+                regenFileStatusBadge.className = 'badge-status';
+                regenFileStatusBadge.style.background = 'rgba(239, 68, 68, 0.1)';
+                regenFileStatusBadge.style.color = '#ef4444';
+                regenFileStatusBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Servidor Offline';
+            }
+            return;
+        }
+
+        if (regenFileStatusBadge) {
+            regenFileStatusBadge.className = 'badge-status';
+            regenFileStatusBadge.style.background = 'rgba(100, 116, 139, 0.1)';
+            regenFileStatusBadge.style.color = '#64748b';
+            regenFileStatusBadge.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Consultando SQLite...';
+        }
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/excel/preview?date=${dateVal}`);
+            if (!res.ok) throw new Error('Falha ao obter prévia');
+            const data = await res.json();
+
+            // Atualiza estatísticas
+            if (regenStatSessions) regenStatSessions.textContent = data.total_sessions || 0;
+            if (regenStatEntries) regenStatEntries.textContent = data.total_entries || 0;
+            if (regenStatPieces) regenStatPieces.textContent = (data.total_pieces || 0).toLocaleString('pt-BR');
+            if (regenStatStops) regenStatStops.textContent = data.total_stops || 0;
+
+            if (regenTargetPath) {
+                regenTargetPath.textContent = data.target_filepath || '...';
+            }
+
+            // Atualiza badge de arquivo no drive Y
+            if (regenFileStatusBadge) {
+                if (data.file_exists) {
+                    regenFileStatusBadge.style.background = 'rgba(16, 124, 65, 0.12)';
+                    regenFileStatusBadge.style.color = '#107c41';
+                    regenFileStatusBadge.style.borderColor = 'rgba(16, 124, 65, 0.3)';
+                    regenFileStatusBadge.innerHTML = `<i class="fa-solid fa-file-circle-check"></i> Ficha ${data.file_name} Já Existe no Y:`;
+                } else {
+                    regenFileStatusBadge.style.background = 'rgba(234, 136, 36, 0.12)';
+                    regenFileStatusBadge.style.color = '#d97706';
+                    regenFileStatusBadge.style.borderColor = 'rgba(234, 136, 36, 0.3)';
+                    regenFileStatusBadge.innerHTML = `<i class="fa-solid fa-clock"></i> Arquivo ${data.file_name} Ainda Não Criado`;
+                }
+            }
+
+            // Renderiza tabela das máquinas
+            if (regenMachinesTbody) {
+                if (!data.machines || data.machines.length === 0) {
+                    regenMachinesTbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center text-muted" style="padding: 1.25rem;">
+                                <i class="fa-solid fa-circle-info" style="color: var(--primary-500); margin-right: 4px;"></i>
+                                Nenhum apontamento no banco de dados para <strong>${data.date_display}</strong>.
+                                <div style="font-size: 0.76rem; margin-top: 4px; color: var(--text-muted);">
+                                    A planilha pode ser criada/regerada limpa com o cabeçalho desta data.
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    regenMachinesTbody.innerHTML = data.machines.map(m => `
+                        <tr>
+                            <td><strong>${m.machine_name}</strong></td>
+                            <td>${m.operator_name}</td>
+                            <td><span class="badge badge-${m.shift === 'Diurno' ? 'day' : 'night'}">${m.shift}</span></td>
+                            <td class="text-center"><strong>${m.entries_count}</strong></td>
+                            <td class="text-center"><strong>${m.pieces_sum.toLocaleString('pt-BR')}</strong></td>
+                            <td class="text-center">${m.stops_sum > 0 ? `<span style="color: var(--warning-600); font-weight: 600;">${m.stops_sum}</span>` : '0'}</td>
+                        </tr>
+                    `).join('');
+                }
+            }
+        } catch (e) {
+            console.error("Erro na prévia:", e);
+            if (regenFileStatusBadge) {
+                regenFileStatusBadge.style.background = 'rgba(239, 68, 68, 0.1)';
+                regenFileStatusBadge.style.color = '#ef4444';
+                regenFileStatusBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Erro ao consultar prévia';
+            }
+        }
+    }
+
+    function openRegenerateModal(initialDate) {
+        const targetDate = initialDate || sessionDateInput.value || getDefaultWorkDate();
+        if (regenDateInput) {
+            regenDateInput.value = targetDate;
+        }
+        if (modalRegenerateExcel) {
+            modalRegenerateExcel.classList.remove('hidden');
+        }
+        loadRegeneratePreview(targetDate);
+    }
+
+    async function executeRegenerateExcel() {
+        if (!state.isOnline) {
+            alert('O backend SQLite/FastAPI precisa estar ativo para sincronizar o arquivo Excel.');
+            return;
+        }
+
+        const dateVal = regenDateInput.value;
+        if (!dateVal) {
+            alert('Por favor, informe uma data válida.');
+            return;
+        }
+
+        const forceRecreate = regenForceRecreate ? regenForceRecreate.checked : true;
+        const origText = btnRegenExecuteText ? btnRegenExecuteText.textContent : 'Regerar e Salvar no Drive Y:';
+
+        if (btnRegenExecute) {
+            btnRegenExecute.disabled = true;
+            if (btnRegenExecuteText) btnRegenExecuteText.textContent = 'Processando e gravando...';
+        }
+        if (btnRegenDownload) btnRegenDownload.disabled = true;
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/excel/sync?date=${dateVal}&force_recreate=${forceRecreate}`, { method: 'POST' });
+            if (res.ok) {
+                const data = await res.json();
+                await loadRegeneratePreview(dateVal);
+                if (dateVal === sessionDateInput.value) {
+                    await updateExcelStatus();
+                }
+                alert(`✅ Planilha Excel do dia ${data.date_formatted} regerada com sucesso!\n\nDestino: ${data.target_filepath}\nApontamentos gravados: ${data.synced_entries_count}\nRealizado: ${data.processed_metrics?.realizado_dia_kg || 0} kg`);
+            } else {
+                const err = await res.json();
+                alert(`⚠️ Erro ao regerar planilha no Excel: ${err.detail || 'Falha na operação'}`);
+            }
+        } catch (e) {
+            alert(`⚠️ Erro de comunicação com o servidor: ${e.message}`);
+        } finally {
+            if (btnRegenExecute) {
+                btnRegenExecute.disabled = false;
+                if (btnRegenExecuteText) btnRegenExecuteText.textContent = origText;
+            }
+            if (btnRegenDownload) btnRegenDownload.disabled = false;
+        }
+    }
+
+    async function executeDownloadExcel() {
+        if (!state.isOnline) {
+            alert('O backend SQLite/FastAPI precisa estar ativo para baixar a planilha.');
+            return;
+        }
+
+        const dateVal = regenDateInput.value;
+        if (!dateVal) {
+            alert('Por favor, informe uma data válida.');
+            return;
+        }
+
+        const forceRecreate = regenForceRecreate ? regenForceRecreate.checked : false;
+        
+        if (btnRegenDownload) {
+            btnRegenDownload.disabled = true;
+            btnRegenDownload.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando Download...';
+        }
+
+        try {
+            const downloadUrl = `${API_BASE_URL}/api/excel/download?date=${dateVal}&force_recreate=${forceRecreate}`;
+            const res = await fetch(downloadUrl);
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({ detail: 'Falha ao baixar planilha' }));
+                throw new Error(err.detail || 'Erro na requisição');
+            }
+
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            
+            // Extrai filename do header se houver
+            let filename = `Ficha_Producao_${dateVal}.xlsx`;
+            const disposition = res.headers.get('content-disposition');
+            if (disposition && disposition.includes('filename=')) {
+                const match = disposition.match(/filename="?([^"]+)"?/);
+                if (match && match[1]) filename = match[1];
+            }
+
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        } catch (e) {
+            alert(`⚠️ Erro ao baixar planilha: ${e.message}`);
+        } finally {
+            if (btnRegenDownload) {
+                btnRegenDownload.disabled = false;
+                btnRegenDownload.innerHTML = '<i class="fa-solid fa-download"></i> Baixar Planilha (.xlsx)';
+            }
+        }
+    }
+
     // --- ATRIBUIÇÃO DE EVENT LISTENERS ---
 
     formApontamento.addEventListener('submit', handleFormSubmit);
@@ -1424,6 +1744,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ações de Excel
     if (btnSyncExcel) btnSyncExcel.addEventListener('click', syncExcelNow);
+
+    // Modal de Regeneração de Planilha por Data
+    if (btnOpenRegenerateModal) {
+        btnOpenRegenerateModal.addEventListener('click', () => openRegenerateModal(sessionDateInput.value));
+    }
+    if (btnQuickRegenerate) {
+        btnQuickRegenerate.addEventListener('click', () => openRegenerateModal(sessionDateInput.value));
+    }
+    if (btnCloseRegenerate) {
+        btnCloseRegenerate.addEventListener('click', () => modalRegenerateExcel.classList.add('hidden'));
+    }
+    if (btnCloseRegenerateFooter) {
+        btnCloseRegenerateFooter.addEventListener('click', () => modalRegenerateExcel.classList.add('hidden'));
+    }
+    if (regenDateInput) {
+        regenDateInput.addEventListener('change', () => loadRegeneratePreview(regenDateInput.value));
+    }
+    if (regenBtnToday) {
+        regenBtnToday.addEventListener('click', () => {
+            const d = getFormattedDateOffset(0);
+            if (regenDateInput) regenDateInput.value = d;
+            loadRegeneratePreview(d);
+        });
+    }
+    if (regenBtnYesterday) {
+        regenBtnYesterday.addEventListener('click', () => {
+            const d = getFormattedDateOffset(1);
+            if (regenDateInput) regenDateInput.value = d;
+            loadRegeneratePreview(d);
+        });
+    }
+    if (regenBtnLastWorkday) {
+        regenBtnLastWorkday.addEventListener('click', () => {
+            const d = getDefaultWorkDate();
+            if (regenDateInput) regenDateInput.value = d;
+            loadRegeneratePreview(d);
+        });
+    }
+    if (btnRegenExecute) {
+        btnRegenExecute.addEventListener('click', executeRegenerateExcel);
+    }
+    if (btnRegenDownload) {
+        btnRegenDownload.addEventListener('click', executeDownloadExcel);
+    }
 
     // Analytics
     btnOpenAnalytics.addEventListener('click', () => loadAndShowAnalytics(filterAnalyticsMachine.value));

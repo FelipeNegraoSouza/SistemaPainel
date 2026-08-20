@@ -112,21 +112,22 @@ def resolve_paths(reference_date: str) -> Dict[str, Any]:
     }
 
 
-def ensure_daily_sheet_exists(reference_date: str) -> Dict[str, Any]:
+def ensure_daily_sheet_exists(reference_date: str, force_recreate: bool = False) -> Dict[str, Any]:
     """
-    Copia o modelo limpo para a pasta de destino caso o arquivo do dia não exista.
+    Copia o modelo limpo para a pasta de destino caso o arquivo do dia não exista,
+    ou recria a partir do zero caso force_recreate seja True.
     """
     paths = resolve_paths(reference_date)
     target_filepath = paths["target_filepath"]
     target_dir = paths["target_dir"]
     template_path = paths["template_path"]
 
-    if not os.path.exists(target_filepath):
-        if not os.path.exists(template_path):
-            raise FileNotFoundError(
-                f"Arquivo modelo não encontrado em '{template_path}'. Verifique o acesso ao drive Y:."
-            )
-        
+    if not os.path.exists(template_path):
+        raise FileNotFoundError(
+            f"Arquivo modelo não encontrado em '{template_path}'. Verifique o acesso ao drive Y:."
+        )
+
+    if not os.path.exists(target_filepath) or force_recreate:
         os.makedirs(target_dir, exist_ok=True)
         shutil.copy2(template_path, target_filepath)
         paths["file_exists"] = True
@@ -135,6 +136,71 @@ def ensure_daily_sheet_exists(reference_date: str) -> Dict[str, Any]:
         paths["created_now"] = False
 
     return paths
+
+
+def get_date_preview(reference_date: str, db: Session) -> Dict[str, Any]:
+    """
+    Retorna um resumo detalhado dos apontamentos gravados no SQLite para uma determinada data,
+    junto ao status do arquivo no drive Y:.
+    """
+    paths = resolve_paths(reference_date)
+    ref_date_iso = paths["date_iso"]
+    date_obj = paths["date_obj"]
+    prev_date_obj = date_obj - timedelta(days=1)
+    prev_date_iso = prev_date_obj.strftime("%Y-%m-%d")
+
+    sessions = db.query(models.ProductionSession).filter(
+        or_(
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Diurno"),
+            and_(models.ProductionSession.reference_date == prev_date_iso, models.ProductionSession.shift == "Noturno"),
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Noturno")
+        )
+    ).all()
+
+    total_entries = 0
+    total_pieces = 0
+    total_stops = 0
+    machines_summary = []
+
+    for s in sessions:
+        machine_name = s.machine.name if s.machine else f"Máquina {s.machine_id}"
+        entries_count = len(s.entries)
+        pieces_sum = sum(e.qty_produced or 0 for e in s.entries)
+        stops_sum = sum(len(e.stops) for e in s.entries)
+        
+        total_entries += entries_count
+        total_pieces += pieces_sum
+        total_stops += stops_sum
+
+        if entries_count > 0:
+            machines_summary.append({
+                "session_id": s.id,
+                "machine_name": machine_name,
+                "operator_name": s.operator_name or "Não informado",
+                "shift": s.shift,
+                "reference_date": s.reference_date,
+                "entries_count": entries_count,
+                "pieces_sum": pieces_sum,
+                "stops_sum": stops_sum
+            })
+
+    return {
+        "status": "success",
+        "date_iso": paths["date_iso"],
+        "date_formatted": paths["date_formatted"],
+        "date_display": paths["date_display"],
+        "file_name": paths["file_name"],
+        "target_dir": paths["target_dir"],
+        "target_filepath": paths["target_filepath"],
+        "file_exists": paths["file_exists"],
+        "template_exists": paths["template_exists"],
+        "template_path": paths["template_path"],
+        "total_sessions": len(sessions),
+        "total_entries": total_entries,
+        "total_pieces": total_pieces,
+        "total_stops": total_stops,
+        "machines": machines_summary
+    }
 
 
 # Cache em memória do catálogo da aba BD para máxima performance
@@ -182,13 +248,13 @@ def get_product_lookup(template_path: str) -> Dict[str, Dict[str, float]]:
     return _CACHED_PRODUCT_LOOKUP
 
 
-def sync_date_to_excel(reference_date: str, db: Session) -> Dict[str, Any]:
+def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = False) -> Dict[str, Any]:
     """
     Processa e calcula TODOS os valores no backend Python e grava os resultados calculados
     diretamente na planilha diária do Excel (aba BD_LANÇAMENTOS) sem uso de fórmulas de modelo.
     O Excel passa a atuar estritamente como visualizador e relatório de impressão.
     """
-    paths = ensure_daily_sheet_exists(reference_date)
+    paths = ensure_daily_sheet_exists(reference_date, force_recreate=force_recreate)
     target_filepath = paths["target_filepath"]
     ref_date_iso = paths["date_iso"]
     date_display = paths["date_display"]

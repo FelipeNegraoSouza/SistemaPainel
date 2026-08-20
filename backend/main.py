@@ -209,20 +209,61 @@ def get_excel_status(date: Optional[str] = None):
         raise HTTPException(status_code=500, detail=f"Erro ao verificar status do Excel: {str(ex)}")
 
 
-@app.post("/api/excel/sync")
-def sync_excel_sheet(date: Optional[str] = None, db: Session = Depends(get_db)):
+@app.get("/api/excel/preview")
+def get_excel_preview(date: Optional[str] = None, db: Session = Depends(get_db)):
     """
-    Garante a criação do arquivo diário copiando o modelo se necessário e
-    sincroniza todos os apontamentos da data no arquivo Excel.
+    Retorna o resumo prévio dos apontamentos do SQLite para a data informada
+    e o status do arquivo correspondente no drive Y:.
     """
     try:
         ref_date = date or ""
-        result = excel_service.sync_date_to_excel(ref_date, db)
+        return excel_service.get_date_preview(ref_date, db)
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=f"Erro ao obter prévia da planilha: {str(ex)}")
+
+
+@app.post("/api/excel/sync")
+def sync_excel_sheet(date: Optional[str] = None, force_recreate: bool = False, db: Session = Depends(get_db)):
+    """
+    Garante a criação do arquivo diário copiando o modelo se necessário (ou recriando do zero
+    caso force_recreate=True) e sincroniza todos os apontamentos da data no arquivo Excel.
+    """
+    try:
+        ref_date = date or ""
+        result = excel_service.sync_date_to_excel(ref_date, db, force_recreate=force_recreate)
         return result
     except FileNotFoundError as fnf:
         raise HTTPException(status_code=404, detail=str(fnf))
     except Exception as ex:
         raise HTTPException(status_code=500, detail=f"Erro ao sincronizar com planilha Excel: {str(ex)}")
+
+
+@app.get("/api/excel/download")
+def download_excel_sheet(date: Optional[str] = None, force_recreate: bool = False, db: Session = Depends(get_db)):
+    """
+    Sincroniza/garante a planilha da data informada e retorna o arquivo .xlsx
+    diretamente para download no navegador.
+    """
+    try:
+        ref_date = date or ""
+        paths = excel_service.resolve_paths(ref_date)
+        target_filepath = paths["target_filepath"]
+        
+        # Garante que a planilha esteja gerada e sincronizada
+        excel_service.sync_date_to_excel(ref_date, db, force_recreate=force_recreate)
+        
+        if not os.path.exists(target_filepath):
+            raise HTTPException(status_code=404, detail="Arquivo Excel não encontrado após geração.")
+
+        return FileResponse(
+            path=target_filepath,
+            filename=paths["file_name"],
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+    except FileNotFoundError as fnf:
+        raise HTTPException(status_code=404, detail=str(fnf))
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=f"Erro ao baixar planilha Excel: {str(ex)}")
 
 
 # Servir arquivos estáticos do frontend (CSS, JS, imagens)
