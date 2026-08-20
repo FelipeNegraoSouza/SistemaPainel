@@ -1006,9 +1006,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.isOnline) {
             try {
                 let res;
-                if (state.currentEditingId && typeof state.currentEditingId !== 'string') {
+                const isEditing = state.currentEditingId !== null && state.currentEditingId !== undefined && state.currentEditingId !== '';
+                const isBackendNumericId = isEditing && !String(state.currentEditingId).startsWith('entry_') && !isNaN(parseInt(state.currentEditingId, 10));
+
+                if (isEditing && isBackendNumericId) {
+                    const numericEntryId = parseInt(state.currentEditingId, 10);
                     // Atualiza intervalo existente (PUT)
-                    res = await fetch(`${API_BASE_URL}/api/entries/${state.currentEditingId}`, {
+                    res = await fetch(`${API_BASE_URL}/api/entries/${numericEntryId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(entryPayload)
@@ -1039,10 +1043,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Fallback local
         if (state.currentEditingId) {
-            const idx = state.entries.findIndex(e => String(e.id) === String(state.currentEditingId));
+            const idx = state.allDayEntries.findIndex(e => String(e.id) === String(state.currentEditingId));
             if (idx !== -1) {
-                state.entries[idx] = {
-                    ...state.entries[idx],
+                state.allDayEntries[idx] = {
+                    ...state.allDayEntries[idx],
                     productSpec,
                     productCode,
                     startTime,
@@ -1058,6 +1062,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const newEntry = {
                 id: 'entry_' + Date.now(),
+                sessionId: state.session.id,
+                machineId: state.session.machine_id,
+                machineName: state.session.machine_name,
                 productSpec,
                 productCode,
                 startTime,
@@ -1069,9 +1076,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 netMinutes,
                 ratePerHour
             };
-            state.entries.push(newEntry);
+            state.allDayEntries.push(newEntry);
         }
 
+        renderMachineFilterPills();
         renderEntriesTable();
         resetEntryForm();
         startTimeInput.value = endTime;
@@ -1084,9 +1092,12 @@ document.addEventListener('DOMContentLoaded', () => {
     async function deleteEntry(id) {
         if (!confirm('Deseja realmente excluir este intervalo produtivo?')) return;
 
-        if (state.isOnline && typeof id !== 'string') {
+        const isBackendNumericId = id !== null && id !== undefined && !String(id).startsWith('entry_') && !isNaN(parseInt(id, 10));
+
+        if (state.isOnline && isBackendNumericId) {
             try {
-                const res = await fetch(`${API_BASE_URL}/api/entries/${id}`, { method: 'DELETE' });
+                const numericEntryId = parseInt(id, 10);
+                const res = await fetch(`${API_BASE_URL}/api/entries/${numericEntryId}`, { method: 'DELETE' });
                 if (res.ok) {
                     await syncSessionWithBackend();
                     return;
@@ -1743,6 +1754,11 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimeInput.addEventListener('input', updateLiveSummary);
     endTimeInput.addEventListener('input', updateLiveSummary);
     productQtyInput.addEventListener('input', updateLiveSummary);
+    // Impede alteração acidental da quantidade (+1 ou -1) ao rolar a página com a roda do mouse
+    productQtyInput.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    }, { passive: false });
 
     // Mudanças na Ficha / Sessão
     sessionMachineSelect.addEventListener('change', syncSessionWithBackend);

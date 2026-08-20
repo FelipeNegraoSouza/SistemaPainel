@@ -280,6 +280,17 @@ body {
     box-shadow: var(--shadow-highlight);
 }
 
+/* Remove botões nativos de incremento/decremento para evitar cliques acidentais de +1 / -1 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 .font-semibold {
     font-weight: 600;
     color: var(--primary-900);
