@@ -530,12 +530,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function tokenizeSearchQuery(text) {
-        const norm = normalizeText(text);
-        return norm.split(/[^a-z0-9]+/).filter(Boolean);
+        let norm = normalizeText(text);
+        // Separa digitos e letras colados, ex: 700mm -> 700 mm, 43x -> 43 x
+        norm = norm.replace(/(\d+)([a-z]+)/g, '$1 $2').replace(/([a-z]+)(\d+)/g, '$1 $2');
+        // Sinonimos comuns de busca de painel
+        norm = norm.replace(/\bpainel\b|\bpaineis\b/g, 'p corrugado');
+        const rawTokens = norm.split(/[^a-z0-9]+/).filter(Boolean);
+        // Filtra ruidos para que 'mm' ou 'x' ou 'de' nao travem o match
+        const meaningful = rawTokens.filter(t => !['mm', 'x', 'de', 'do', 'da', 'em', 'com'].includes(t));
+        return meaningful.length > 0 ? meaningful : rawTokens;
     }
 
     function searchProducts(query) {
-        if (!query || !state.productsCatalog || state.productsCatalog.length === 0) return [];
+        if (!state.productsCatalog || state.productsCatalog.length === 0) return [];
+        if (!query || !query.trim()) {
+            return state.productsCatalog.slice(0, 15);
+        }
 
         const qNorm = normalizeText(query);
         const qCode = qNorm.replace(/^#+/, '').trim();
@@ -569,12 +579,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (nameCompact.includes(qCompact)) score += 350;
             }
 
-            // 3. Match de tokens em qualquer ordem
+            // 3. Match de tokens em qualquer ordem com expansao de 'P.'
             if (qTokens.length > 0) {
-                const fullPool = `${codeStr} ${dimNorm} ${nameNorm} ${specNorm}`;
+                const fullPool = `${codeStr} ${dimNorm} ${nameNorm} ${specNorm}`.replace(/\bp\.\b/g, 'p painel corrugado');
                 const allTokensMatch = qTokens.every(token => fullPool.includes(token));
                 if (allTokensMatch) {
-                    score += 300 + (qTokens.length * 20);
+                    score += 300 + (qTokens.length * 25);
                     if (qTokens.every(token => dimNorm.includes(token))) {
                         score += 200;
                     }
@@ -587,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         matches.sort((a, b) => b.score - a.score);
-        return matches.slice(0, 20).map(m => m.product);
+        return matches.slice(0, 25).map(m => m.product);
     }
 
     function showProductHint(product) {
@@ -1714,7 +1724,12 @@ document.addEventListener('DOMContentLoaded', () => {
     productSpecInput.addEventListener('input', handleProductSearchInput);
     productSpecInput.addEventListener('keydown', handleProductKeyNavigation);
     productSpecInput.addEventListener('focus', () => {
-        if (productSpecInput.value.trim()) handleProductSearchInput();
+        handleProductSearchInput();
+    });
+    productSpecInput.addEventListener('click', () => {
+        if (productSuggestions.classList.contains('hidden')) {
+            handleProductSearchInput();
+        }
     });
     if (btnClearProduct) btnClearProduct.addEventListener('click', clearSelectedProduct);
 
