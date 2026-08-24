@@ -9,8 +9,12 @@ from sqlalchemy.orm import Session
 from backend import models
 
 # Caminhos padrão do arquivo modelo e destino no drive Y:
-DEFAULT_TEMPLATE_PATH = r"Y:\03 - PAINEL CORRUGADO\Ficha_apontamento_modelo_painel.xlsx"
-DEFAULT_BASE_DEST_DIR = r"Y:\03 - PAINEL CORRUGADO\Fichas"
+DEFAULT_TEMPLATE_PATH = r"Y:\03 - PAINEL CORRUGADO\Ficha__modelo_sistema.xlsx"
+DEFAULT_BASE_DEST_DIR = r"Y:\03 - PAINEL CORRUGADO\fichas_teste"
+
+# Metas padrão de produção (ajustáveis conforme padrão operacional)
+DEFAULT_META_DIA = 2500.0
+DEFAULT_META_MES = 52500.0
 
 # Mapeamento dos meses para nomes de pasta em português
 MONTH_NAMES = {
@@ -70,6 +74,120 @@ def normalize_machine_name(name: str) -> str:
     return upper
 
 
+def safe_set_cell_value(ws, row: int, col: int, value: Any):
+    """
+    Grava o valor em uma célula com segurança.
+    Se a célula for uma MergedCell (ex: parte de um intervalo mesclado customizado),
+    localiza o range mesclado correspondente e grava na célula principal (top-left) do range.
+    """
+    cell = ws.cell(row, col)
+    if isinstance(cell, openpyxl.cell.cell.MergedCell):
+        for rng in list(ws.merged_cells.ranges):
+            if cell.coordinate in rng:
+                ws.cell(rng.min_row, rng.min_col).value = value
+                return
+    else:
+        cell.value = value
+
+
+def normalize_kpi_merged_cells(ws):
+    """
+    Garante que os ranges mesclados dos cartões de KPI (linhas 31 a 41 e 44 a 48)
+    estejam no padrão exato da planilha modelo Ficha__modelo_sistema.xlsx.
+    """
+    target_kpi_ranges = [
+        "B1:J1",
+        "B31:E32", "G31:I32", "J31:J32",
+        "B33:E35", "G33:I35", "J33:J35",
+        "B37:E38", "G37:I38", "J37:J38",
+        "B39:E41", "G39:I41", "J39:J41",
+        "F31:F35", "F37:F41",
+        "B44:E45", "J44:J45",
+        "B46:E48", "J46:J48"
+    ]
+    current_ranges = [str(r) for r in ws.merged_cells.ranges]
+    for r_str in target_kpi_ranges:
+        if r_str not in current_ranges:
+            try:
+                ws.merge_cells(r_str)
+            except Exception:
+                pass
+
+
+def get_daily_solda_lateral_kg(db: Session, date_obj: datetime, bd_lookup: Dict[str, Any]) -> float:
+    """
+    Calcula a produção diária em kg da Solda Lateral para uma data de referência no SQLite.
+    Regra de turnos:
+    - Diurno na data
+    - Noturno na noite anterior (ex: Domingo à noite para planilha de Segunda)
+    - Noturno na própria data
+    """
+    ref_date_iso = date_obj.strftime("%Y-%m-%d")
+    prev_date_iso = (date_obj - timedelta(days=1)).strftime("%Y-%m-%d")
+    
+    sessions = db.query(models.ProductionSession).filter(
+        or_(
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Diurno"),
+            and_(models.ProductionSession.reference_date == prev_date_iso, models.ProductionSession.shift == "Noturno"),
+            and_(models.ProductionSession.reference_date == ref_date_iso, models.ProductionSession.shift == "Noturno")
+        )
+    ).all()
+    
+    total_solda_l = 0.0
+    for s in sessions:
+        machine_name = s.machine.name if s.machine else ""
+        norm_m = normalize_machine_name(machine_name)
+        if "SOLDA LATERAL" not in norm_m:
+            continue
+        
+        for e in s.entries:
+            qty = e.qty_produced or 0
+            if qty <= 0:
+                continue
+            
+            peso_unitario = 0.0
+            if e.product and e.product.unit_weight_kg:
+                peso_unitario = float(e.product.unit_weight_kg)
+            
+            if peso_unitario == 0.0:
+                p_code = str(e.product_code or "").strip()
+                p_spec = (e.product_spec_custom or (e.product.name if e.product else "")).strip().upper()
+                if p_code and p_code in bd_lookup:
+                    peso_unitario = bd_lookup[p_code]["peso"]
+                elif p_spec and p_spec in bd_lookup:
+                    peso_unitario = bd_lookup[p_spec]["peso"]
+                else:
+                    for k, v in bd_lookup.items():
+                        if k in p_spec or p_spec in k:
+                            peso_unitario = v["peso"]
+                            break
+            
+            total_solda_l += round(peso_unitario * qty, 2)
+            
+    return round(total_solda_l, 2)
+
+
+def calculate_month_accumulated_solda_lateral(
+    db: Session, 
+    date_obj: datetime, 
+    current_day_solda_l: float, 
+    bd_lookup: Dict[str, Any]
+) -> float:
+    """
+    Calcula a produção acumulada de Solda Lateral no mês:
+    Soma todos os dias desde o dia 1 até o dia atual da planilha (inclusive).
+    """
+    accumulated = 0.0
+    # Soma os dias anteriores do mesmo mês (dia 1 até dia anterior)
+    for day in range(1, date_obj.day):
+        d = date_obj.replace(day=day)
+        accumulated += get_daily_solda_lateral_kg(db, d, bd_lookup)
+    
+    # Soma a produção do próprio dia atual
+    accumulated += current_day_solda_l
+    return round(accumulated, 2)
+
+
 def resolve_paths(reference_date: str) -> Dict[str, Any]:
     """
     Calcula os caminhos do arquivo modelo, pasta de destino e arquivo diário.
@@ -116,6 +234,7 @@ def ensure_daily_sheet_exists(reference_date: str, force_recreate: bool = False)
     """
     Copia o modelo limpo para a pasta de destino caso o arquivo do dia não exista,
     ou recria a partir do zero caso force_recreate seja True.
+    Inicializa imediatamente as metas diárias/mensais e o cabeçalho.
     """
     paths = resolve_paths(reference_date)
     target_filepath = paths["target_filepath"]
@@ -132,6 +251,31 @@ def ensure_daily_sheet_exists(reference_date: str, force_recreate: bool = False)
         shutil.copy2(template_path, target_filepath)
         paths["file_exists"] = True
         paths["created_now"] = True
+
+        # Preenche imediatamente as metas padrão no novo arquivo
+        try:
+            wb = openpyxl.load_workbook(target_filepath)
+            ws = None
+            for s in wb.worksheets:
+                if "BD_LAN" in s.title.upper() or "LANCAMENTOS" in s.title.upper():
+                    ws = s
+                    break
+            if ws is not None:
+                normalize_kpi_merged_cells(ws)
+                safe_set_cell_value(ws, 1, 2, f"PAINEL - {paths['date_display']}")
+                safe_set_cell_value(ws, 33, 2, DEFAULT_META_DIA)
+                safe_set_cell_value(ws, 33, 7, 0.0)
+                safe_set_cell_value(ws, 33, 10, 0.0)
+                safe_set_cell_value(ws, 39, 2, DEFAULT_META_MES)
+                safe_set_cell_value(ws, 39, 7, 0.0)
+                safe_set_cell_value(ws, 39, 10, 0.0)
+                safe_set_cell_value(ws, 45, 8, 0.0)
+                safe_set_cell_value(ws, 46, 8, 0.0)
+                safe_set_cell_value(ws, 47, 8, 0.0)
+                wb.save(target_filepath)
+                wb.close()
+        except Exception as ex:
+            print(f"[Aviso Excel] Falha ao pré-preencher metas no arquivo criado: {ex}")
     else:
         paths["created_now"] = False
 
@@ -478,23 +622,43 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
         row_idx += 1
 
     # --- ATUALIZAÇÃO DOS CARTÕES DE KPI / TOTAIS NO FINAL DA PLANILHA ---
+    normalize_kpi_merged_cells(ws)
     
-    # Realizado do dia (Solda Lateral ou Total de Produção)
-    realizado_dia = round(total_peso_solda_l if total_peso_solda_l > 0 else (total_peso_dobra + total_peso_solda_p), 2)
-    
-    # Meta Dia (Linha 31, Coluna B)
-    meta_dia_cell = ws.cell(31, 2)
-    meta_dia = float(meta_dia_cell.value) if meta_dia_cell.value and isinstance(meta_dia_cell.value, (int, float)) else 2500.0
-    
-    # Realizado (Linha 31, Coluna G)
-    ws.cell(31, 7).value = realizado_dia
-    # % Meta Dia (Linha 31, Coluna J)
-    ws.cell(31, 10).value = round(realizado_dia / meta_dia, 4) if meta_dia > 0 else 0.0
+    # 1. Produção Diária (baseada exclusivamente na Solda Lateral)
+    realizado_dia = round(total_peso_solda_l, 2)
+    meta_dia = DEFAULT_META_DIA
+    pct_meta_dia = round(realizado_dia / meta_dia, 4) if meta_dia > 0 else 0.0
 
-    # Totais por Operação (Linhas 43 a 45)
-    ws.cell(43, 8).value = round(total_peso_dobra, 2)
-    ws.cell(44, 8).value = round(total_peso_solda_l, 2)
-    ws.cell(45, 8).value = round(total_peso_solda_p, 2)
+    # 2. Produção Acumulada do Mês (desde o 1º apontamento até a data da planilha, inclusive)
+    acumulado_mes = calculate_month_accumulated_solda_lateral(
+        db=db,
+        date_obj=date_obj,
+        current_day_solda_l=realizado_dia,
+        bd_lookup=bd_lookup
+    )
+    meta_mes = DEFAULT_META_MES
+    pct_meta_mes = round(acumulado_mes / meta_mes, 4) if meta_mes > 0 else 0.0
+
+    # Gravação dos KPIs Diários (Linhas 31 a 35)
+    # B33: Meta Diária
+    safe_set_cell_value(ws, 33, 2, meta_dia)
+    # G33: Realizado do Dia (Soma total diária da Solda Lateral)
+    safe_set_cell_value(ws, 33, 7, realizado_dia)
+    # J33: % Meta Concluída Diária (G33 / B33)
+    safe_set_cell_value(ws, 33, 10, pct_meta_dia)
+
+    # Gravação dos KPIs Mensais (Linhas 37 a 41)
+    # B39: Meta Mensal
+    safe_set_cell_value(ws, 39, 2, meta_mes)
+    # G39: Produção Acumulada no Mês
+    safe_set_cell_value(ws, 39, 7, acumulado_mes)
+    # J39: % Meta Concluída Mensal pelo Acumulado (G39 / B39)
+    safe_set_cell_value(ws, 39, 10, pct_meta_mes)
+
+    # Totais Diários por Operação / Máquina (Linhas 45 a 47)
+    safe_set_cell_value(ws, 45, 8, round(total_peso_dobra, 2))      # H45 = Total Dobra
+    safe_set_cell_value(ws, 46, 8, round(total_peso_solda_l, 2))    # H46 = Total Solda Lateral
+    safe_set_cell_value(ws, 47, 8, round(total_peso_solda_p, 2))    # H47 = Total Solda Ponto
 
     # Ajusta o range da Tabela5 para manter formatação de impressão
     if ws.tables:
@@ -503,6 +667,7 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
                 tbl.ref = f"B2:T28"
 
     wb.save(target_filepath)
+    wb.close()
 
     return {
         "success": True,
@@ -512,6 +677,11 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
         "date_iso": ref_date_iso,
         "processed_metrics": {
             "realizado_dia_kg": realizado_dia,
+            "meta_dia_kg": meta_dia,
+            "meta_mes_kg": meta_mes,
+            "acumulado_mes_kg": acumulado_mes,
+            "pct_meta_dia": round(realizado_dia / meta_dia, 4) if meta_dia > 0 else 0.0,
+            "pct_meta_mes": round(acumulado_mes / meta_mes, 4) if meta_mes > 0 else 0.0,
             "dobra_kg": round(total_peso_dobra, 2),
             "solda_lateral_kg": round(total_peso_solda_l, 2),
             "solda_ponto_kg": round(total_peso_solda_p, 2)
@@ -541,6 +711,7 @@ def sync_catalog_from_excel_bd(db: Session, template_path: Optional[str] = None)
 
     ws = wb["BD"]
     rows = list(ws.iter_rows(values_only=True))[1:]
+    wb.close()
 
     synced_products = []
     seen_codes = set()

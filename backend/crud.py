@@ -138,6 +138,29 @@ def _calculate_time_difference_minutes(start_str: str, end_str: str) -> int:
         return 0
 
 def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) -> models.ProductionEntry:
+    # Se a máquina foi alterada no formulário, direciona para a sessão correspondente
+    if entry_data.machine_id:
+        current_session = db.query(models.ProductionSession).filter(models.ProductionSession.id == session_id).first()
+        if current_session and entry_data.machine_id != current_session.machine_id:
+            target_machine_id = entry_data.machine_id
+            target_session = db.query(models.ProductionSession).filter(
+                models.ProductionSession.reference_date == current_session.reference_date,
+                models.ProductionSession.machine_id == target_machine_id,
+                models.ProductionSession.shift == current_session.shift
+            ).first()
+            if not target_session:
+                target_session = models.ProductionSession(
+                    reference_date=current_session.reference_date,
+                    operator_name=current_session.operator_name,
+                    shift=current_session.shift,
+                    sector=current_session.sector,
+                    machine_id=target_machine_id
+                )
+                db.add(target_session)
+                db.commit()
+                db.refresh(target_session)
+            session_id = target_session.id
+
     # Se o produto tem código, vincula ao catálogo
     product_code = entry_data.product_code
     if product_code:
@@ -204,6 +227,28 @@ def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) ->
     db_entry = db.query(models.ProductionEntry).filter(models.ProductionEntry.id == entry_id).first()
     if not db_entry:
         return None
+
+    # Se a máquina foi alterada na edição, move o intervalo para a sessão da nova máquina
+    current_session = db_entry.session or db.query(models.ProductionSession).filter(models.ProductionSession.id == db_entry.session_id).first()
+    if entry_data.machine_id and current_session and entry_data.machine_id != current_session.machine_id:
+        target_machine_id = entry_data.machine_id
+        target_session = db.query(models.ProductionSession).filter(
+            models.ProductionSession.reference_date == current_session.reference_date,
+            models.ProductionSession.machine_id == target_machine_id,
+            models.ProductionSession.shift == current_session.shift
+        ).first()
+        if not target_session:
+            target_session = models.ProductionSession(
+                reference_date=current_session.reference_date,
+                operator_name=current_session.operator_name,
+                shift=current_session.shift,
+                sector=current_session.sector,
+                machine_id=target_machine_id
+            )
+            db.add(target_session)
+            db.commit()
+            db.refresh(target_session)
+        db_entry.session_id = target_session.id
 
     # Se o produto tem código, vincula ao catálogo
     product_code = entry_data.product_code

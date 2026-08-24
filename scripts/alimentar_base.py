@@ -23,7 +23,7 @@ sys.path.insert(0, BASE_DIR)
 from backend.database import SessionLocal, engine, Base
 from backend import models
 
-TEMPLATE_EXCEL_PATH = r"Y:\03 - PAINEL CORRUGADO\Ficha_apontamento_modelo_painel.xlsx"
+TEMPLATE_EXCEL_PATH = r"Y:\03 - PAINEL CORRUGADO\Ficha__modelo_sistema.xlsx"
 JSON_CATALOG_PATH = os.path.join(os.path.dirname(__file__), "catalogo_paineis.json")
 
 

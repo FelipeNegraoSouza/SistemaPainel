@@ -89,14 +89,16 @@ def sync_session(session_data: schemas.SessionCreate, db: Session = Depends(get_
     """
     Cria ou recupera a ficha de produção da data, máquina e turno selecionados,
     retornando todos os apontamentos já gravados no banco.
-    Garante também a cópia do arquivo modelo se o arquivo diário não existir.
+    Garante também a cópia do arquivo modelo se o arquivo diário não existir e sincroniza a planilha.
     """
+    session = crud.get_or_create_session(db, session_data)
+
     try:
         excel_service.ensure_daily_sheet_exists(session_data.reference_date)
+        excel_service.sync_date_to_excel(session_data.reference_date, db)
     except Exception as e:
-        print(f"[Aviso Excel] Não foi possível verificar/criar planilha diária: {e}")
+        print(f"[Aviso Excel] Não foi possível verificar/sincronizar planilha diária: {e}")
 
-    session = crud.get_or_create_session(db, session_data)
     return session
 
 

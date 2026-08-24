@@ -83,9 +83,9 @@
 
                 <div class="form-group">
                     <label for="session-operator">
-                        <i class="fa-solid fa-user-gear"></i> Operador Responsável:
+                        <i class="fa-solid fa-user-gear"></i> Operador Responsável: <span style="color: var(--danger-600); font-weight: bold;" title="Campo obrigatório">*</span>
                     </label>
-                    <input type="text" id="session-operator" class="form-control" placeholder="Ex: João da Silva">
+                    <input type="text" id="session-operator" class="form-control" placeholder="Digite o nome do operador (obrigatório)" required>
                 </div>
 
                 <div class="form-group">
@@ -105,7 +105,7 @@
             <div class="excel-path-banner" id="excel-path-banner" style="margin-top: 1rem; padding: 0.6rem 0.85rem; background: var(--bg-main); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
                     <i class="fa-solid fa-file-excel" style="color: #107c41; font-size: 1.1rem;"></i>
-                    <span><strong>Planilha do Dia (Y:):</strong> <span id="excel-target-path" style="color: var(--primary-700); font-family: monospace;">Y:\03 - PAINEL CORRUGADO\Fichas\...</span></span>
+                    <span><strong>Planilha do Dia (Y:):</strong> <span id="excel-target-path" style="color: var(--primary-700); font-family: monospace;">Y:\03 - PAINEL CORRUGADO\fichas_teste\...</span></span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span id="excel-status-tag" class="badge-status" style="background: rgba(16, 124, 65, 0.1); color: #107c41; border: 1px solid rgba(16, 124, 65, 0.3);">
@@ -138,6 +138,16 @@
 
                     <!-- Dados Principais do Intervalo -->
                     <div class="form-grid-entry">
+                        <!-- Máquina Referente do Lançamento (permite alterar livremente na criação ou edição) -->
+                        <div class="form-group span-full" id="entry-machine-group">
+                            <label for="entry-machine">
+                                <i class="fa-solid fa-gears"></i> Máquina Referente:
+                            </label>
+                            <select id="entry-machine" class="form-control font-semibold">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </select>
+                        </div>
+
                         <div class="form-group span-full product-search-container">
                             <label for="product-spec">
                                 <i class="fa-solid fa-layer-group"></i> Medida Base do Painel (Pesquisa Inteligente):
@@ -503,7 +513,7 @@
 
                     <div id="regen-destination-info" class="regen-dest-info">
                         <i class="fa-solid fa-folder-tree"></i>
-                        <span>Destino no Drive Y: <code id="regen-target-path">Y:\03 - PAINEL CORRUGADO\Fichas\...</code></span>
+                        <span>Destino no Drive Y: <code id="regen-target-path">Y:\03 - PAINEL CORRUGADO\fichas_teste\...</code></span>
                     </div>
 
                     <!-- Tabela Resumo das Máquinas na Data -->

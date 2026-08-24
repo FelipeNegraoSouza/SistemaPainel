@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formApontamento = document.getElementById('form-apontamento');
     const formCardTitle = document.getElementById('form-card-title');
     const entryIdInput = document.getElementById('entry-id');
+    const entryMachineSelect = document.getElementById('entry-machine');
     const selectedProductCodeInput = document.getElementById('selected-product-code');
     const productSpecInput = document.getElementById('product-spec');
     const btnClearProduct = document.getElementById('btn-clear-product');
@@ -264,11 +265,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMachineOptions() {
         if (!state.machines || state.machines.length === 0) return;
 
-        sessionMachineSelect.innerHTML = state.machines.map(m => 
+        const optionsHtml = state.machines.map(m => 
             `<option value="${m.id}" ${m.id === state.session.machine_id ? 'selected' : ''}>
                 ${escapeHtml(m.name)} ${!m.has_production_control ? '(Sem controle)' : ''}
             </option>`
         ).join('');
+
+        sessionMachineSelect.innerHTML = optionsHtml;
+        if (entryMachineSelect) {
+            entryMachineSelect.innerHTML = optionsHtml;
+        }
 
         filterAnalyticsMachine.innerHTML = '<option value="">Todas as Máquinas</option>' + 
             state.machines.map(m => `<option value="${m.id}">${escapeHtml(m.name)}</option>`).join('');
@@ -349,9 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function syncSessionWithBackend() {
+        const opVal = sessionOperatorInput.value.trim();
         const payload = {
             reference_date: sessionDateInput.value,
-            operator_name: sessionOperatorInput.value.trim() || 'Operador Padrão',
+            operator_name: opVal,
             shift: sessionShiftInput.value,
             sector: 'Painéis',
             machine_id: parseInt(sessionMachineSelect.value, 10)
@@ -367,15 +374,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (state.isOnline) {
             try {
-                // 1. Garante que a ficha da máquina ativa no topo existe no banco
-                const res = await fetch(`${API_BASE_URL}/api/sessions/sync`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (res.ok) {
-                    const sessionData = await res.json();
-                    state.session.id = sessionData.id;
+                // 1. Se o operador estiver preenchido, garante a sessão no banco
+                if (opVal) {
+                    const res = await fetch(`${API_BASE_URL}/api/sessions/sync`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) {
+                        const sessionData = await res.json();
+                        state.session.id = sessionData.id;
+                    }
                 }
 
                 // 2. Carrega todas as sessões e apontamentos de todas as máquinas apontadas nesta data e turno
@@ -384,6 +393,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const allSessions = await dayRes.json();
                     const allEntries = [];
                     allSessions.forEach(s => {
+                        // Se o operador na tela estiver vazio, preenche com o operador já cadastrado na sessão da máquina
+                        if (!sessionOperatorInput.value.trim() && s.operator_name && s.machine_id === payload.machine_id) {
+                            sessionOperatorInput.value = s.operator_name;
+                            state.session.operator_name = s.operator_name;
+                        }
+
                         const mName = s.machine ? s.machine.name : `Máquina ${s.machine_id}`;
                         (s.entries || []).forEach(e => {
                             allEntries.push({
@@ -958,6 +973,16 @@ document.addEventListener('DOMContentLoaded', () => {
     async function handleFormSubmit(e) {
         e.preventDefault();
 
+        const operatorName = sessionOperatorInput.value.trim();
+        if (!operatorName) {
+            alert('Por favor, preencha o campo de Operador Responsável antes de salvar o intervalo.');
+            sessionOperatorInput.classList.add('is-invalid');
+            sessionOperatorInput.focus();
+            sessionOperatorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        sessionOperatorInput.classList.remove('is-invalid');
+
         const productSpec = productSpecInput.value.trim();
         const startTime = startTimeInput.value;
         const endTime = endTimeInput.value;
@@ -973,9 +998,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!productSpec || !startTime || !endTime || isNaN(qty)) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
+            alert('Por favor, preencha todos os campos obrigatórios do intervalo.');
             return;
         }
+
+        const selectedMachineId = entryMachineSelect ? parseInt(entryMachineSelect.value, 10) : state.session.machine_id;
+        const selectedMachine = state.machines.find(m => m.id === selectedMachineId);
+        const machineName = selectedMachine ? selectedMachine.name : (state.session.machine_name || 'Máquina');
 
         const grossMinutes = calculateTimeDifference(startTime, endTime);
         const stops = getStopsFromForm();
@@ -986,6 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ratePerHour = netMinutes > 0 ? parseFloat((qty / (netMinutes / 60)).toFixed(2)) : 0.0;
 
         const entryPayload = {
+            machine_id: selectedMachineId,
             product_code: productCode,
             product_spec_custom: productSpec,
             start_time: startTime,
@@ -1011,7 +1041,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (isEditing && isBackendNumericId) {
                     const numericEntryId = parseInt(state.currentEditingId, 10);
-                    // Atualiza intervalo existente (PUT)
+                    // Atualiza intervalo existente (PUT) - o backend já move para a sessão da máquina selecionada
                     res = await fetch(`${API_BASE_URL}/api/entries/${numericEntryId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
@@ -1047,6 +1077,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (idx !== -1) {
                 state.allDayEntries[idx] = {
                     ...state.allDayEntries[idx],
+                    machineId: selectedMachineId,
+                    machineName: machineName,
                     productSpec,
                     productCode,
                     startTime,
@@ -1063,8 +1095,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const newEntry = {
                 id: 'entry_' + Date.now(),
                 sessionId: state.session.id,
-                machineId: state.session.machine_id,
-                machineName: state.session.machine_name,
+                machineId: selectedMachineId,
+                machineName: machineName,
                 productSpec,
                 productCode,
                 startTime,
@@ -1116,20 +1148,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const entry = (state.allDayEntries || []).find(e => String(e.id) === String(id));
         if (!entry) return;
 
-        // Se for de outra máquina, atualiza o seletor no topo para manter total sincronia
-        if (entry.machineId && entry.machineId !== state.session.machine_id) {
-            sessionMachineSelect.value = entry.machineId;
-            state.session.machine_id = entry.machineId;
-            state.session.machine_name = entry.machineName;
-            state.session.id = entry.sessionId;
-        }
-
         state.currentEditingId = id;
         formCardTitle.textContent = `Editar Intervalo (${entry.machineName})`;
         btnSubmitEntry.innerHTML = '<i class="fa-solid fa-check"></i> Atualizar Intervalo';
         btnCancelEdit.classList.remove('hidden');
 
         entryIdInput.value = entry.id;
+        if (entryMachineSelect && entry.machineId) {
+            entryMachineSelect.value = entry.machineId;
+        }
         productSpecInput.value = entry.productSpec;
         selectedProductCodeInput.value = entry.productCode || '';
         startTimeInput.value = entry.startTime;
@@ -1171,6 +1198,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCancelEdit.classList.add('hidden');
 
         entryIdInput.value = '';
+        if (entryMachineSelect) {
+            entryMachineSelect.value = sessionMachineSelect.value || state.session.machine_id;
+        }
         selectedProductCodeInput.value = '';
         productSpecInput.value = '';
         startTimeInput.value = '';
@@ -1187,11 +1217,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const entry = (state.allDayEntries || []).find(e => String(e.id) === String(id));
         if (!entry) return;
 
-        if (entry.machineId && entry.machineId !== state.session.machine_id) {
-            sessionMachineSelect.value = entry.machineId;
-            state.session.machine_id = entry.machineId;
-            state.session.machine_name = entry.machineName;
-            state.session.id = entry.sessionId;
+        if (entryMachineSelect && entry.machineId) {
+            entryMachineSelect.value = entry.machineId;
         }
 
         productSpecInput.value = entry.productSpec;
@@ -1760,14 +1787,36 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
     }, { passive: false });
 
-    // Mudanças na Ficha / Sessão
-    sessionMachineSelect.addEventListener('change', syncSessionWithBackend);
+    // Mudanças na Ficha / Sessão e Máquina do Lançamento
+    sessionMachineSelect.addEventListener('change', async () => {
+        if (!state.currentEditingId && entryMachineSelect) {
+            entryMachineSelect.value = sessionMachineSelect.value;
+        }
+        await syncSessionWithBackend();
+    });
+
+    if (entryMachineSelect) {
+        entryMachineSelect.addEventListener('change', () => {
+            if (state.currentEditingId) {
+                const selMachineId = parseInt(entryMachineSelect.value, 10);
+                const selMachine = state.machines.find(m => m.id === selMachineId);
+                const mName = selMachine ? selMachine.name : 'Máquina';
+                formCardTitle.textContent = `Editar Intervalo (${mName})`;
+            }
+        });
+    }
+
     sessionDateInput.addEventListener('change', async () => {
         updateShiftNightHint();
         await syncSessionWithBackend();
         await updateExcelStatus();
     });
+
+    sessionOperatorInput.addEventListener('input', () => {
+        sessionOperatorInput.classList.remove('is-invalid');
+    });
     sessionOperatorInput.addEventListener('change', syncSessionWithBackend);
+
     sessionShiftInput.addEventListener('change', async () => {
         updateShiftNightHint();
         await syncSessionWithBackend();

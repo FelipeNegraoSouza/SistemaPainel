@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 from datetime import datetime
 
 # --- SCHEMAS DE MÁQUINAS ---
@@ -70,6 +70,7 @@ class EntryBase(BaseModel):
     total_stop_minutes: int = 0
     net_minutes: int = 0
     real_rate_per_hour: float = 0.0
+    machine_id: Optional[int] = None
 
 class EntryCreate(EntryBase):
     stops: List[StopCreate] = []
@@ -90,6 +91,13 @@ class SessionBase(BaseModel):
     shift: str = "Diurno"
     sector: str = "Painéis"
     machine_id: int
+
+    @field_validator('operator_name')
+    @classmethod
+    def validate_operator_name(cls, v: str) -> str:
+        if not v or not v.strip():
+            raise ValueError('O nome do operador é obrigatório.')
+        return v.strip()
 
 class SessionCreate(SessionBase):
     pass

@@ -280,6 +280,12 @@ body {
     box-shadow: var(--shadow-highlight);
 }
 
+.form-control.is-invalid {
+    border-color: var(--danger-500) !important;
+    background-color: var(--danger-50) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+}
+
 /* Remove botões nativos de incremento/decremento para evitar cliques acidentais de +1 / -1 */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
