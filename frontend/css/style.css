@@ -159,7 +159,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Cartão de Dados do Turno / Sessão / Máquina
+   Cartão de Dados do Turno / Sessão / Data & KPIs Diários
    -------------------------------------------------------------------------- */
 .session-card {
     background: var(--surface-card);
@@ -169,39 +169,273 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-.section-title {
+.session-header-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Caixa do Seletor de Data */
+.session-date-box {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.15rem;
+    min-width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.45rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.session-date-header {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    color: var(--primary-800);
-    margin-bottom: 1rem;
+    gap: 0.45rem;
+    color: var(--primary-900);
 }
 
-.section-title i {
+.session-date-header i {
     color: var(--primary-600);
-    font-size: 1.15rem;
+    font-size: 1.05rem;
 }
 
-.section-title h2 {
-    font-size: 1.1rem;
+.session-date-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.session-date-input {
+    font-size: 1.05rem !important;
+    padding: 0.55rem 0.75rem !important;
+    border-color: var(--primary-500) !important;
+    background-color: #ffffff !important;
+    color: var(--primary-900) !important;
     font-weight: 600;
 }
 
-.section-title-with-actions {
+.session-date-box .helper-text {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.1rem;
+}
+
+/* Container de Cards de KPI */
+.header-kpis-container {
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr 1.2fr;
+    gap: 1rem;
+    flex: 1;
+    min-width: 320px;
+}
+
+@media (max-width: 1200px) {
+    .header-kpis-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+.header-kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-kpi-card:hover {
+    border-color: var(--primary-500);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.header-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-600);
+    border-radius: 4px 0 0 4px;
+}
+
+.header-kpi-card.lateral-kpi::before {
+    background: var(--success-500);
+}
+
+.header-kpi-card.mini-kpi-card::before {
+    background: var(--primary-700);
+}
+
+.kpi-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.icon-total {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-600);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.icon-lateral {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--success-600);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.kpi-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.kpi-title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    gap: 0.5rem;
+    margin-bottom: 0.15rem;
 }
 
-.section-title-with-actions .section-title {
-    margin-bottom: 0;
+.kpi-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
 }
 
-.form-grid-session {
+.kpi-value-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    line-height: 1.2;
+    margin: 0.15rem 0;
+}
+
+.kpi-number {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--primary-900);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.kpi-unit {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.kpi-target-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 0.35rem;
+}
+
+.kpi-hint {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    margin-top: 0.1rem;
+}
+
+.kpi-badge-pct {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.12rem 0.5rem;
+    border-radius: 12px;
+    background: var(--primary-50);
+    color: var(--primary-700);
+    border: 1px solid var(--primary-100);
+}
+
+.kpi-badge-pct.success {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.kpi-badge-pct.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #b45309;
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+.kpi-progress-bar {
+    width: 100%;
+    height: 5px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.35rem;
+}
+
+.kpi-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out, background 0.3s ease;
+}
+
+/* Mini Grid de Estatísticas Operacionais */
+.mini-kpi-card {
+    padding: 0.75rem 1rem;
+}
+
+.kpi-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 0.85rem;
+    width: 100%;
+}
+
+.kpi-stat-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.78rem;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.stat-label i {
+    font-size: 0.68rem;
+    color: var(--primary-600);
+}
+
+.stat-val {
+    color: var(--primary-900);
+    font-weight: 700;
+    font-size: 0.88rem;
+    font-variant-numeric: tabular-nums;
 }
 
 /* --------------------------------------------------------------------------
@@ -629,6 +863,72 @@ input[type="number"] {
     align-items: center;
     gap: 0.35rem;
     font-weight: 500;
+}
+
+/* Indicador de Turno no Formulário de Apontamento */
+.entry-shift-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--bg-main);
+    transition: all 0.2s ease;
+    flex-wrap: wrap;
+}
+
+.entry-shift-indicator.diurno {
+    border-color: #fde68a;
+    background: #fffbeb;
+}
+
+.entry-shift-indicator.noturno {
+    border-color: #ddd6fe;
+    background: #f5f3ff;
+}
+
+.shift-desc-text {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Badges de Turno */
+.badge-shift {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 12px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-shift.diurno {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.badge-shift.noturno {
+    background: #ede9fe;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+}
+
+/* Badge do Operador na Tabela */
+.badge-operator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary-900);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
 }
 
 /* Badges de Máquinas na Tabela Lateral */
@@ -1316,14 +1616,255 @@ input[type="number"] {
     color: var(--primary-800);
 }
 
-.regen-options-box {
-    background: var(--surface-ground);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    padding: 0.85rem 1.15rem;
+.records-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.print-signatures-block {
+    display: none;
+}
+
+.print-only {
+    display: none;
 }
 
 .hidden {
     display: none !important;
 }
+
+/* ==========================================================================
+   FORMATAÇÃO DE IMPRESSÃO / EXPORTAÇÃO EM PDF (@media print)
+   ========================================================================== */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 8mm 10mm;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        font-size: 0.85rem !important;
+    }
+
+    .app-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        gap: 0.75rem !important;
+    }
+
+    /* Oculta elementos que não devem sair na impressão */
+    .app-header,
+    .entry-card,
+    .excel-path-banner,
+    .machine-filter-pills,
+    .modal-backdrop,
+    .app-footer,
+    .header-actions,
+    .actions-col,
+    .table-actions,
+    button,
+    .btn,
+    .empty-state {
+        display: none !important;
+    }
+
+    /* Exibe blocos exclusivos de impressão */
+    .print-only {
+        display: block !important;
+    }
+
+    .print-report-header {
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #0f172a;
+    }
+
+    .print-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .print-header-top h1 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    .print-subtitle {
+        font-size: 0.82rem;
+        color: #475569;
+        margin-top: 0.2rem;
+    }
+
+    .print-meta-box {
+        text-align: right;
+        font-size: 0.82rem;
+        color: #334155;
+    }
+
+    /* Ficha do Dia / KPIs na Impressão */
+    .session-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 6px !important;
+        padding: 0.75rem 1rem !important;
+        margin-bottom: 0.75rem !important;
+        page-break-inside: avoid;
+    }
+
+    .session-header-row {
+        gap: 0.75rem !important;
+    }
+
+    .session-date-box {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 0.6rem 0.85rem !important;
+        min-width: 200px !important;
+    }
+
+    .session-date-input {
+        border: none !important;
+        background: transparent !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+    }
+
+    .header-kpis-container {
+        gap: 0.6rem !important;
+    }
+
+    .header-kpi-card {
+        border: 1px solid #cbd5e1 !important;
+        padding: 0.6rem 0.85rem !important;
+        border-radius: 6px !important;
+    }
+
+    .kpi-number {
+        font-size: 1.3rem !important;
+        color: #0f172a !important;
+    }
+
+    /* Layout da Tabela de Registros */
+    .main-content {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .records-card {
+        border: none !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .records-header {
+        margin-bottom: 0.5rem !important;
+        padding-bottom: 0.4rem !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+    }
+
+    .records-header .section-title h2 {
+        font-size: 1rem !important;
+    }
+
+    .table-responsive {
+        overflow: visible !important;
+    }
+
+    .apontamentos-table {
+        width: 100% !important;
+        font-size: 0.8rem !important;
+        border-collapse: collapse !important;
+        border: 1px solid #64748b !important;
+    }
+
+    .apontamentos-table th {
+        background-color: #f1f5f9 !important;
+        color: #0f172a !important;
+        border: 1px solid #94a3b8 !important;
+        padding: 0.4rem 0.5rem !important;
+        font-weight: 700 !important;
+        text-align: left;
+    }
+
+    .apontamentos-table td {
+        border: 1px solid #cbd5e1 !important;
+        padding: 0.35rem 0.5rem !important;
+        color: #1e293b !important;
+    }
+
+    .apontamentos-table tr {
+        page-break-inside: avoid !important;
+    }
+
+    .badge-machine,
+    .badge-operator,
+    .badge-shift,
+    .badge-time,
+    .badge-qty,
+    .badge-rate {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+        font-weight: 600 !important;
+    }
+
+    .badge-stops-pill {
+        border: 1px solid #cbd5e1 !important;
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        padding: 0.1rem 0.35rem !important;
+        font-size: 0.74rem !important;
+    }
+
+    /* Bloco de Assinaturas */
+    .print-signatures-block {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2rem !important;
+        margin-top: 2rem !important;
+        padding-top: 1rem !important;
+        page-break-inside: avoid !important;
+    }
+
+    .print-sig-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .print-sig-line {
+        width: 100%;
+        border-top: 1px solid #334155;
+        margin-bottom: 0.35rem;
+    }
+
+    .print-sig-title {
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+}
+
 

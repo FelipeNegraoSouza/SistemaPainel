@@ -304,6 +304,7 @@ def get_date_preview(reference_date: str, db: Session) -> Dict[str, Any]:
     total_entries = 0
     total_pieces = 0
     total_stops = 0
+    total_scrap_kg = 0.0
     machines_summary = []
 
     for s in sessions:
@@ -311,16 +312,22 @@ def get_date_preview(reference_date: str, db: Session) -> Dict[str, Any]:
         entries_count = len(s.entries)
         pieces_sum = sum(e.qty_produced or 0 for e in s.entries)
         stops_sum = sum(len(e.stops) for e in s.entries)
+        scrap_sum = sum(float(getattr(e, 'scrap_kg', 0.0) or 0.0) for e in s.entries)
         
         total_entries += entries_count
         total_pieces += pieces_sum
         total_stops += stops_sum
+        total_scrap_kg += scrap_sum
 
         if entries_count > 0:
+            entry_ops = [e.operator_name for e in s.entries if e.operator_name]
+            unique_ops = list(dict.fromkeys(entry_ops))
+            display_op = ", ".join(unique_ops) if unique_ops else (s.operator_name or "Não informado")
+            
             machines_summary.append({
                 "session_id": s.id,
                 "machine_name": machine_name,
-                "operator_name": s.operator_name or "Não informado",
+                "operator_name": display_op,
                 "shift": s.shift,
                 "reference_date": s.reference_date,
                 "entries_count": entries_count,
@@ -343,6 +350,7 @@ def get_date_preview(reference_date: str, db: Session) -> Dict[str, Any]:
         "total_entries": total_entries,
         "total_pieces": total_pieces,
         "total_stops": total_stops,
+        "total_scrap_kg": round(total_scrap_kg, 2),
         "machines": machines_summary
     }
 
@@ -450,7 +458,7 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
     for s in sessions:
         machine_name = s.machine.name if s.machine else f"Máquina {s.machine_id}"
         norm_machine = normalize_machine_name(machine_name)
-        operator_name = s.operator_name or ""
+        session_op = s.operator_name or ""
         
         for e in s.entries:
             all_entries.append({
@@ -458,8 +466,10 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
                 "product_spec": e.product_spec_custom or (e.product.name if e.product else ""),
                 "product_code": e.product_code,
                 "product_obj": e.product,
-                "operator": operator_name,
+                "operator": e.operator_name or session_op or "",
+                "shift": e.shift or s.shift or "",
                 "qty": e.qty_produced or 0,
+                "scrap_kg": float(getattr(e, 'scrap_kg', 0.0) or 0.0),
                 "start_time": e.start_time,
                 "end_time": e.end_time,
                 "gross_minutes": e.gross_minutes or 0,
@@ -684,7 +694,8 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
             "pct_meta_mes": round(acumulado_mes / meta_mes, 4) if meta_mes > 0 else 0.0,
             "dobra_kg": round(total_peso_dobra, 2),
             "solda_lateral_kg": round(total_peso_solda_l, 2),
-            "solda_ponto_kg": round(total_peso_solda_p, 2)
+            "solda_ponto_kg": round(total_peso_solda_p, 2),
+            "total_scrap_kg": round(sum(entry.get("scrap_kg", 0.0) for entry in all_entries), 2)
         }
     }
 

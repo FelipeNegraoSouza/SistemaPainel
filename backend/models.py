@@ -44,13 +44,13 @@ class Product(Base):
 
 class ProductionSession(Base):
     """
-    Ficha de Produção do Turno / Máquina
+    Ficha de Produção da Data / Máquina
     """
     __tablename__ = "production_sessions"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     reference_date = Column(String(10), nullable=False, index=True) # YYYY-MM-DD
-    operator_name = Column(String(150), nullable=False)
+    operator_name = Column(String(150), nullable=True, default="Operador")
     shift = Column(String(50), default="Diurno")
     sector = Column(String(50), default="Painéis")
     machine_id = Column(Integer, ForeignKey("machines.id"), nullable=False)
@@ -70,6 +70,8 @@ class ProductionEntry(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     session_id = Column(Integer, ForeignKey("production_sessions.id"), nullable=False)
+    operator_name = Column(String(150), nullable=True)                          # Operador específico deste intervalo
+    shift = Column(String(50), nullable=True)                                  # Diurno (06:00-18:00) ou Noturno
     product_code = Column(Integer, ForeignKey("products.code"), nullable=True) # Vinculado à PK inteira
     product_spec_custom = Column(String(250), nullable=False)                  # Texto digitado / descrição
     
@@ -78,6 +80,7 @@ class ProductionEntry(Base):
     
     gross_minutes = Column(Integer, default=0)
     qty_produced = Column(Integer, default=0)
+    scrap_kg = Column(Float, default=0.0)           # Perdas / Refugo em kg
     total_stop_minutes = Column(Integer, default=0)
     net_minutes = Column(Integer, default=0)
     real_rate_per_hour = Column(Float, default=0.0) # Peças/h líquidas realizadas

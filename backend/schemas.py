@@ -61,11 +61,14 @@ class StopResponse(StopBase):
 
 # --- SCHEMAS DE APONTAMENTOS / INTERVALOS PRODUTIVOS ---
 class EntryBase(BaseModel):
+    operator_name: Optional[str] = None
+    shift: Optional[str] = None
     product_code: Optional[int] = None
     product_spec_custom: str
     start_time: str
     end_time: str
     qty_produced: int
+    scrap_kg: float = 0.0
     gross_minutes: int = 0
     total_stop_minutes: int = 0
     net_minutes: int = 0
@@ -87,17 +90,10 @@ class EntryResponse(EntryBase):
 # --- SCHEMAS DE FICHA / SESSÃO DO TURNO ---
 class SessionBase(BaseModel):
     reference_date: str
-    operator_name: str
+    operator_name: Optional[str] = "Operador"
     shift: str = "Diurno"
     sector: str = "Painéis"
     machine_id: int
-
-    @field_validator('operator_name')
-    @classmethod
-    def validate_operator_name(cls, v: str) -> str:
-        if not v or not v.strip():
-            raise ValueError('O nome do operador é obrigatório.')
-        return v.strip()
 
 class SessionCreate(SessionBase):
     pass

@@ -19,7 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
             machine_id: 1,
             machine_name: 'Dobra 1'
         },
-        machines: [],
+        machines: [
+            { id: 1, name: "Dobra 1", has_production_control: true },
+            { id: 2, name: "Dobra 2", has_production_control: true },
+            { id: 3, name: "Solda Lateral 1", has_production_control: true },
+            { id: 4, name: "Solda Lateral 2", has_production_control: true },
+            { id: 5, name: "Solda Ponto 1", has_production_control: true },
+            { id: 6, name: "Solda Ponto 2", has_production_control: true },
+            { id: 7, name: "Revisão", has_production_control: false },
+            { id: 8, name: "Solda Manual", has_production_control: false }
+        ],
         productsCatalog: [],
         entries: [],
         allDayEntries: [],
@@ -43,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ELEMENTOS DO DOM ---
     const dbStatusBadge = document.getElementById('db-status-badge');
-    const sessionMachineSelect = document.getElementById('session-machine');
     const sessionDateInput = document.getElementById('session-date');
+    const sessionMachineSelect = document.getElementById('session-machine');
     const sessionOperatorInput = document.getElementById('session-operator');
     const sessionShiftInput = document.getElementById('session-shift');
     const shiftNightHint = document.getElementById('shift-night-hint');
@@ -53,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formApontamento = document.getElementById('form-apontamento');
     const formCardTitle = document.getElementById('form-card-title');
     const entryIdInput = document.getElementById('entry-id');
+    const entryOperatorInput = document.getElementById('entry-operator');
     const entryMachineSelect = document.getElementById('entry-machine');
     const selectedProductCodeInput = document.getElementById('selected-product-code');
     const productSpecInput = document.getElementById('product-spec');
@@ -66,7 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const startTimeInput = document.getElementById('start-time');
     const endTimeInput = document.getElementById('end-time');
+    const entryShiftInput = document.getElementById('entry-shift');
+    const entryShiftIndicator = document.getElementById('entry-shift-indicator');
+    const entryShiftBadge = document.getElementById('entry-shift-badge');
+    const entryShiftDesc = document.getElementById('entry-shift-desc');
     const productQtyInput = document.getElementById('product-qty');
+    const scrapKgInput = document.getElementById('scrap-kg');
     const btnSubmitEntry = document.getElementById('btn-submit-entry');
     const btnCancelEdit = document.getElementById('btn-cancel-edit');
 
@@ -91,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dayTotalQty = document.getElementById('day-total-qty');
 
     // Ações Gerais
+    const btnPrintReport = document.getElementById('btn-print-report');
+    const btnPrintRecords = document.getElementById('btn-print-records');
     const btnSyncExcel = document.getElementById('btn-sync-excel');
     const btnSyncExcelText = document.getElementById('btn-sync-excel-text');
     const excelTargetPath = document.getElementById('excel-target-path');
@@ -187,18 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateShiftNightHint() {
-        if (!shiftNightHint || !shiftNightText) return;
-        const shift = sessionShiftInput.value;
-        const dateVal = sessionDateInput.value;
-        if (shift === 'Noturno' && dateVal) {
-            const prevDate = getPreviousNightDate(dateVal);
-            const [py, pm, pd] = prevDate.split('-');
-            const [sy, sm, sd] = dateVal.split('-');
-            shiftNightText.innerHTML = `Produção física referente à <strong>noite de ${pd}/${pm}/${py}</strong> (consolidada na planilha de <strong>${sd}/${sm}/${sy}</strong>)`;
-            shiftNightHint.classList.remove('hidden');
-        } else {
-            shiftNightHint.classList.add('hidden');
-        }
+        // Função no-op após simplificação do cabeçalho
     }
 
     function timeToMinutes(timeStr) {
@@ -222,6 +228,45 @@ document.addEventListener('DOMContentLoaded', () => {
         let diff = end - start;
         if (diff < 0) diff += 1440; // Virada de meia-noite
         return diff;
+    }
+
+    function detectShiftFromTime(startTimeStr) {
+        if (!startTimeStr || !startTimeStr.includes(':')) return 'Diurno';
+        const [h, m] = startTimeStr.split(':').map(Number);
+        const totalMins = h * 60 + m;
+        // Regra: 06:00 (360 min) até 18:00 (1080 min) = Diurno; Restante (18:01 às 05:59) = Noturno
+        if (totalMins >= 360 && totalMins <= 1080) {
+            return 'Diurno';
+        } else {
+            return 'Noturno';
+        }
+    }
+
+    function updateShiftIndicator() {
+        if (!entryShiftBadge || !entryShiftIndicator || !entryShiftDesc) return;
+        const startTime = startTimeInput.value;
+        const shift = detectShiftFromTime(startTime);
+        
+        if (entryShiftInput) entryShiftInput.value = shift;
+
+        if (shift === 'Diurno') {
+            entryShiftIndicator.className = 'entry-shift-indicator diurno';
+            entryShiftBadge.className = 'badge-shift diurno';
+            entryShiftBadge.innerHTML = '<i class="fa-solid fa-sun"></i> Diurno (06:00 às 18:00)';
+            entryShiftDesc.textContent = 'Horário dentro do período diurno (06:00 às 18:00).';
+        } else {
+            entryShiftIndicator.className = 'entry-shift-indicator noturno';
+            entryShiftBadge.className = 'badge-shift noturno';
+            entryShiftBadge.innerHTML = '<i class="fa-solid fa-moon"></i> Noturno (Após 18:00 ou antes das 06:00)';
+            const dateVal = sessionDateInput.value;
+            const prevDate = getPreviousNightDate(dateVal);
+            let prevDateDisplay = '';
+            if (prevDate) {
+                const [py, pm, pd] = prevDate.split('-');
+                prevDateDisplay = ` (${pd}/${pm})`;
+            }
+            entryShiftDesc.textContent = `Turno noturno (18:01 às 05:59) referente à noite anterior${prevDateDisplay}, finalizado pela manhã.`;
+        }
     }
 
     function escapeHtml(text) {
@@ -265,19 +310,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMachineOptions() {
         if (!state.machines || state.machines.length === 0) return;
 
+        const currentMachineId = state.session.machine_id || 1;
         const optionsHtml = state.machines.map(m => 
-            `<option value="${m.id}" ${m.id === state.session.machine_id ? 'selected' : ''}>
+            `<option value="${m.id}" ${m.id === currentMachineId ? 'selected' : ''}>
                 ${escapeHtml(m.name)} ${!m.has_production_control ? '(Sem controle)' : ''}
             </option>`
         ).join('');
 
-        sessionMachineSelect.innerHTML = optionsHtml;
+        if (sessionMachineSelect) {
+            sessionMachineSelect.innerHTML = optionsHtml;
+        }
         if (entryMachineSelect) {
             entryMachineSelect.innerHTML = optionsHtml;
         }
 
-        filterAnalyticsMachine.innerHTML = '<option value="">Todas as Máquinas</option>' + 
-            state.machines.map(m => `<option value="${m.id}">${escapeHtml(m.name)}</option>`).join('');
+        if (filterAnalyticsMachine) {
+            filterAnalyticsMachine.innerHTML = '<option value="">Todas as Máquinas</option>' + 
+                state.machines.map(m => `<option value="${m.id}">${escapeHtml(m.name)}</option>`).join('');
+        }
     }
 
     async function loadProductsCatalog() {
@@ -355,50 +405,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function syncSessionWithBackend() {
-        const opVal = sessionOperatorInput.value.trim();
+        const opVal = entryOperatorInput ? entryOperatorInput.value.trim() : (localStorage.getItem('last_operator_name') || 'Operador');
+        const shiftFilter = sessionShiftInput ? sessionShiftInput.value : 'Todos';
+        const targetMachineId = entryMachineSelect ? parseInt(entryMachineSelect.value, 10) : (sessionMachineSelect ? parseInt(sessionMachineSelect.value, 10) : (state.session.machine_id || 1));
+        
         const payload = {
             reference_date: sessionDateInput.value,
-            operator_name: opVal,
-            shift: sessionShiftInput.value,
+            operator_name: opVal || "Operador",
+            shift: shiftFilter === 'Todos' ? 'Diurno' : shiftFilter,
             sector: 'Painéis',
-            machine_id: parseInt(sessionMachineSelect.value, 10)
+            machine_id: targetMachineId
         };
 
         const selectedMachine = state.machines.find(m => m.id === payload.machine_id);
-        const machineName = selectedMachine ? selectedMachine.name : sessionMachineSelect.options[sessionMachineSelect.selectedIndex]?.text || 'Máquina';
+        const machineName = selectedMachine ? selectedMachine.name : 'Máquina';
         
         state.session = { ...state.session, ...payload, machine_name: machineName };
         if (currentSheetSubtitle) {
-            currentSheetSubtitle.textContent = `Data: ${payload.reference_date} | Turno: ${payload.shift}`;
+            currentSheetSubtitle.textContent = `Data: ${payload.reference_date} | Todas as Máquinas do Dia (Diurno + Noturno)`;
         }
 
         if (state.isOnline) {
             try {
-                // 1. Se o operador estiver preenchido, garante a sessão no banco
-                if (opVal) {
-                    const res = await fetch(`${API_BASE_URL}/api/sessions/sync`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (res.ok) {
-                        const sessionData = await res.json();
-                        state.session.id = sessionData.id;
-                    }
-                }
-
-                // 2. Carrega todas as sessões e apontamentos de todas as máquinas apontadas nesta data e turno
-                const dayRes = await fetch(`${API_BASE_URL}/api/sessions/day-sessions?date=${payload.reference_date}&shift=${encodeURIComponent(payload.shift)}`);
+                // 1. Carrega imediatamente todas as sessões e apontamentos desta data (super rápido do SQLite)
+                const shiftParam = shiftFilter && shiftFilter !== 'Todos' ? `&shift=${encodeURIComponent(shiftFilter)}` : '';
+                const dayRes = await fetch(`${API_BASE_URL}/api/sessions/day-sessions?date=${payload.reference_date}${shiftParam}`);
                 if (dayRes.ok) {
                     const allSessions = await dayRes.json();
                     const allEntries = [];
                     allSessions.forEach(s => {
-                        // Se o operador na tela estiver vazio, preenche com o operador já cadastrado na sessão da máquina
-                        if (!sessionOperatorInput.value.trim() && s.operator_name && s.machine_id === payload.machine_id) {
-                            sessionOperatorInput.value = s.operator_name;
-                            state.session.operator_name = s.operator_name;
-                        }
-
                         const mName = s.machine ? s.machine.name : `Máquina ${s.machine_id}`;
                         (s.entries || []).forEach(e => {
                             allEntries.push({
@@ -406,12 +441,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 sessionId: s.id,
                                 machineId: s.machine_id,
                                 machineName: mName,
-                                operatorName: s.operator_name,
+                                operatorName: e.operator_name || s.operator_name || 'Operador',
+                                shift: e.shift || s.shift || detectShiftFromTime(e.start_time),
                                 productSpec: e.product_spec_custom,
                                 productCode: e.product_code,
                                 startTime: e.start_time,
                                 endTime: e.end_time,
                                 qty: e.qty_produced,
+                                scrapKg: parseFloat(e.scrap_kg) || 0.0,
                                 grossMinutes: e.gross_minutes,
                                 totalStopMinutes: e.total_stop_minutes,
                                 netMinutes: e.net_minutes,
@@ -429,8 +466,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     state.allDayEntries = allEntries;
                     renderMachineFilterPills();
                     renderEntriesTable();
-                    return;
+                    updateHeaderKPIs();
                 }
+
+                // 2. Garante a sessão ativa no banco em paralelo
+                fetch(`${API_BASE_URL}/api/sessions/sync`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(r => r.ok ? r.json() : null).then(sessionData => {
+                    if (sessionData && sessionData.id) {
+                        state.session.id = sessionData.id;
+                    }
+                }).catch(() => {});
+
+                return;
             } catch (e) {
                 console.error("Erro ao sincronizar com backend:", e);
             }
@@ -439,6 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fallback local
         renderMachineFilterPills();
         renderEntriesTable();
+        updateHeaderKPIs();
     }
 
     // --- GERENCIAMENTO DE PARADAS DINÂMICAS ---
@@ -634,9 +685,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!query) {
             btnClearProduct.classList.add('hidden');
-            hideProductSuggestions();
             selectedProductCodeInput.value = '';
             productCatalogHint.classList.add('hidden');
+            // Exibe os painéis principais do catálogo ao focar/clicar
+            const topDefault = (state.productsCatalog || []).slice(0, 20);
+            renderProductSuggestions(topDefault);
             return;
         }
 
@@ -784,6 +837,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const endTime = endTimeInput.value;
         const qty = parseFloat(productQtyInput.value) || 0;
 
+        // Atualiza dinamicamente o indicador visual do turno detectado
+        updateShiftIndicator();
+
         let grossMinutes = 0;
         if (startTime && endTime) {
             grossMinutes = calculateTimeDifference(startTime, endTime);
@@ -910,6 +966,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const rateDisplay = entry.ratePerHour ? `${entry.ratePerHour} pçs/h` : '--';
+            const detectedShift = entry.shift || detectShiftFromTime(entry.startTime);
+            const isNight = detectedShift === 'Noturno';
+            const shiftClass = isNight ? 'noturno' : 'diurno';
+            const shiftIcon = isNight ? 'fa-moon' : 'fa-sun';
+            const shiftLabel = isNight ? 'Noturno' : 'Diurno';
+            const opDisplay = entry.operatorName || 'Operador';
 
             tr.innerHTML = `
                 <td>
@@ -917,9 +979,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <i class="fa-solid fa-gear"></i> ${escapeHtml(entry.machineName)}
                     </span>
                 </td>
+                <td>
+                    <span class="badge-operator" title="Operador da vez: ${escapeHtml(opDisplay)}">
+                        <i class="fa-solid fa-user-gear"></i> ${escapeHtml(opDisplay)}
+                    </span>
+                </td>
+                <td>
+                    <span class="badge-shift ${shiftClass}" title="Turno: ${shiftLabel}">
+                        <i class="fa-solid ${shiftIcon}"></i> ${shiftLabel}
+                    </span>
+                </td>
                 <td><span class="badge-time">${entry.startTime} - ${entry.endTime}</span></td>
                 <td><strong>${escapeHtml(entry.productSpec)}</strong></td>
                 <td class="text-center"><span class="badge-qty">${entry.qty} pçs</span></td>
+                <td class="text-center">${entry.scrapKg > 0 ? `<span class="badge-stops-pill" style="color: #e11d48; font-weight: 700;">${entry.scrapKg.toFixed(2)} kg</span>` : '<span class="text-muted">-</span>'}</td>
                 <td class="text-center">${formatMinutesToHours(entry.grossMinutes)}</td>
                 <td class="text-center">${stopsHtml}</td>
                 <td class="text-center"><strong>${formatMinutesToHours(entry.netMinutes)}</strong></td>
@@ -946,6 +1019,111 @@ document.addEventListener('DOMContentLoaded', () => {
         dayTotalQty.textContent = sumQty.toLocaleString('pt-BR');
 
         attachTableActionListeners();
+        updateHeaderKPIs();
+    }
+
+    // --- ATUALIZAÇÃO DOS CARDS DE KPI DE PRODUÇÃO DIÁRIA NO CABEÇALHO ---
+
+    function updateHeaderKPIs() {
+        const allEntries = state.allDayEntries || [];
+        let totalDailyKg = 0.0;
+        let totalSoldaLateralKg = 0.0;
+        let totalDobraKg = 0.0;
+        let totalSoldaPontoKg = 0.0;
+        let totalDailyScrapKg = 0.0;
+        let totalPieces = 0;
+        let totalNetMinutes = 0;
+
+        const DEFAULT_META_DIA = 2500.0;
+
+        allEntries.forEach(entry => {
+            const qty = entry.qty || 0;
+            totalPieces += qty;
+            totalNetMinutes += (entry.netMinutes || 0);
+            totalDailyScrapKg += (entry.scrapKg || 0.0);
+
+            // Obter peso unitário
+            let unitWeight = 0.0;
+            if (entry.productCode) {
+                const p = state.productsCatalog.find(prod => prod.code === entry.productCode);
+                if (p && p.unit_weight_kg) unitWeight = p.unit_weight_kg;
+            }
+            if (unitWeight === 0.0 && entry.productSpec) {
+                const specUpper = (entry.productSpec || '').toUpperCase().trim();
+                const p = state.productsCatalog.find(prod => 
+                    (prod.dimensions && prod.dimensions.toUpperCase().trim() === specUpper) || 
+                    (prod.name && prod.name.toUpperCase().trim() === specUpper) ||
+                    (prod.dimensions && specUpper.includes(prod.dimensions.toUpperCase().trim()))
+                );
+                if (p && p.unit_weight_kg) unitWeight = p.unit_weight_kg;
+            }
+
+            const entryKg = qty * unitWeight;
+            totalDailyKg += entryKg;
+
+            const mName = (entry.machineName || '').toUpperCase();
+            if (mName.includes('LATERAL')) {
+                totalSoldaLateralKg += entryKg;
+            } else if (mName.includes('DOBRA')) {
+                totalDobraKg += entryKg;
+            } else if (mName.includes('PONTO')) {
+                totalSoldaPontoKg += entryKg;
+            }
+        });
+
+        const kpiTotalKg = document.getElementById('kpi-total-kg');
+        const kpiSoldaLateralKg = document.getElementById('kpi-solda-lateral-kg');
+        const kpiLateralPct = document.getElementById('kpi-lateral-pct');
+        const kpiLateralProgress = document.getElementById('kpi-lateral-progress');
+        const kpiDobraKg = document.getElementById('kpi-dobra-kg');
+        const kpiSoldaPontoKg = document.getElementById('kpi-solda-ponto-kg');
+        const kpiTotalPieces = document.getElementById('kpi-total-pieces');
+        const kpiTotalNetTime = document.getElementById('kpi-total-net-time');
+        const kpiTotalScrapKg = document.getElementById('kpi-total-scrap-kg');
+
+        if (kpiTotalKg) {
+            kpiTotalKg.textContent = totalDailyKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        if (kpiSoldaLateralKg) {
+            kpiSoldaLateralKg.textContent = totalSoldaLateralKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        if (kpiDobraKg) {
+            kpiDobraKg.textContent = totalDobraKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' kg';
+        }
+        if (kpiSoldaPontoKg) {
+            kpiSoldaPontoKg.textContent = totalSoldaPontoKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' kg';
+        }
+        if (kpiTotalPieces) {
+            kpiTotalPieces.textContent = totalPieces.toLocaleString('pt-BR') + ' pçs';
+        }
+        if (kpiTotalNetTime) {
+            kpiTotalNetTime.textContent = formatMinutesToHours(totalNetMinutes);
+        }
+        if (kpiTotalScrapKg) {
+            kpiTotalScrapKg.textContent = totalDailyScrapKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' kg';
+        }
+
+        const pct = DEFAULT_META_DIA > 0 ? (totalSoldaLateralKg / DEFAULT_META_DIA) * 100 : 0;
+        if (kpiLateralPct) {
+            kpiLateralPct.textContent = `${pct.toFixed(1)}% da Meta`;
+            if (pct >= 100) {
+                kpiLateralPct.className = 'kpi-badge-pct success';
+            } else if (pct >= 70) {
+                kpiLateralPct.className = 'kpi-badge-pct warning';
+            } else {
+                kpiLateralPct.className = 'kpi-badge-pct';
+            }
+        }
+        if (kpiLateralProgress) {
+            kpiLateralProgress.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+            if (pct >= 100) {
+                kpiLateralProgress.style.background = 'linear-gradient(90deg, #059669, #10b981)';
+            } else if (pct >= 70) {
+                kpiLateralProgress.style.background = 'linear-gradient(90deg, #d97706, #f59e0b)';
+            } else {
+                kpiLateralProgress.style.background = 'linear-gradient(90deg, #2563eb, #3b82f6)';
+            }
+        }
     }
 
     function attachTableActionListeners() {
@@ -973,20 +1151,23 @@ document.addEventListener('DOMContentLoaded', () => {
     async function handleFormSubmit(e) {
         e.preventDefault();
 
-        const operatorName = sessionOperatorInput.value.trim();
+        const operatorName = entryOperatorInput ? entryOperatorInput.value.trim() : '';
         if (!operatorName) {
-            alert('Por favor, preencha o campo de Operador Responsável antes de salvar o intervalo.');
-            sessionOperatorInput.classList.add('is-invalid');
-            sessionOperatorInput.focus();
-            sessionOperatorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            alert('Por favor, preencha o campo de Operador da Vez antes de salvar o intervalo.');
+            if (entryOperatorInput) {
+                entryOperatorInput.classList.add('is-invalid');
+                entryOperatorInput.focus();
+                entryOperatorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             return;
         }
-        sessionOperatorInput.classList.remove('is-invalid');
+        if (entryOperatorInput) entryOperatorInput.classList.remove('is-invalid');
 
         const productSpec = productSpecInput.value.trim();
         const startTime = startTimeInput.value;
         const endTime = endTimeInput.value;
         const qty = parseInt(productQtyInput.value, 10);
+        const scrapKg = scrapKgInput ? (parseFloat(scrapKgInput.value) || 0.0) : 0.0;
         let productCode = selectedProductCodeInput.value ? parseInt(selectedProductCodeInput.value, 10) : null;
 
         // Auto-identifica o código caso o operador tenha digitado manualmente sem clicar no dropdown
@@ -1006,6 +1187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedMachine = state.machines.find(m => m.id === selectedMachineId);
         const machineName = selectedMachine ? selectedMachine.name : (state.session.machine_name || 'Máquina');
 
+        const detectedShift = detectShiftFromTime(startTime);
         const grossMinutes = calculateTimeDifference(startTime, endTime);
         const stops = getStopsFromForm();
         const totalStopMinutes = stops.reduce((acc, s) => acc + s.durationMinutes, 0);
@@ -1016,11 +1198,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const entryPayload = {
             machine_id: selectedMachineId,
+            operator_name: operatorName,
+            shift: detectedShift,
             product_code: productCode,
             product_spec_custom: productSpec,
             start_time: startTime,
             end_time: endTime,
             qty_produced: qty,
+            scrap_kg: scrapKg,
             gross_minutes: grossMinutes,
             total_stop_minutes: totalStopMinutes,
             net_minutes: netMinutes,
@@ -1033,6 +1218,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }))
         };
 
+        // Salva o último operador digitado para facilitar próximos lançamentos consecutivos
+        try {
+            localStorage.setItem('last_operator_name', operatorName);
+        } catch (e) {}
+
         if (state.isOnline) {
             try {
                 let res;
@@ -1041,7 +1231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (isEditing && isBackendNumericId) {
                     const numericEntryId = parseInt(state.currentEditingId, 10);
-                    // Atualiza intervalo existente (PUT) - o backend já move para a sessão da máquina selecionada
+                    // Atualiza intervalo existente (PUT) - o backend já move para a sessão da máquina/turno selecionados
                     res = await fetch(`${API_BASE_URL}/api/entries/${numericEntryId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
@@ -1079,6 +1269,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...state.allDayEntries[idx],
                     machineId: selectedMachineId,
                     machineName: machineName,
+                    operatorName: operatorName,
+                    shift: detectedShift,
                     productSpec,
                     productCode,
                     startTime,
@@ -1097,6 +1289,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionId: state.session.id,
                 machineId: selectedMachineId,
                 machineName: machineName,
+                operatorName: operatorName,
+                shift: detectedShift,
                 productSpec,
                 productCode,
                 startTime,
@@ -1154,6 +1348,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCancelEdit.classList.remove('hidden');
 
         entryIdInput.value = entry.id;
+        if (entryOperatorInput) {
+            entryOperatorInput.value = entry.operatorName || '';
+        }
         if (entryMachineSelect && entry.machineId) {
             entryMachineSelect.value = entry.machineId;
         }
@@ -1162,6 +1359,9 @@ document.addEventListener('DOMContentLoaded', () => {
         startTimeInput.value = entry.startTime;
         endTimeInput.value = entry.endTime;
         productQtyInput.value = entry.qty;
+        if (scrapKgInput) {
+            scrapKgInput.value = entry.scrapKg > 0 ? entry.scrapKg : '';
+        }
 
         // Tenta achar o produto no catálogo para preencher os hints
         const foundProd = state.productsCatalog.find(p => p.code === entry.productCode || p.dimensions === entry.productSpec || p.name === entry.productSpec);
@@ -1198,14 +1398,19 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCancelEdit.classList.add('hidden');
 
         entryIdInput.value = '';
-        if (entryMachineSelect) {
-            entryMachineSelect.value = sessionMachineSelect.value || state.session.machine_id;
+        if (entryOperatorInput) {
+            entryOperatorInput.value = localStorage.getItem('last_operator_name') || '';
+            entryOperatorInput.classList.remove('is-invalid');
+        }
+        if (entryMachineSelect && !entryMachineSelect.value) {
+            entryMachineSelect.value = state.session.machine_id || 1;
         }
         selectedProductCodeInput.value = '';
         productSpecInput.value = '';
         startTimeInput.value = '';
         endTimeInput.value = '';
         productQtyInput.value = '';
+        if (scrapKgInput) scrapKgInput.value = '';
         productCatalogHint.classList.add('hidden');
         btnClearProduct.classList.add('hidden');
         hideProductSuggestions();
@@ -1217,6 +1422,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const entry = (state.allDayEntries || []).find(e => String(e.id) === String(id));
         if (!entry) return;
 
+        if (entryOperatorInput && entry.operatorName) {
+            entryOperatorInput.value = entry.operatorName;
+        }
         if (entryMachineSelect && entry.machineId) {
             entryMachineSelect.value = entry.machineId;
         }
@@ -1226,6 +1434,9 @@ document.addEventListener('DOMContentLoaded', () => {
         startTimeInput.value = entry.endTime;
         endTimeInput.value = '';
         productQtyInput.value = entry.qty;
+        if (scrapKgInput) {
+            scrapKgInput.value = entry.scrapKg > 0 ? entry.scrapKg : '';
+        }
 
         const foundProd = state.productsCatalog.find(p => p.code === entry.productCode || p.dimensions === entry.productSpec || p.name === entry.productSpec);
         if (foundProd) {
@@ -1248,9 +1459,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const entry = (state.allDayEntries || []).find(e => String(e.id) === String(entryId));
         if (!entry || !entry.stops || entry.stops.length === 0) return;
 
+        const detectedShift = entry.shift || detectShiftFromTime(entry.startTime);
+        const isNight = detectedShift === 'Noturno';
+        const shiftClass = isNight ? 'noturno' : 'diurno';
+        const shiftLabel = isNight ? 'Noturno' : 'Diurno';
+
         let contentHtml = `
-            <div style="margin-bottom: 1rem;">
-                <p><strong>Máquina:</strong> <span class="badge-machine ${getMachineClass(entry.machineName)}">${escapeHtml(entry.machineName)}</span></p>
+            <div style="margin-bottom: 1rem; line-height: 1.6;">
+                <p><strong>Máquina:</strong> <span class="badge-machine ${getMachineClass(entry.machineName)}">${escapeHtml(entry.machineName)}</span> | <strong>Operador:</strong> <span class="badge-operator"><i class="fa-solid fa-user-gear"></i> ${escapeHtml(entry.operatorName || 'Operador')}</span> | <strong>Turno:</strong> <span class="badge-shift ${shiftClass}">${shiftLabel}</span></p>
                 <p><strong>Produto:</strong> ${escapeHtml(entry.productSpec)}</p>
                 <p><strong>Horário do Intervalo:</strong> ${entry.startTime} às ${entry.endTime} (${formatMinutesToHours(entry.grossMinutes)})</p>
                 <p><strong>Total em Paradas:</strong> <span style="color: var(--warning-600); font-weight: bold;">${formatMinutesToHours(entry.totalStopMinutes)}</span></p>
@@ -1788,12 +2004,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: false });
 
     // Mudanças na Ficha / Sessão e Máquina do Lançamento
-    sessionMachineSelect.addEventListener('change', async () => {
-        if (!state.currentEditingId && entryMachineSelect) {
-            entryMachineSelect.value = sessionMachineSelect.value;
-        }
-        await syncSessionWithBackend();
-    });
+    if (sessionMachineSelect) {
+        sessionMachineSelect.addEventListener('change', async () => {
+            if (!state.currentEditingId && entryMachineSelect) {
+                entryMachineSelect.value = sessionMachineSelect.value;
+            }
+            await syncSessionWithBackend();
+        });
+    }
 
     if (entryMachineSelect) {
         entryMachineSelect.addEventListener('change', () => {
@@ -1812,15 +2030,11 @@ document.addEventListener('DOMContentLoaded', () => {
         await updateExcelStatus();
     });
 
-    sessionOperatorInput.addEventListener('input', () => {
-        sessionOperatorInput.classList.remove('is-invalid');
-    });
-    sessionOperatorInput.addEventListener('change', syncSessionWithBackend);
-
-    sessionShiftInput.addEventListener('change', async () => {
-        updateShiftNightHint();
-        await syncSessionWithBackend();
-    });
+    if (entryOperatorInput) {
+        entryOperatorInput.addEventListener('input', () => {
+            entryOperatorInput.classList.remove('is-invalid');
+        });
+    }
 
     // Ações de Excel
     if (btnSyncExcel) btnSyncExcel.addEventListener('click', syncExcelNow);
@@ -1889,16 +2103,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (catalogSearchInput) catalogSearchInput.addEventListener('input', filterCatalogTable);
     if (btnSyncCatalogExcel) btnSyncCatalogExcel.addEventListener('click', syncCatalogFromExcel);
 
+    // --- IMPRESSÃO / GERAÇÃO DE PDF ---
+
+    function printDailyReport() {
+        // Atualiza data de referência e timestamp de emissão
+        const dateVal = sessionDateInput ? sessionDateInput.value : '';
+        let formattedDate = dateVal || 'Data não informada';
+        if (dateVal && dateVal.includes('-')) {
+            const [y, m, d] = dateVal.split('-');
+            formattedDate = `${d}/${m}/${y}`;
+        }
+
+        const printRefDate = document.getElementById('print-ref-date');
+        if (printRefDate) printRefDate.textContent = formattedDate;
+
+        const printTimestamp = document.getElementById('print-timestamp');
+        if (printTimestamp) {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('pt-BR');
+            const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            printTimestamp.textContent = `${dateStr} às ${timeStr}`;
+        }
+
+        window.print();
+    }
+
+    if (btnPrintReport) btnPrintReport.addEventListener('click', printDailyReport);
+    if (btnPrintRecords) btnPrintRecords.addEventListener('click', printDailyReport);
+
     // Modal de Detalhes de Paradas
-    btnCloseModal.addEventListener('click', () => modalStopsDetail.classList.add('hidden'));
-    btnCloseModalFooter.addEventListener('click', () => modalStopsDetail.classList.add('hidden'));
+    if (btnCloseModal) btnCloseModal.addEventListener('click', () => modalStopsDetail.classList.add('hidden'));
+    if (btnCloseModalFooter) btnCloseModalFooter.addEventListener('click', () => modalStopsDetail.classList.add('hidden'));
 
     btnExportJson.addEventListener('click', exportDataToJson);
 
     // --- INICIALIZAÇÃO ---
     async function init() {
+        renderMachineOptions();
         sessionDateInput.value = getDefaultWorkDate();
+        if (entryOperatorInput) {
+            entryOperatorInput.value = localStorage.getItem('last_operator_name') || '';
+        }
         updateShiftNightHint();
+        updateShiftIndicator();
         await checkApiConnection();
         await loadMachines();
         await loadProductsCatalog();
