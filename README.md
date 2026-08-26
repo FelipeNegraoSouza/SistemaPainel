@@ -13,6 +13,7 @@ SistemaPainel/
 │   ├── models.py               # Modelos ORM (Machines, Products, Sessions, Entries, Stops)
 │   ├── schemas.py              # Validações Pydantic
 │   ├── crud.py                 # Funções de inserção, consulta e exclusão no banco
+│   ├── excel_service.py        # Integração e sincronização com planilhas Excel no Drive Y:
 │   ├── analytics.py            # Análise estatística e médias de produção com Pandas
 │   ├── seed_data.py            # Carga padrão inicial de máquinas e catálogo
 │   └── main.py                 # Rotas da API FastAPI e serviço estático

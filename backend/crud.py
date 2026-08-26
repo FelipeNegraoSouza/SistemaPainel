@@ -126,6 +126,24 @@ def get_sessions_by_date(db: Session, date: str, shift: Optional[str] = None) ->
 
 
 # --- APONTAMENTOS / INTERVALOS ---
+def detect_shift_from_time(start_str: str) -> str:
+    """
+    Detecta se o horário de início pertence ao período Diurno (06:00 às 18:00)
+    ou Noturno (após as 18:00 ou antes das 06:00 - noite anterior).
+    """
+    try:
+        if not start_str or ":" not in start_str:
+            return "Diurno"
+        h, m = map(int, start_str.strip().split(":"))
+        total_mins = h * 60 + m
+        # 06:00 = 360 mins, 18:00 = 1080 mins (6 às 18 max)
+        if 360 <= total_mins <= 1080:
+            return "Diurno"
+        else:
+            return "Noturno"
+    except Exception:
+        return "Diurno"
+
 def _calculate_time_difference_minutes(start_str: str, end_str: str) -> int:
     try:
         h1, m1 = map(int, start_str.split(":"))
@@ -138,6 +156,38 @@ def _calculate_time_difference_minutes(start_str: str, end_str: str) -> int:
         return 0
 
 def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) -> models.ProductionEntry:
+    current_session = db.query(models.ProductionSession).filter(models.ProductionSession.id == session_id).first()
+    
+    # Detecta turno do apontamento conforme a regra: 06:00 às 18:00 = Diurno, restante = Noturno
+    detected_shift = entry_data.shift or detect_shift_from_time(entry_data.start_time)
+    target_machine_id = entry_data.machine_id if entry_data.machine_id else (current_session.machine_id if current_session else 1)
+    
+    # Se a máquina ou o turno foram alterados/detectados diferente da sessão original, roteia para a sessão correspondente
+    if current_session:
+        # Data base da ficha
+        base_ref_date = current_session.reference_date
+        # Se a sessão atual era noturna, sua data efetiva já era prev_date; recupera a data da ficha se necessário
+        target_effective_date = get_effective_session_date(base_ref_date, detected_shift)
+        
+        target_session = db.query(models.ProductionSession).filter(
+            models.ProductionSession.reference_date == target_effective_date,
+            models.ProductionSession.machine_id == target_machine_id,
+            models.ProductionSession.shift == detected_shift
+        ).first()
+        
+        if not target_session:
+            target_session = models.ProductionSession(
+                reference_date=target_effective_date,
+                operator_name=entry_data.operator_name or current_session.operator_name or "Operador",
+                shift=detected_shift,
+                sector=current_session.sector,
+                machine_id=target_machine_id
+            )
+            db.add(target_session)
+            db.commit()
+            db.refresh(target_session)
+        session_id = target_session.id
+
     # Se o produto tem código, vincula ao catálogo
     product_code = entry_data.product_code
     if product_code:
@@ -172,12 +222,15 @@ def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) 
 
     db_entry = models.ProductionEntry(
         session_id=session_id,
+        operator_name=entry_data.operator_name,
+        shift=detected_shift,
         product_code=product_code,
         product_spec_custom=entry_data.product_spec_custom,
         start_time=entry_data.start_time,
         end_time=entry_data.end_time,
         gross_minutes=gross_minutes,
         qty_produced=qty,
+        scrap_kg=float(entry_data.scrap_kg or 0.0),
         total_stop_minutes=total_stop_minutes,
         net_minutes=net_minutes,
         real_rate_per_hour=real_rate_per_hour
@@ -204,6 +257,34 @@ def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) ->
     db_entry = db.query(models.ProductionEntry).filter(models.ProductionEntry.id == entry_id).first()
     if not db_entry:
         return None
+
+    # Detecta turno conforme regra 06:00-18:00 Diurno vs Noturno
+    detected_shift = entry_data.shift or detect_shift_from_time(entry_data.start_time)
+    
+    current_session = db_entry.session or db.query(models.ProductionSession).filter(models.ProductionSession.id == db_entry.session_id).first()
+    target_machine_id = entry_data.machine_id if entry_data.machine_id else (current_session.machine_id if current_session else 1)
+
+    # Se a máquina ou o turno foram alterados na edição, move o intervalo para a sessão correspondente
+    if current_session and (target_machine_id != current_session.machine_id or detected_shift != current_session.shift):
+        base_ref_date = current_session.reference_date
+        target_effective_date = get_effective_session_date(base_ref_date, detected_shift)
+        target_session = db.query(models.ProductionSession).filter(
+            models.ProductionSession.reference_date == target_effective_date,
+            models.ProductionSession.machine_id == target_machine_id,
+            models.ProductionSession.shift == detected_shift
+        ).first()
+        if not target_session:
+            target_session = models.ProductionSession(
+                reference_date=target_effective_date,
+                operator_name=entry_data.operator_name or current_session.operator_name or "Operador",
+                shift=detected_shift,
+                sector=current_session.sector,
+                machine_id=target_machine_id
+            )
+            db.add(target_session)
+            db.commit()
+            db.refresh(target_session)
+        db_entry.session_id = target_session.id
 
     # Se o produto tem código, vincula ao catálogo
     product_code = entry_data.product_code
@@ -237,12 +318,15 @@ def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) ->
         else:
             real_rate_per_hour = 0.0
 
+    db_entry.operator_name = entry_data.operator_name
+    db_entry.shift = detected_shift
     db_entry.product_code = product_code
     db_entry.product_spec_custom = entry_data.product_spec_custom
     db_entry.start_time = entry_data.start_time
     db_entry.end_time = entry_data.end_time
     db_entry.gross_minutes = gross_minutes
     db_entry.qty_produced = qty
+    db_entry.scrap_kg = float(entry_data.scrap_kg or 0.0)
     db_entry.total_stop_minutes = total_stop_minutes
     db_entry.net_minutes = net_minutes
     db_entry.real_rate_per_hour = real_rate_per_hour

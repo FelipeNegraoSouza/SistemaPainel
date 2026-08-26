@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 from datetime import datetime
 
 # --- SCHEMAS DE MÁQUINAS ---
@@ -61,15 +61,19 @@ class StopResponse(StopBase):
 
 # --- SCHEMAS DE APONTAMENTOS / INTERVALOS PRODUTIVOS ---
 class EntryBase(BaseModel):
+    operator_name: Optional[str] = None
+    shift: Optional[str] = None
     product_code: Optional[int] = None
     product_spec_custom: str
     start_time: str
     end_time: str
     qty_produced: int
+    scrap_kg: float = 0.0
     gross_minutes: int = 0
     total_stop_minutes: int = 0
     net_minutes: int = 0
     real_rate_per_hour: float = 0.0
+    machine_id: Optional[int] = None
 
 class EntryCreate(EntryBase):
     stops: List[StopCreate] = []
@@ -86,7 +90,7 @@ class EntryResponse(EntryBase):
 # --- SCHEMAS DE FICHA / SESSÃO DO TURNO ---
 class SessionBase(BaseModel):
     reference_date: str
-    operator_name: str
+    operator_name: Optional[str] = "Operador"
     shift: str = "Diurno"
     sector: str = "Painéis"
     machine_id: int

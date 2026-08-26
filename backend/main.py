@@ -28,6 +28,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def add_no_cache_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 # Diretório base
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -89,14 +97,16 @@ def sync_session(session_data: schemas.SessionCreate, db: Session = Depends(get_
     """
     Cria ou recupera a ficha de produção da data, máquina e turno selecionados,
     retornando todos os apontamentos já gravados no banco.
-    Garante também a cópia do arquivo modelo se o arquivo diário não existir.
+    Garante também a cópia do arquivo modelo se o arquivo diário não existir e sincroniza a planilha.
     """
+    session = crud.get_or_create_session(db, session_data)
+
     try:
         excel_service.ensure_daily_sheet_exists(session_data.reference_date)
+        excel_service.sync_date_to_excel(session_data.reference_date, db)
     except Exception as e:
-        print(f"[Aviso Excel] Não foi possível verificar/criar planilha diária: {e}")
+        print(f"[Aviso Excel] Não foi possível verificar/sincronizar planilha diária: {e}")
 
-    session = crud.get_or_create_session(db, session_data)
     return session
 
 
@@ -273,7 +283,10 @@ app.mount("/js", StaticFiles(directory=os.path.join(FRONTEND_DIR, "js")), name="
 
 @app.get("/")
 def serve_index():
-    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+    return FileResponse(
+        os.path.join(FRONTEND_DIR, "index.html"),
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache"}
+    )
 
 if __name__ == "__main__":
     import uvicorn
