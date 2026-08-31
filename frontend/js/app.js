@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dayTotalQty = document.getElementById('day-total-qty');
 
     // Ações Gerais
+    const btnDownloadPdf = document.getElementById('btn-download-pdf');
+    const btnDownloadPdfRecords = document.getElementById('btn-download-pdf-records');
     const btnPrintReport = document.getElementById('btn-print-report');
     const btnPrintRecords = document.getElementById('btn-print-records');
     const btnSyncExcel = document.getElementById('btn-sync-excel');
@@ -127,6 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCloseAnalyticsFooter = document.getElementById('btn-close-analytics-footer');
     const filterAnalyticsMachine = document.getElementById('filter-analytics-machine');
     const analyticsTbody = document.getElementById('analytics-tbody');
+    const btnDownloadAnalyticsPdf = document.getElementById('btn-download-analytics-pdf');
+    const btnPrintAnalyticsPdf = document.getElementById('btn-print-analytics-pdf');
+    const btnDownloadAnalyticsPdfFooter = document.getElementById('btn-download-analytics-pdf-footer');
 
     const modalProducts = document.getElementById('modal-products');
     const btnCloseProducts = document.getElementById('btn-close-products');
@@ -2105,6 +2110,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- IMPRESSÃO / GERAÇÃO DE PDF ---
 
+    function downloadDailyPdf() {
+        const dateVal = sessionDateInput ? sessionDateInput.value : '';
+        const downloadUrl = `${API_BASE_URL}/api/reports/pdf?date=${dateVal || ''}`;
+        window.open(downloadUrl, '_blank');
+    }
+
     function printDailyReport() {
         // Atualiza data de referência e timestamp de emissão
         const dateVal = sessionDateInput ? sessionDateInput.value : '';
@@ -2128,8 +2139,22 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     }
 
+    function downloadAnalyticsPdf() {
+        const machineId = filterAnalyticsMachine ? filterAnalyticsMachine.value : '';
+        const downloadUrl = machineId 
+            ? `${API_BASE_URL}/api/reports/machine-averages/pdf?machine_id=${encodeURIComponent(machineId)}`
+            : `${API_BASE_URL}/api/reports/machine-averages/pdf`;
+        window.open(downloadUrl, '_blank');
+    }
+
+    if (btnDownloadPdf) btnDownloadPdf.addEventListener('click', downloadDailyPdf);
+    if (btnDownloadPdfRecords) btnDownloadPdfRecords.addEventListener('click', downloadDailyPdf);
     if (btnPrintReport) btnPrintReport.addEventListener('click', printDailyReport);
     if (btnPrintRecords) btnPrintRecords.addEventListener('click', printDailyReport);
+
+    if (btnDownloadAnalyticsPdf) btnDownloadAnalyticsPdf.addEventListener('click', downloadAnalyticsPdf);
+    if (btnPrintAnalyticsPdf) btnPrintAnalyticsPdf.addEventListener('click', downloadAnalyticsPdf);
+    if (btnDownloadAnalyticsPdfFooter) btnDownloadAnalyticsPdfFooter.addEventListener('click', downloadAnalyticsPdf);
 
     // Modal de Detalhes de Paradas
     if (btnCloseModal) btnCloseModal.addEventListener('click', () => modalStopsDetail.classList.add('hidden'));
