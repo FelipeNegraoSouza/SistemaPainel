@@ -2,12 +2,13 @@ import os
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from sqlalchemy.orm import Session
 from typing import List, Optional
+from datetime import datetime
 
 from backend.database import get_db, Base, engine
-from backend import models, schemas, crud, analytics, excel_service
+from backend import models, schemas, crud, analytics, excel_service, pdf_service
 from backend.seed_data import init_db
 
 # Inicializa banco e tabelas
@@ -248,32 +249,57 @@ def sync_excel_sheet(date: Optional[str] = None, force_recreate: bool = False, d
         raise HTTPException(status_code=500, detail=f"Erro ao sincronizar com planilha Excel: {str(ex)}")
 
 
-@app.get("/api/excel/download")
-def download_excel_sheet(date: Optional[str] = None, force_recreate: bool = False, db: Session = Depends(get_db)):
+# --- RELATÓRIOS OFICIAIS EM PDF (IMUTÁVEL) ---
+
+@app.get("/api/reports/pdf")
+def download_daily_report_pdf(date: Optional[str] = None, db: Session = Depends(get_db)):
     """
-    Sincroniza/garante a planilha da data informada e retorna o arquivo .xlsx
-    diretamente para download no navegador.
+    Gera e entrega o Relatório Oficial de Produção em PDF da data selecionada,
+    completo, estruturado e imutável.
     """
     try:
-        ref_date = date or ""
-        paths = excel_service.resolve_paths(ref_date)
-        target_filepath = paths["target_filepath"]
+        ref_date = date or datetime.now().strftime("%Y-%m-%d")
+        pdf_bytes = pdf_service.generate_daily_production_pdf(ref_date, db)
         
-        # Garante que a planilha esteja gerada e sincronizada
-        excel_service.sync_date_to_excel(ref_date, db, force_recreate=force_recreate)
+        date_parts = ref_date.split("-")
+        filename_date = f"{date_parts[2]}-{date_parts[1]}-{date_parts[0]}" if len(date_parts) == 3 else ref_date
+        filename = f"Relatorio_Producao_{filename_date}.pdf"
         
-        if not os.path.exists(target_filepath):
-            raise HTTPException(status_code=404, detail="Arquivo Excel não encontrado após geração.")
-
-        return FileResponse(
-            path=target_filepath,
-            filename=paths["file_name"],
-            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"inline; filename={filename}",
+                "Content-Type": "application/pdf"
+            }
         )
-    except FileNotFoundError as fnf:
-        raise HTTPException(status_code=404, detail=str(fnf))
     except Exception as ex:
-        raise HTTPException(status_code=500, detail=f"Erro ao baixar planilha Excel: {str(ex)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao gerar relatório PDF: {str(ex)}")
+
+
+@app.get("/api/reports/machine-averages/pdf")
+def download_machine_averages_pdf(machine_id: Optional[int] = None, db: Session = Depends(get_db)):
+    """
+    Gera e entrega o Relatório Oficial de Médias e Produtividade por Hora em PDF,
+    com suporte opcional a filtro por máquina.
+    """
+    try:
+        pdf_bytes = pdf_service.generate_averages_report_pdf(db, machine_id=machine_id)
+        
+        filter_suffix = f"_Maquina_{machine_id}" if machine_id else "_Geral"
+        filename = f"Relatorio_Medias_Producao_Hora{filter_suffix}.pdf"
+        
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"inline; filename={filename}",
+                "Content-Type": "application/pdf"
+            }
+        )
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=f"Erro ao gerar relatório de médias em PDF: {str(ex)}")
+
 
 
 # Servir arquivos estáticos do frontend (CSS, JS, imagens)

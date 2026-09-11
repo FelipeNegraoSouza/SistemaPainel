@@ -1247,11 +1247,25 @@ input[type="number"] {
 .analytics-filter-bar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 0.75rem;
     background: var(--primary-50);
     padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--primary-100);
+}
+
+.analytics-filter-bar .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.analytics-filter-bar .analytics-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .analytics-filter-bar select {
