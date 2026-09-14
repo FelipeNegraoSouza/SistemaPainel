@@ -1,9 +1,30 @@
+from sqlalchemy import text
 from backend.database import engine, Base, SessionLocal
 from backend import models
 
 def init_db():
     # Cria todas as tabelas
     Base.metadata.create_all(bind=engine)
+
+    # Migração leve para adicionar novas colunas se não existirem no SQLite
+    with engine.connect() as conn:
+        try:
+            entry_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(production_entries)")).fetchall()]
+            if "unproductive_reason" not in entry_cols:
+                conn.execute(text("ALTER TABLE production_entries ADD COLUMN unproductive_reason VARCHAR(250)"))
+                conn.commit()
+                print("[OK] Coluna 'unproductive_reason' adicionada em 'production_entries'.")
+        except Exception as e:
+            print(f"[Aviso Migração] entries: {e}")
+
+        try:
+            session_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(production_sessions)")).fetchall()]
+            if "unproductive_notes" not in session_cols:
+                conn.execute(text("ALTER TABLE production_sessions ADD COLUMN unproductive_notes TEXT"))
+                conn.commit()
+                print("[OK] Coluna 'unproductive_notes' adicionada em 'production_sessions'.")
+        except Exception as e:
+            print(f"[Aviso Migração] sessions: {e}")
     
     db = SessionLocal()
     try:
