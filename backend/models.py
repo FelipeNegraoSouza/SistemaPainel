@@ -54,6 +54,7 @@ class ProductionSession(Base):
     shift = Column(String(50), default="Diurno")
     sector = Column(String(50), default="Painéis")
     machine_id = Column(Integer, ForeignKey("machines.id"), nullable=False)
+    unproductive_notes = Column(Text, nullable=True)                            # Justificativa geral opcional da improdutividade do turno
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -84,6 +85,7 @@ class ProductionEntry(Base):
     total_stop_minutes = Column(Integer, default=0)
     net_minutes = Column(Integer, default=0)
     real_rate_per_hour = Column(Float, default=0.0) # Peças/h líquidas realizadas
+    unproductive_reason = Column(String(250), nullable=True) # Motivo opcional do momento improdutivo / transição
     
     created_at = Column(DateTime, default=datetime.utcnow)
 

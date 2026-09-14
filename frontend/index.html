@@ -138,6 +138,10 @@
                                 <strong class="stat-val" id="kpi-total-net-time">0h 00m</strong>
                             </div>
                             <div class="kpi-stat-item">
+                                <span class="stat-label" style="color: #d97706;"><i class="fa-solid fa-hourglass-end"></i> Improdutivo:</span>
+                                <strong class="stat-val" id="kpi-total-unproductive-time" style="color: #d97706;">0h 00m</strong>
+                            </div>
+                            <div class="kpi-stat-item">
                                 <span class="stat-label" style="color: #e11d48;"><i class="fa-solid fa-recycle"></i> Refugo / Perdas:</span>
                                 <strong class="stat-val" id="kpi-total-scrap-kg" style="color: #e11d48;">0,00 kg</strong>
                             </div>
@@ -264,6 +268,32 @@
                             </label>
                             <input type="number" id="scrap-kg" class="form-control font-semibold" min="0" step="0.01" placeholder="0,00 kg" value="">
                         </div>
+
+                        <!-- Motivo / Justificativa Opcional de Momento Improdutivo ou Transição -->
+                        <div class="form-group span-full">
+                            <label for="unproductive-reason">
+                                <i class="fa-solid fa-hourglass-half"></i> Motivo do Momento Improdutivo / Transição (Opcional):
+                            </label>
+                            <div class="search-input-wrapper">
+                                <i class="fa-solid fa-tag search-icon" style="color: #d97706;"></i>
+                                <input type="text" id="unproductive-reason" class="form-control font-semibold" placeholder="Ex: Transição de produto, Início tardio, Saída antecipada, Setup... (opcional)" list="unproductive-reasons-list">
+                                <datalist id="unproductive-reasons-list">
+                                    <option value="Transição de Produto / Setup"></option>
+                                    <option value="Início Tardio"></option>
+                                    <option value="Saída Mais Cedo / Antecipada"></option>
+                                    <option value="Aguardando Matéria-Prima"></option>
+                                    <option value="Troca de Molde / Ferramental"></option>
+                                    <option value="Aguardando Operador / Liberação"></option>
+                                    <option value="Manutenção Mecânica / Elétrica"></option>
+                                    <option value="Limpeza / Organização do Posto"></option>
+                                    <option value="Almoço / Intervalo não programado"></option>
+                                    <option value="Outros"></option>
+                                </datalist>
+                            </div>
+                            <small class="helper-text" style="color: var(--text-muted); font-size: 0.78rem;">
+                                <i class="fa-solid fa-circle-info"></i> Campo opcional para especificar o motivo de períodos sem produção neste turno.
+                            </small>
+                        </div>
                     </div>
 
                     <!-- Seção de Paradas no Intervalo -->
@@ -305,6 +335,10 @@
                             <span class="summary-label">Ritmo Estimado:</span>
                             <span class="summary-val" id="summary-rate">-- pçs/h</span>
                         </div>
+                        <div class="summary-item" style="border-left: 1px dashed var(--border-color, #cbd5e1); padding-left: 0.75rem;">
+                            <span class="summary-label" style="color: #d97706;">Turno (Base):</span>
+                            <span class="summary-val" id="summary-shift-base" style="color: #d97706;">8h 48m</span>
+                        </div>
                     </div>
 
                     <!-- Botão de Ação -->
@@ -329,7 +363,9 @@
                     </div>
                     <div class="records-header-right">
                         <div class="records-summary-badge" id="day-totals-badge">
-                            <span>Total Líquido: <strong id="day-total-net">0h 00m</strong></span>
+                            <span>Produtivo: <strong id="day-total-net">0h 00m</strong></span>
+                            <span class="separator">|</span>
+                            <span>Improdutivo: <strong id="day-total-unproductive" style="color: #d97706;">0h 00m</strong></span>
                             <span class="separator">|</span>
                             <span>Total Peças: <strong id="day-total-qty">0</strong></span>
                         </div>
@@ -362,6 +398,7 @@
                                 <th class="text-center">Paradas</th>
                                 <th class="text-center">T. Líquido</th>
                                 <th class="text-center">Ritmo</th>
+                                <th class="text-center">Transição / Obs</th>
                                 <th class="text-center actions-col">Ações</th>
                             </tr>
                         </thead>
