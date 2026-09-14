@@ -21,6 +21,9 @@ app = FastAPI(
 )
 
 # Configuração CORS
+# Responsavel por filtrar que origem(maquina, site, ip, tudo por navegador) pode acessar a api e o que pode fazer (post, get, put, delete etc)
+# Servidores ou sistemas podem fazer requisições se não estiverem pelo navegador
+# Essas regras so valem pra navegador!!!
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -28,7 +31,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+#Responsavel por garantir que as informações de resposta nao sejam armazenadas em cache do navegador
 @app.middleware("http")
 async def add_no_cache_headers(request, call_next):
     response = await call_next(request)
@@ -40,7 +43,18 @@ async def add_no_cache_headers(request, call_next):
 # Diretório base
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-# --- ROTAS DA API ---
+
+# ============================================================
+# API (Application Programming Interface)
+# É a "porta de entrada" do sistema: um conjunto de rotas que
+# recebem requisições HTTP, processam a lógica e devolvem
+# respostas (geralmente JSON) para quem chamou.
+#
+# Cada rota abaixo tem um método HTTP (GET, POST, PUT, DELETE)
+# e um caminho (ex: /usuarios). O cliente pede, a API responde.
+# ============================================================
+
+#               --- ROTAS DA API ABAIXO ---
 
 @app.get("/api/machines", response_model=List[schemas.MachineResponse])
 def list_machines(db: Session = Depends(get_db)):
