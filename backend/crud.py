@@ -126,6 +126,15 @@ def get_sessions_by_date(db: Session, date: str, shift: Optional[str] = None) ->
 
 
 # --- APONTAMENTOS / INTERVALOS ---
+SHIFT_DURATION_DIURNO = 528   # 8h 48m (8 * 60 + 48)
+SHIFT_DURATION_NOTURNO = 468  # 7h 48m (7 * 60 + 48)
+
+def get_shift_duration_minutes(shift: Optional[str]) -> int:
+    """Retorna a duração total do turno em minutos: Diurno = 8h48m (528 min), Noturno = 7h48m (468 min)."""
+    if shift and str(shift).strip().lower() == "noturno":
+        return SHIFT_DURATION_NOTURNO
+    return SHIFT_DURATION_DIURNO
+
 def detect_shift_from_time(start_str: str) -> str:
     """
     Detecta se o horário de início pertence ao período Diurno (06:00 às 18:00)
@@ -233,7 +242,8 @@ def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) 
         scrap_kg=float(entry_data.scrap_kg or 0.0),
         total_stop_minutes=total_stop_minutes,
         net_minutes=net_minutes,
-        real_rate_per_hour=real_rate_per_hour
+        real_rate_per_hour=real_rate_per_hour,
+        unproductive_reason=entry_data.unproductive_reason
     )
     db.add(db_entry)
     db.flush() # Para gerar db_entry.id
@@ -330,6 +340,7 @@ def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) ->
     db_entry.total_stop_minutes = total_stop_minutes
     db_entry.net_minutes = net_minutes
     db_entry.real_rate_per_hour = real_rate_per_hour
+    db_entry.unproductive_reason = entry_data.unproductive_reason
 
     for stop, duration in stop_objs:
         db_stop = models.ProductionStop(

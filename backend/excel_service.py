@@ -474,7 +474,8 @@ def sync_date_to_excel(reference_date: str, db: Session, force_recreate: bool = 
                 "end_time": e.end_time,
                 "gross_minutes": e.gross_minutes or 0,
                 "stop_minutes": e.total_stop_minutes or 0,
-                "net_minutes": e.net_minutes or 0
+                "net_minutes": e.net_minutes or 0,
+                "unproductive_reason": getattr(e, 'unproductive_reason', '') or ""
             })
 
     # Ordena por máquina e hora de início

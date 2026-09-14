@@ -95,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryStopTime = document.getElementById('summary-stop-time');
     const summaryNetTime = document.getElementById('summary-net-time');
     const summaryRate = document.getElementById('summary-rate');
+    const summaryShiftBase = document.getElementById('summary-shift-base');
+    const unproductiveReasonInput = document.getElementById('unproductive-reason');
 
     // Tabela e Listagem
     const entriesTbody = document.getElementById('entries-tbody');
@@ -103,7 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentSheetSubtitle = document.getElementById('current-sheet-subtitle');
     const machineFilterPills = document.getElementById('machine-filter-pills');
     const dayTotalNet = document.getElementById('day-total-net');
+    const dayTotalUnproductive = document.getElementById('day-total-unproductive');
     const dayTotalQty = document.getElementById('day-total-qty');
+    const kpiTotalUnproductiveTime = document.getElementById('kpi-total-unproductive-time');
+
+    // Duração Oficial dos Turnos: Diurno = 8h 48m (528 min), Noturno = 7h 48m (468 min)
+    const SHIFT_MINUTES_DIURNO = 528;
+    const SHIFT_MINUTES_NOTURNO = 468;
+
+    function getShiftTotalMinutes(shift) {
+        if (shift && String(shift).trim().toLowerCase() === 'noturno') {
+            return SHIFT_MINUTES_NOTURNO;
+        }
+        return SHIFT_MINUTES_DIURNO;
+    }
 
     // Ações Gerais
     const btnDownloadPdf = document.getElementById('btn-download-pdf');
@@ -458,6 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 totalStopMinutes: e.total_stop_minutes,
                                 netMinutes: e.net_minutes,
                                 ratePerHour: e.real_rate_per_hour,
+                                unproductiveReason: e.unproductive_reason || '',
                                 stops: (e.stops || []).map(st => ({
                                     id: st.id,
                                     startTime: st.start_time,
@@ -867,6 +883,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             summaryRate.textContent = `-- pçs/h`;
         }
+
+        const detectedShift = detectShiftFromTime(startTime);
+        if (summaryShiftBase) {
+            summaryShiftBase.textContent = detectedShift === 'Noturno' ? '7h 48m (Noturno)' : '8h 48m (Diurno)';
+        }
     }
 
     // --- RENDERIZAÇÃO DA TABELA DE APONTAMENTOS ---
@@ -937,6 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
             entriesTbody.innerHTML = '';
             emptyEntriesView.classList.remove('hidden');
             dayTotalNet.textContent = '0h 00m';
+            if (dayTotalUnproductive) dayTotalUnproductive.textContent = '0h 00m';
             dayTotalQty.textContent = '0';
             return;
         }
@@ -978,6 +1000,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const shiftLabel = isNight ? 'Noturno' : 'Diurno';
             const opDisplay = entry.operatorName || 'Operador';
 
+            const unprodReason = entry.unproductiveReason || entry.unproductive_reason || '';
+            const unprodHtml = unprodReason 
+                ? `<span class="badge-stops-pill" style="color: #b45309; background: #fef3c7; border: 1px solid #fde68a;" title="${escapeHtml(unprodReason)}"><i class="fa-solid fa-hourglass-half"></i> ${escapeHtml(unprodReason)}</span>`
+                : '<span class="text-muted">-</span>';
+
             tr.innerHTML = `
                 <td>
                     <span class="badge-machine ${getMachineClass(entry.machineName)}">
@@ -1002,6 +1029,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="text-center">${stopsHtml}</td>
                 <td class="text-center"><strong>${formatMinutesToHours(entry.netMinutes)}</strong></td>
                 <td class="text-center"><span class="badge-rate">${rateDisplay}</span></td>
+                <td class="text-center">${unprodHtml}</td>
                 <td class="text-center">
                     <div class="table-actions">
                         <button type="button" class="btn-icon" data-action="edit" data-id="${entry.id}" title="Editar este intervalo">
@@ -1020,7 +1048,25 @@ document.addEventListener('DOMContentLoaded', () => {
             entriesTbody.appendChild(tr);
         });
 
+        // Apuração do Tempo Total de Turno esperado (Diurno: 8h48m = 528 min, Noturno: 7h48m = 468 min)
+        const activeMachineShifts = new Set();
+        entriesToDisplay.forEach(entry => {
+            const shift = entry.shift || detectShiftFromTime(entry.startTime);
+            activeMachineShifts.add(`${entry.machineId || entry.machineName}_${shift}`);
+        });
+
+        let totalExpectedShiftMinutes = 0;
+        activeMachineShifts.forEach(key => {
+            const isNight = key.endsWith('_Noturno');
+            totalExpectedShiftMinutes += isNight ? SHIFT_MINUTES_NOTURNO : SHIFT_MINUTES_DIURNO;
+        });
+
+        const totalUnproductiveMinutes = Math.max(0, totalExpectedShiftMinutes - sumNetMinutes);
+
         dayTotalNet.textContent = formatMinutesToHours(sumNetMinutes);
+        if (dayTotalUnproductive) {
+            dayTotalUnproductive.textContent = formatMinutesToHours(totalUnproductiveMinutes);
+        }
         dayTotalQty.textContent = sumQty.toLocaleString('pt-BR');
 
         attachTableActionListeners();
@@ -1103,6 +1149,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (kpiTotalNetTime) {
             kpiTotalNetTime.textContent = formatMinutesToHours(totalNetMinutes);
+        }
+        if (kpiTotalUnproductiveTime) {
+            const activeMachineShifts = new Set();
+            allEntries.forEach(entry => {
+                const shift = entry.shift || detectShiftFromTime(entry.startTime);
+                activeMachineShifts.add(`${entry.machineId || entry.machineName}_${shift}`);
+            });
+
+            let totalExpectedShiftMinutes = 0;
+            activeMachineShifts.forEach(key => {
+                const isNight = key.endsWith('_Noturno');
+                totalExpectedShiftMinutes += isNight ? SHIFT_MINUTES_NOTURNO : SHIFT_MINUTES_DIURNO;
+            });
+
+            const totalUnproductive = Math.max(0, totalExpectedShiftMinutes - totalNetMinutes);
+            kpiTotalUnproductiveTime.textContent = formatMinutesToHours(totalUnproductive);
         }
         if (kpiTotalScrapKg) {
             kpiTotalScrapKg.textContent = totalDailyScrapKg.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' kg';
@@ -1200,6 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (netMinutes < 0) netMinutes = 0;
 
         const ratePerHour = netMinutes > 0 ? parseFloat((qty / (netMinutes / 60)).toFixed(2)) : 0.0;
+        const unproductiveReason = unproductiveReasonInput ? unproductiveReasonInput.value.trim() : '';
 
         const entryPayload = {
             machine_id: selectedMachineId,
@@ -1215,6 +1278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             total_stop_minutes: totalStopMinutes,
             net_minutes: netMinutes,
             real_rate_per_hour: ratePerHour,
+            unproductive_reason: unproductiveReason || null,
             stops: stops.map(s => ({
                 start_time: s.startTime,
                 end_time: s.endTime,
@@ -1285,7 +1349,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     stops,
                     totalStopMinutes,
                     netMinutes,
-                    ratePerHour
+                    ratePerHour,
+                    unproductiveReason
                 };
             }
         } else {
@@ -1305,7 +1370,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 stops,
                 totalStopMinutes,
                 netMinutes,
-                ratePerHour
+                ratePerHour,
+                unproductiveReason
             };
             state.allDayEntries.push(newEntry);
         }
@@ -1367,6 +1433,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrapKgInput) {
             scrapKgInput.value = entry.scrapKg > 0 ? entry.scrapKg : '';
         }
+        if (unproductiveReasonInput) {
+            unproductiveReasonInput.value = entry.unproductiveReason || entry.unproductive_reason || '';
+        }
 
         // Tenta achar o produto no catálogo para preencher os hints
         const foundProd = state.productsCatalog.find(p => p.code === entry.productCode || p.dimensions === entry.productSpec || p.name === entry.productSpec);
@@ -1416,6 +1485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         endTimeInput.value = '';
         productQtyInput.value = '';
         if (scrapKgInput) scrapKgInput.value = '';
+        if (unproductiveReasonInput) unproductiveReasonInput.value = '';
         productCatalogHint.classList.add('hidden');
         btnClearProduct.classList.add('hidden');
         hideProductSuggestions();
@@ -1441,6 +1511,9 @@ document.addEventListener('DOMContentLoaded', () => {
         productQtyInput.value = entry.qty;
         if (scrapKgInput) {
             scrapKgInput.value = entry.scrapKg > 0 ? entry.scrapKg : '';
+        }
+        if (unproductiveReasonInput) {
+            unproductiveReasonInput.value = '';
         }
 
         const foundProd = state.productsCatalog.find(p => p.code === entry.productCode || p.dimensions === entry.productSpec || p.name === entry.productSpec);
@@ -1469,12 +1542,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const shiftClass = isNight ? 'noturno' : 'diurno';
         const shiftLabel = isNight ? 'Noturno' : 'Diurno';
 
+        const unprodReason = entry.unproductiveReason || entry.unproductive_reason || '';
+        let unprodHtml = '';
+        if (unprodReason) {
+            unprodHtml = `
+                <div style="margin-top: 0.4rem; background: #fef3c7; border: 1px solid #fde68a; padding: 0.4rem 0.6rem; border-radius: 6px; color: #92400e; font-size: 0.82rem;">
+                    <strong><i class="fa-solid fa-hourglass-half"></i> Motivo do Momento Improdutivo / Transição:</strong> ${escapeHtml(unprodReason)}
+                </div>
+            `;
+        }
+
         let contentHtml = `
             <div style="margin-bottom: 1rem; line-height: 1.6;">
                 <p><strong>Máquina:</strong> <span class="badge-machine ${getMachineClass(entry.machineName)}">${escapeHtml(entry.machineName)}</span> | <strong>Operador:</strong> <span class="badge-operator"><i class="fa-solid fa-user-gear"></i> ${escapeHtml(entry.operatorName || 'Operador')}</span> | <strong>Turno:</strong> <span class="badge-shift ${shiftClass}">${shiftLabel}</span></p>
                 <p><strong>Produto:</strong> ${escapeHtml(entry.productSpec)}</p>
                 <p><strong>Horário do Intervalo:</strong> ${entry.startTime} às ${entry.endTime} (${formatMinutesToHours(entry.grossMinutes)})</p>
                 <p><strong>Total em Paradas:</strong> <span style="color: var(--warning-600); font-weight: bold;">${formatMinutesToHours(entry.totalStopMinutes)}</span></p>
+                ${unprodHtml}
             </div>
             <h4 style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">Relação de Paradas:</h4>
         `;

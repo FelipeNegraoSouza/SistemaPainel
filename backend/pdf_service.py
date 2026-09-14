@@ -199,7 +199,8 @@ def generate_daily_production_pdf(reference_date: str, db: Session) -> bytes:
                 "gross_min": gross,
                 "stop_min": stops_min,
                 "net_min": net,
-                "rate": rate
+                "rate": rate,
+                "unproductive_reason": getattr(e, 'unproductive_reason', '') or ""
             })
 
             for st in (e.stops or []):
@@ -428,12 +429,16 @@ def generate_daily_production_pdf(reference_date: str, db: Session) -> bytes:
         entries_rows.append(empty_row)
     else:
         for e in all_entries:
+            spec_display = e["product_spec"]
+            if e.get("unproductive_reason"):
+                spec_display += f"<br/><font color='#d97706' size='6'><b>Obs/Transição:</b> {e['unproductive_reason']}</font>"
+
             row = [
                 Paragraph(e["machine"], cell_text_bold),
                 Paragraph(e["operator"], cell_text),
                 Paragraph(e["shift"], cell_text_center),
                 Paragraph(f"{e['start_time']} - {e['end_time']}", cell_text_center),
-                Paragraph(e["product_spec"], cell_text),
+                Paragraph(spec_display, cell_text),
                 Paragraph(f"{e['qty']} pçs", cell_text_center),
                 Paragraph(f"{e['weight_kg']:.2f}".replace(".", ","), cell_text_center),
                 Paragraph(f"{e['scrap_kg']:.2f}".replace(".", ",") if e["scrap_kg"] > 0 else "-", cell_text_danger if e["scrap_kg"] > 0 else cell_text_center),
