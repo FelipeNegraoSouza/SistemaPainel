@@ -1542,12 +1542,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const shiftClass = isNight ? 'noturno' : 'diurno';
         const shiftLabel = isNight ? 'Noturno' : 'Diurno';
 
+        const unprodReason = entry.unproductiveReason || entry.unproductive_reason || '';
+        let unprodHtml = '';
+        if (unprodReason) {
+            unprodHtml = `
+                <div style="margin-top: 0.4rem; background: #fef3c7; border: 1px solid #fde68a; padding: 0.4rem 0.6rem; border-radius: 6px; color: #92400e; font-size: 0.82rem;">
+                    <strong><i class="fa-solid fa-hourglass-half"></i> Motivo do Momento Improdutivo / Transição:</strong> ${escapeHtml(unprodReason)}
+                </div>
+            `;
+        }
+
         let contentHtml = `
             <div style="margin-bottom: 1rem; line-height: 1.6;">
                 <p><strong>Máquina:</strong> <span class="badge-machine ${getMachineClass(entry.machineName)}">${escapeHtml(entry.machineName)}</span> | <strong>Operador:</strong> <span class="badge-operator"><i class="fa-solid fa-user-gear"></i> ${escapeHtml(entry.operatorName || 'Operador')}</span> | <strong>Turno:</strong> <span class="badge-shift ${shiftClass}">${shiftLabel}</span></p>
                 <p><strong>Produto:</strong> ${escapeHtml(entry.productSpec)}</p>
                 <p><strong>Horário do Intervalo:</strong> ${entry.startTime} às ${entry.endTime} (${formatMinutesToHours(entry.grossMinutes)})</p>
                 <p><strong>Total em Paradas:</strong> <span style="color: var(--warning-600); font-weight: bold;">${formatMinutesToHours(entry.totalStopMinutes)}</span></p>
+                ${unprodHtml}
             </div>
             <h4 style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">Relação de Paradas:</h4>
         `;
