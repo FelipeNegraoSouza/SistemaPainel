@@ -1,4 +1,4 @@
-import os
+'''import os
 import shutil
 from datetime import datetime, time, timedelta
 from typing import Dict, Any, Optional, List
@@ -814,5 +814,5 @@ def sync_catalog_from_excel_bd(db: Session, template_path: Optional[str] = None)
         "new_count": new_count,
         "updated_count": updated_count,
         "template_path": t_path
-    }
+    }'''
 
