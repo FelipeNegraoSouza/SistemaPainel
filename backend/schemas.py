@@ -74,6 +74,7 @@ class EntryBase(BaseModel):
     net_minutes: int = 0
     real_rate_per_hour: float = 0.0
     machine_id: Optional[int] = None
+    unproductive_reason: Optional[str] = None
 
 class EntryCreate(EntryBase):
     stops: List[StopCreate] = []
@@ -94,6 +95,7 @@ class SessionBase(BaseModel):
     shift: str = "Diurno"
     sector: str = "Painéis"
     machine_id: int
+    unproductive_notes: Optional[str] = None
 
 class SessionCreate(SessionBase):
     pass
