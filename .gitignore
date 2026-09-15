@@ -15,4 +15,6 @@ env/
 .idea/
 .DS_Store
 Thumbs.db
-apontamentos.db
+
+# Bancos de dados
+*.db
