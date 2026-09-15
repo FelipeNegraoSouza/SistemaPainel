@@ -1,3 +1,16 @@
+# ============================================================
+# SERVICE — Excel + regra de negócio
+#
+# Este arquivo mistura três responsabilidades:
+#   1. Configuração/domínio: caminhos, metas, mapas de nomes.
+#   2. Regra de negócio: cálculo de peso, turno, produtividade,
+#      agrupamento por tipo de máquina, acumulado do mês.
+#   3. Manipulação de Excel: openpyxl, merges, escrita de células.
+#
+# Depende do BANCO (SQLAlchemy) — não é módulo isolado de Excel.
+# Escrita na planilha é 100% via backend: o Excel NÃO calcula
+# nada, é só visualizador/impressão.
+# ============================================================
 import os
 import shutil
 from datetime import datetime, time, timedelta
@@ -13,6 +26,7 @@ DEFAULT_TEMPLATE_PATH = r"Y:\03 - PAINEL CORRUGADO\Ficha__modelo_sistema.xlsx"
 DEFAULT_BASE_DEST_DIR = r"Y:\03 - PAINEL CORRUGADO\fichas_teste"
 
 # Metas padrão de produção (ajustáveis conforme padrão operacional)
+"se a fábrica mudar a meta, altere aqui"
 DEFAULT_META_DIA = 2500.0
 DEFAULT_META_MES = 52500.0
 
@@ -355,7 +369,8 @@ def get_date_preview(reference_date: str, db: Session) -> Dict[str, Any]:
     }
 
 
-# Cache em memória do catálogo da aba BD para máxima performance
+# Cache em memória do catálogo da aba BD para máxima performance]
+"cache em memória; se o modelo mudar, reinicie o servidor"
 _CACHED_PRODUCT_LOOKUP: Optional[Dict[str, Dict[str, float]]] = None
 
 def get_product_lookup(template_path: str) -> Dict[str, Dict[str, float]]:

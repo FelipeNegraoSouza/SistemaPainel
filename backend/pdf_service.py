@@ -1,3 +1,19 @@
+# ============================================================
+# SERVICE — Geração de PDFs (ReportLab)
+#
+# Mesmo padrão do services.excel: mistura três responsabilidades.
+#   1. Consulta ao banco + cálculo (regra de negócio)
+#   2. Configuração visual (estilos, tabelas, cores)
+#   3. Serialização do PDF (ReportLab -> bytes)
+#
+# O PDF é gerado em memória (io.BytesIO) e devolvido como bytes.
+# Quem salva/baixa é a rota da API.
+#
+# ATENÇÃO:
+#   - get_previous_night_date e DEFAULT_META_* estão duplicados
+#     em outros módulos. Alterar aqui não altera lá.
+#   - O Excel é visualizador; o PDF é documento oficial imutável.
+# ============================================================
 import io
 import os
 from datetime import datetime, timedelta
@@ -20,6 +36,12 @@ from backend import models
 DEFAULT_META_DIA = 2500.0
 DEFAULT_META_MES = 52500.0
 
+
+# Truque do ReportLab: para escrever "Página X de Y", só é possível
+# saber o total de páginas no final. Por isso esta classe:
+# 1. Salva o estado de cada página em showPage()
+# 2. No save(), percorre todos os estados e desenha o rodapé
+#    com o total já conhecido.
 class NumberedCanvas(canvas.Canvas):
     """
     Canvas com numeração de páginas em dois passos (Página X de Y)

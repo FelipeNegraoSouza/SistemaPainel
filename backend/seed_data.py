@@ -1,3 +1,21 @@
+# ============================================================
+# SEED — Inicialização do banco (primeira execução)
+#
+# Faz 3 coisas:
+#   1. create_all: cria tabelas que ainda não existem.
+#   2. Migração light: via PRAGMA + ALTER TABLE, adiciona
+#      colunas novas em bancos antigos (SQLite apenas).
+#      Obs: só ADICIONA coluna. Não remove, renomeia ou
+#      altera tipo. Se precisar disso, usar Alembic.
+#   3. Seed: insere as 8 máquinas padrão se a tabela estiver
+#      vazia. Roda só uma vez (idempotente).
+#
+# Product fica vazio de propósito: o catálogo é sincronizado
+# depois pela função sync_catalog_from_excel_bd do services.excel.
+#
+# Executado diretamente: python seeddata.py
+# OU importado e chamado pelo main.py (verificar).
+# ============================================================
 from sqlalchemy import text
 from backend.database import engine, Base, SessionLocal
 from backend import models

@@ -1,3 +1,22 @@
+# ============================================================
+# ANALYTICS — Cálculo estatístico de produção (Pandas)
+#
+# Responsabilidade única: consultar o banco, agregar com Pandas
+# e devolver DADOS ESTRUTURADOS. Não formata PDF, não escreve
+# Excel, não gera arquivo. Quem consome é o services.pdf
+# (e futuras rotas de API).
+#
+# Padrão:
+#   1. Monta query com join no banco
+#   2. Joga resultado em DataFrame
+#   3. groupby + agg para agregar
+#   4. Calcula colunas derivadas (ritmo, tempo médio, eficiência)
+#   5. Devolve lista de dicts (JSON-friendly)
+#
+# ATENÇÃO: carrega TODOS os resultados em memória.
+# OK para o volume atual da fábrica. Se crescer muito,
+# migrar agregação para SQL (GROUP BY direto no banco).
+# ============================================================
 import pandas as pd
 from sqlalchemy.orm import Session
 from typing import Dict, Any, List

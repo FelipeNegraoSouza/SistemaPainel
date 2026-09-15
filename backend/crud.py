@@ -1,8 +1,29 @@
+# ============================================================
+# CRUD — Acesso ao banco + regras de negócio embutidas.
+#
+# Padrão geral das funções simples:
+#   db.query(Model).filter(...).all() / .first()   -> ler
+#   db.add(Model(**dados))                          -> criar
+#   db.commit() + db.refresh(obj)                   -> salvar
+#   db.delete(obj) + db.commit()                    -> deletar
+#
+# ATENÇÃO: algumas funções aqui NÃO são CRUD puro, carregam
+# regra de negócio (turno, cálculo de tempo, roteamento de
+# sessão). Conceitualmente pertenceriam a services/, mas
+# ficaram aqui por conveniência.
+#   - get_previous_night_date / get_effective_session_date
+#   - get_or_create_session
+#   - get_sessions_by_date
+#   - detect_shift_from_time
+#   - create_entry / update_entry
+# ============================================================
 from typing import List, Optional
 from datetime import datetime, timedelta
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from backend import models, schemas
+
+
 
 # --- MÁQUINAS ---
 def get_machines(db: Session) -> List[models.Machine]:
@@ -54,6 +75,9 @@ def delete_product(db: Session, code: int) -> bool:
 
 
 # --- FICHAS / SESSÕES DE PRODUÇÃO ---
+
+# Regra do domínio: a planilha de Segunda à noite refere-se
+# à produção física de Domingo à noite.
 def get_previous_night_date(date_str: str) -> str:
     """Calcula a data do turno noturno (sempre a noite anterior: ex. Segunda refere-se a Domingo à noite)."""
     try:
@@ -126,6 +150,9 @@ def get_sessions_by_date(db: Session, date: str, shift: Optional[str] = None) ->
 
 
 # --- APONTAMENTOS / INTERVALOS ---
+
+# Durações fixas por turno (usadas no cálculo de eficiência).
+# Se a regra da fábrica mudar, altere aqui.
 SHIFT_DURATION_DIURNO = 528   # 8h 48m (8 * 60 + 48)
 SHIFT_DURATION_NOTURNO = 468  # 7h 48m (7 * 60 + 48)
 
@@ -246,7 +273,7 @@ def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) 
         unproductive_reason=entry_data.unproductive_reason
     )
     db.add(db_entry)
-    db.flush() # Para gerar db_entry.id
+    db.flush() # gera o id do entry SEM commitar, para usar nas paradas
 
     # Adicionar paradas detalhadas
     for stop, duration in stop_objs:
@@ -263,6 +290,8 @@ def create_entry(db: Session, session_id: int, entry_data: schemas.EntryCreate) 
     db.refresh(db_entry)
     return db_entry
 
+# Estratégia: apaga todas as paradas antigas e recria as novas.
+# Mais simples que diff, mas gera novos IDs a cada update.
 def update_entry(db: Session, entry_id: int, entry_data: schemas.EntryCreate) -> Optional[models.ProductionEntry]:
     db_entry = db.query(models.ProductionEntry).filter(models.ProductionEntry.id == entry_id).first()
     if not db_entry:

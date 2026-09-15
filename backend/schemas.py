@@ -1,25 +1,76 @@
+# ============================================================
+# SCHEMAS — Contratos de dados da API (Pydantic)
+#
+# Função: validar, filtrar e formatar o que ENTRA e SAI da API.
+# São a "alfândega" entre o cliente HTTP e o banco.
+#
+# Padrão usado aqui:
+#   XxxBase     -> campos comuns (herança)
+#   XxxCreate   -> o que o cliente PODE enviar para criar
+#   XxxUpdate   -> campos opcionais para atualização parcial
+#   XxxResponse -> o que a API DEVOLVE (inclui id, datas, etc.)
+#
+# Regras importantes:
+#   - Optional[X] = None  -> campo opcional, pode vir vazio
+#   - valor sem Optional  -> campo obrigatório
+#   - campo com default   -> se não vier, assume o valor padrão
+#   - campos fora do schema NÃO entram (filtro de segurança)
+#
+# model_config = ConfigDict(from_attributes=True):
+#   permite montar o schema a partir de um OBJETO (ex: model
+#   SQLAlchemy), não só de um dicionário. É a ponte
+#   models (banco) -> schemas (API).
+#
+# Schemas de métricas (ex: MachineAverageMetric) são só SAÍDA:
+# não representam tabela, só o formato do cálculo do analytics.
+# ============================================================
+
+# ------------------------------------------------------------
+# BaseModel (Pydantic): classe mãe dos schemas.
+# Só por herdar dela, a classe ganha:
+#   - validação automática dos tipos
+#   - conversão quando possível (ex: "123" -> 123)
+#   - erro claro se faltar campo obrigatório
+#   - aplicação de valores padrão (default=...)
+#   - serialização para dict/JSON (.model_dump(), .model_dump_json())
+#
+# Diferença dos dois "Base" do projeto:
+#   Base       (SQLAlchemy) -> mapeia classe em TABELA do banco
+#   BaseModel  (Pydantic)   -> valida dados que ENTRAM/SAEM da API
+#
+# Herança em cadeia:
+#   BaseModel (Pydantic)
+#       └─ MachineBase      -> campos comuns
+#             ├─ MachineCreate    -> entrada (criar)
+#             └─ MachineResponse  -> saída (devolver)
+# ------------------------------------------------------------
 from typing import List, Optional
 from pydantic import BaseModel, ConfigDict, field_validator
 from datetime import datetime
 
 # --- SCHEMAS DE MÁQUINAS ---
-class MachineBase(BaseModel):
+
+
+class MachineBase(BaseModel):               #herda o basemodel
     name: str
     code: Optional[str] = None
     sector: str = "Painéis"
     has_production_control: bool = True
 
-class MachineCreate(MachineBase):
+class MachineCreate(MachineBase):           #herda machineBase que herda Basemodel
     pass
 
-class MachineResponse(MachineBase):
+class MachineResponse(MachineBase):         #herda machineBase que herda Basemodel
     id: int
     created_at: datetime
     model_config = ConfigDict(from_attributes=True)
 
 
+# O exemplo de herança acima vale para todos abaixo
+
+
 # --- SCHEMAS DE PRODUTOS / ESPECIFICAÇÕES DE PAINÉIS ---
-class ProductBase(BaseModel):
+class ProductBase(BaseModel):                   
     code: int # PK Inteira
     name: str
     specification: Optional[str] = None

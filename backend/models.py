@@ -1,3 +1,20 @@
+# ============================================================
+# MODELS — Definição das tabelas do banco (SQLAlchemy ORM)
+#
+# - Cada classe = uma tabela no banco.
+# - Column(...)     = coluna real no banco (nome, tipo, regras).
+# - ForeignKey(...) = liga fisicamente uma tabela à outra (no SQL).
+# - relationship(...) = atalho em Python para navegar entre objetos,
+#                       faz o JOIN automaticamente. NÃO é coluna.
+#                       Parâmetros:
+#                         - nome da classe do outro lado (string)
+#                         - back_populates = atributo espelhado do outro lado
+#                       Convenção de nomes:
+#                         - lado "um"     = singular (machine, product)
+#                         - lado "muitos" = plural   (sessions, entries)
+#
+# Quem consulta/salva de verdade é a Session (ver database.py).
+# ============================================================
 from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String, Float, Boolean, 
